@@ -10,7 +10,7 @@ content:
     type: file
     path: content/soirees.json
     format: json
-    description: "Ajoute une soirée avec le bouton « Add an entry » tout en bas de la liste, remplis la fiche, puis clique sur « Save » en haut à droite. Le site se met à jour tout seul en 1 minute environ."
+    description: "Ajoute une soirée avec le bouton « Add an item » tout en bas de la liste, remplis la fiche, puis clique sur « Save » en haut à droite. Le site se met à jour tout seul en 1 minute environ."
     fields:
       - name: soirees
         label: Toutes les soirées (de la plus ancienne à la plus récente)
@@ -42,7 +42,7 @@ content:
             label: Line-up
             type: string
             list: true
-            description: "Un artiste par ligne. Clique sur « Add an entry » pour en ajouter un autre, ex. Carl H, puis Vic b2b Jpeg."
+            description: "Un artiste par ligne. Clique sur « Add an item » pour en ajouter un autre, ex. Carl H, puis Vic b2b Jpeg."
           - name: descente
             label: Heure de début
             type: select
