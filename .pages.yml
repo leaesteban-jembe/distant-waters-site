@@ -1,0 +1,29 @@
+# Configuration de l'espace d'administration (Pages CMS : https://pagescms.org)
+media:
+  input: img/soirees
+  output: img/soirees
+  categories: [image]
+
+content:
+  - name: soirees
+    label: Soirées
+    type: file
+    path: content/soirees.json
+    format: json
+    description: "Ajoutez chaque soirée ici. La plus proche à venir s'affiche automatiquement en haut du site et dans la carte d'embarquement ; une fois la date passée, elle rejoint le banc d'affiches."
+    fields:
+      - name: soirees
+        label: Soirées
+        type: object
+        list: true
+        fields:
+          - { name: titre, label: Nom de la soirée, type: string, description: "Ex. Odyssea 10. Laisser vide si pas de nom." }
+          - { name: date, label: Date, type: date, required: true }
+          - { name: date_affichee, label: Date affichée (facultatif), type: string, description: "Seulement si la date est floue, ex. « Automne 24 »." }
+          - { name: lieu, label: Lieu, type: string, required: true, description: "Ex. Macadam, Open Air Ohm Town" }
+          - { name: lineup, label: Line-up, type: string, description: "Ex. Carl H, Vic b2b Jpeg" }
+          - { name: descente, label: Heure de début, type: string, default: "23 h 30" }
+          - { name: remontee, label: Heure de fin, type: string, default: "6 h" }
+          - { name: billetterie, label: Lien billetterie, type: string, description: "Lien Shotgun, RA, Dice…" }
+          - { name: affiche, label: Affiche, type: image }
+          - { name: credit, label: Crédit de l'affiche, type: string, description: "Ex. Collage Alizée Domange" }

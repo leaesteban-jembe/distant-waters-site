@@ -1,0 +1,33 @@
+Déposer ici les sons du site, en mp3 (128 ou 192 kbps suffisent).
+Dès qu'un fichier est présent, le site le joue à la place de SoundCloud (un seul toucher, même sur iPhone).
+Un fichier manquant = le site garde le son SoundCloud pour cette piste.
+
+Noms exacts à utiliser :
+
+dw01-a1.mp3  Tetrodoxin
+dw01-a2.mp3  Aqualung
+dw01-b1.mp3  Sequential Hermaphrodism
+dw01-b2.mp3  Ampullae of Lorenzini
+
+dw02-a1.mp3  Evolution Of Dreams (Solidwood)
+dw02-a2.mp3  The Sea Banquet (Sans Sucre)
+dw02-b1.mp3  Warmin' Liquid (Groenogen & Soyouz)
+dw02-b2.mp3  Scuba Disco (Human Logo)
+
+dw03-a1.mp3  ???? (Emi Ömar)
+dw03-a2.mp3  Aquaboulevard (Emi Ömar)
+dw03-b1.mp3  The Living Wreck (Sans Sucre)
+dw03-b2.mp3  The Riddle (Sans Sucre)
+
+dw04-a1.mp3  One Hundred Years (Akyki)
+dw04-a2.mp3  Salted Suite (Akyki)
+dw04-b1.mp3  The Bell On Ice (Akyki)
+dw04-b2.mp3  River Denizens (Akyki)
+
+mix-vic.mp3
+mix-sanssucre.mp3
+mix-jpeg.mp3
+mix-buzz.mp3
+mix-yola.mp3
+
+Pour les mixes d'une heure, un extrait de 10 à 20 minutes suffit pour garder le site léger.
