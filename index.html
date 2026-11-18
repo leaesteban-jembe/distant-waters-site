@@ -1759,7 +1759,7 @@ function renderSoirees(list){
  const pill=document.querySelector('.nextPill>span'); if(pill) pill.innerHTML=`Prochaine plongée · ${dCourt(next.date)} · ${next.lieu}<span class="npMore"> · ${next.billetterie?'Prendre sa place':'Infos'}</span> →`;
  const band=document.querySelectorAll('#pass .pBand span'); if(band[0]) band[0].textContent='DISTANT WATERS · '+(next.titre?next.titre.toUpperCase():'LIGNE ODYSSEA'); if(band[2]) band[2].textContent='N° '+(num?num[0]:'··');
  const dest=document.querySelector('#pass .pDest'); if(dest){dest.querySelector('strong').textContent=next.lieu; dest.querySelector('em').textContent=next.titre||'Le fond';}
- const g=[...document.querySelectorAll('#pass .pGrid b')]; if(g.length>=4){g[0].textContent=dLong(next.date); g[1].textContent=next.lineup||'En préparation'; g[2].textContent=next.descente||'23 h 30'; g[3].textContent=next.remontee||'6 h';}
+ const g=[...document.querySelectorAll('#pass .pGrid b')]; if(g.length>=4){g[0].textContent=dLong(next.date); g[1].textContent=(Array.isArray(next.lineup)?next.lineup.filter(Boolean).join(', '):next.lineup)||'En préparation'; g[2].textContent=next.descente||'23 h 30'; g[3].textContent=next.remontee||'6 h';}
  const stub=document.querySelector('#pass .pStub p'); const ab=$('#alertBtn');
  if(next.billetterie){ if(stub) stub.textContent='La billetterie est ouverte.'; const a=document.createElement('a'); a.className='btn tkBtn'; a.href=next.billetterie; a.target='_blank'; a.rel='noopener'; a.textContent='Prendre sa place →'; ab.replaceWith(a); }
  else if(stub) stub.textContent='Billetterie bientôt ouverte. On vous prévient ?';

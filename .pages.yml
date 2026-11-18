@@ -10,7 +10,7 @@ content:
     type: file
     path: content/soirees.json
     format: json
-    description: "Ajoute une soirée avec le bouton « Add an entry » tout en bas de la liste, remplis la fiche, puis clique sur « Save » en haut à droite. Le site se met à jour tout seul en 1 minute environ. La prochaine soirée à venir s'affiche en haut du site et sur la carte d'embarquement ; une fois passée, son affiche rejoint le banc d'affiches."
+    description: "Ajoute une soirée avec le bouton « Add an entry » tout en bas de la liste, remplis la fiche, puis clique sur « Save » en haut à droite. Le site se met à jour tout seul en 1 minute environ."
     fields:
       - name: soirees
         label: Toutes les soirées (de la plus ancienne à la plus récente)
@@ -20,13 +20,50 @@ content:
             collapsed: true
             summary: "{fields.date} · {fields.lieu} {fields.titre}"
         fields:
-          - { name: titre, label: Nom de la soirée, type: string, description: "Ex. Odyssea 10. Laisse vide si la soirée n'a pas de nom." }
-          - { name: date, label: Date, type: date, required: true, description: "Le jour où la soirée commence (même si elle finit le lendemain matin)." }
-          - { name: date_affichee, label: Date affichée (facultatif), type: string, description: "Seulement si tu veux afficher autre chose que la date exacte, ex. « Automne 24 ». Sinon laisse vide." }
-          - { name: lieu, label: Lieu, type: string, required: true, description: "Ex. Macadam, Open Air Ohm Town." }
-          - { name: lineup, label: Line-up, type: string, description: "Les artistes séparés par des virgules, ex. Carl H, Vic b2b Jpeg." }
-          - { name: descente, label: Heure de début, type: string, default: "23 h 30", description: "Écris-la comme ça : 23 h 30." }
-          - { name: remontee, label: Heure de fin, type: string, default: "6 h", description: "Écris-la comme ça : 6 h." }
-          - { name: billetterie, label: Lien de la billetterie, type: string, description: "Copie-colle le lien complet (Shotgun, RA, Dice…), en commençant par https://. Le bouton « Prendre sa place » apparaît tout seul sur le site." }
-          - { name: affiche, label: Affiche, type: image, description: "Format portrait, en JPG, PNG ou WebP, idéalement moins de 2 Mo." }
-          - { name: credit, label: Crédit de l'affiche, type: string, description: "Qui a fait l'affiche, ex. Collage Alizée Domange." }
+          - name: titre
+            label: Nom de la soirée
+            type: string
+            description: "Ex. Odyssea 10. Laisse vide si la soirée n'a pas de nom."
+          - name: date
+            label: Date
+            type: date
+            required: true
+            description: "Clique pour ouvrir le calendrier. C'est le jour où la soirée commence, même si elle finit le lendemain matin."
+          - name: date_affichee
+            label: Date affichée (facultatif)
+            type: string
+            description: "Seulement si tu veux afficher autre chose que la date exacte, ex. « Automne 24 ». Sinon laisse vide."
+          - name: lieu
+            label: Lieu
+            type: string
+            required: true
+            description: "Les lieux habituels : Macadam, CO2, 40 Pieds, Drôle de Barge, Ohm Town, Open Air Ohm Town, 44 Tours. Écris-le toujours de la même façon."
+          - name: lineup
+            label: Line-up
+            type: string
+            list: true
+            description: "Un artiste par ligne. Clique sur « Add an entry » pour en ajouter un autre, ex. Carl H, puis Vic b2b Jpeg."
+          - name: descente
+            label: Heure de début
+            type: select
+            default: "23 h 30"
+            options:
+              values: [ "18 h", "18 h 30", "19 h", "19 h 30", "20 h", "20 h 30", "21 h", "21 h 30", "22 h", "22 h 30", "23 h", "23 h 30", "0 h", "0 h 30", "1 h", "1 h 30", "2 h", "2 h 30", "3 h", "3 h 30", "4 h", "4 h 30", "5 h", "5 h 30", "6 h", "6 h 30", "7 h", "7 h 30", "8 h", "8 h 30", "9 h", "9 h 30", "10 h", "10 h 30", "11 h", "11 h 30", "12 h" ]
+          - name: remontee
+            label: Heure de fin
+            type: select
+            default: "6 h"
+            options:
+              values: [ "18 h", "18 h 30", "19 h", "19 h 30", "20 h", "20 h 30", "21 h", "21 h 30", "22 h", "22 h 30", "23 h", "23 h 30", "0 h", "0 h 30", "1 h", "1 h 30", "2 h", "2 h 30", "3 h", "3 h 30", "4 h", "4 h 30", "5 h", "5 h 30", "6 h", "6 h 30", "7 h", "7 h 30", "8 h", "8 h 30", "9 h", "9 h 30", "10 h", "10 h 30", "11 h", "11 h 30", "12 h" ]
+          - name: billetterie
+            label: Lien de la billetterie
+            type: string
+            description: "Copie-colle le lien complet (Shotgun, RA, Dice…), en commençant par https://. Le bouton « Prendre sa place » apparaît tout seul sur le site."
+          - name: affiche
+            label: Affiche
+            type: image
+            description: "Clique pour choisir l'image sur ton ordi ou ton téléphone. Format portrait, en JPG, PNG ou WebP, idéalement moins de 2 Mo."
+          - name: credit
+            label: Crédit de l'affiche
+            type: string
+            description: "Qui a fait l'affiche, ex. Collage Alizée Domange."
