@@ -1,4 +1,4 @@
-# Configuration de l'espace d'administration (Pages CMS : https://pagescms.org)
+# Espace d'administration des soirées (Pages CMS : https://app.pagescms.org)
 media:
   input: img/soirees
   output: img/soirees
@@ -10,20 +10,23 @@ content:
     type: file
     path: content/soirees.json
     format: json
-    description: "Ajoutez chaque soirée ici. La plus proche à venir s'affiche automatiquement en haut du site et dans la carte d'embarquement ; une fois la date passée, elle rejoint le banc d'affiches."
+    description: "Ajoute une soirée avec le bouton « Add an entry » tout en bas de la liste, remplis la fiche, puis clique sur « Save » en haut à droite. Le site se met à jour tout seul en 1 minute environ. La prochaine soirée à venir s'affiche en haut du site et sur la carte d'embarquement ; une fois passée, son affiche rejoint le banc d'affiches."
     fields:
       - name: soirees
-        label: Soirées
+        label: Toutes les soirées (de la plus ancienne à la plus récente)
         type: object
-        list: true
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.date} · {fields.lieu} {fields.titre}"
         fields:
-          - { name: titre, label: Nom de la soirée, type: string, description: "Ex. Odyssea 10. Laisser vide si pas de nom." }
-          - { name: date, label: Date, type: date, required: true }
-          - { name: date_affichee, label: Date affichée (facultatif), type: string, description: "Seulement si la date est floue, ex. « Automne 24 »." }
-          - { name: lieu, label: Lieu, type: string, required: true, description: "Ex. Macadam, Open Air Ohm Town" }
-          - { name: lineup, label: Line-up, type: string, description: "Ex. Carl H, Vic b2b Jpeg" }
-          - { name: descente, label: Heure de début, type: string, default: "23 h 30" }
-          - { name: remontee, label: Heure de fin, type: string, default: "6 h" }
-          - { name: billetterie, label: Lien billetterie, type: string, description: "Lien Shotgun, RA, Dice…" }
-          - { name: affiche, label: Affiche, type: image }
-          - { name: credit, label: Crédit de l'affiche, type: string, description: "Ex. Collage Alizée Domange" }
+          - { name: titre, label: Nom de la soirée, type: string, description: "Ex. Odyssea 10. Laisse vide si la soirée n'a pas de nom." }
+          - { name: date, label: Date, type: date, required: true, description: "Le jour où la soirée commence (même si elle finit le lendemain matin)." }
+          - { name: date_affichee, label: Date affichée (facultatif), type: string, description: "Seulement si tu veux afficher autre chose que la date exacte, ex. « Automne 24 ». Sinon laisse vide." }
+          - { name: lieu, label: Lieu, type: string, required: true, description: "Ex. Macadam, Open Air Ohm Town." }
+          - { name: lineup, label: Line-up, type: string, description: "Les artistes séparés par des virgules, ex. Carl H, Vic b2b Jpeg." }
+          - { name: descente, label: Heure de début, type: string, default: "23 h 30", description: "Écris-la comme ça : 23 h 30." }
+          - { name: remontee, label: Heure de fin, type: string, default: "6 h", description: "Écris-la comme ça : 6 h." }
+          - { name: billetterie, label: Lien de la billetterie, type: string, description: "Copie-colle le lien complet (Shotgun, RA, Dice…), en commençant par https://. Le bouton « Prendre sa place » apparaît tout seul sur le site." }
+          - { name: affiche, label: Affiche, type: image, description: "Format portrait, en JPG, PNG ou WebP, idéalement moins de 2 Mo." }
+          - { name: credit, label: Crédit de l'affiche, type: string, description: "Qui a fait l'affiche, ex. Collage Alizée Domange." }
