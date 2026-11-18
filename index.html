@@ -1765,7 +1765,7 @@ function renderSoirees(list){
  else if(stub) stub.textContent='Billetterie bientôt ouverte. On vous prévient ?';
  if(next.affiche){ const f=document.createElement('figure'); f.className='next'; f.innerHTML=`<img decoding="async" src="${src(next.affiche)}" alt="Affiche ${next.titre||''}"><figcaption>Prochaine · ${dCourt(next.date)} · <span>${next.lieu}</span></figcaption>${next.credit?`<div class="credit">${next.credit}</div>`:''}`; bank.prepend(f); }
 }
-fetch('content/soirees.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>renderSoirees(d.soirees||[])).catch(()=>{});
+fetch('content/soirees.json',{cache:'no-cache'}).then(r=>r.json()).then(d=>renderSoirees((d.soirees||[]).map(p=>({...p,lieu:(/^Autre lieu/.test(p.lieu||'')?(p.autre_lieu||''):p.lieu)})))).catch(()=>{});
 let drag=false,sx=0,sl=0,hold=0;
 bank.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') return; drag=true;sx=e.clientX;sl=bank.scrollLeft;bank.setPointerCapture(e.pointerId);bank.style.cursor='grabbing';});
 bank.addEventListener('pointermove',e=>{ if(drag) bank.scrollLeft=sl-(e.clientX-sx); });

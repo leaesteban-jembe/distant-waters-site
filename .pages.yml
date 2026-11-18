@@ -35,9 +35,15 @@ content:
             description: "Seulement si tu veux afficher autre chose que la date exacte, ex. « Automne 24 ». Sinon laisse vide."
           - name: lieu
             label: Lieu
-            type: string
+            type: select
             required: true
-            description: "Les lieux habituels : Macadam, CO2, 40 Pieds, Drôle de Barge, Ohm Town, Open Air Ohm Town, 44 Tours. Écris-le toujours de la même façon."
+            description: "Tape les premières lettres pour retrouver le lieu. S'il n'est pas dans la liste, choisis « Autre lieu » tout en bas et écris son nom dans le champ suivant."
+            options:
+              values: [ "40 Pieds", "44 Tours", "Atelier du Dahu", "Boreal", "Bras de Fer", "Cafk", "CO2", "Drôle de Barge", "La Chaumière", "Macadam", "Micro-Ondes", "Ohm Town", "Autre lieu (à écrire en dessous)" ]
+          - name: autre_lieu
+            label: Nouveau lieu (seulement si « Autre lieu »)
+            type: string
+            description: "Juste le nom du lieu, ex. Le Ferrailleur. Dis-le à Léa, elle l'ajoutera à la liste pour la prochaine fois."
           - name: lineup
             label: Line-up
             type: string
