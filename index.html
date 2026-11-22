@@ -483,11 +483,11 @@ footer{margin-top:60px;padding-bottom:110px;text-align:center;font:700 11px var(
 .lgv .pst svg{width:72%}
 .lga{position:absolute;inset:auto 6px 6px 6px;display:flex;gap:4px;justify-content:center;opacity:0;transform:translateY(8px);transition:all .3s}
 .lgv:focus-within .lga{opacity:1;transform:none}@media (hover:hover){.lgv:hover .lga{opacity:1;transform:none}}
-.lga button{flex:1;white-space:nowrap;background:rgba(10,16,48,.88);color:var(--ecume);border-radius:999px;padding:6px 0;font:700 10px var(--mono);letter-spacing:.06em}
+.lga button{flex:1;min-height:0;height:30px;line-height:1;white-space:nowrap;background:rgba(10,16,48,.88);color:var(--ecume);border-radius:999px;padding:6px 0;font:700 10px var(--mono);letter-spacing:.06em}
 @media (hover:hover){.lga button:hover{background:var(--plancton);color:var(--nuit)}}
 .lg figcaption{margin-top:8px;font-size:12px;color:rgba(242,238,227,.7)}
 .lg figcaption b{display:block;color:var(--ecume);font-weight:600;font-size:13px}
-@media (max-width:900px){.logos{grid-template-columns:repeat(2,1fr)}.lga{opacity:1;transform:none}.lgv{aspect-ratio:1.15}.logoHead{flex-wrap:wrap;gap:10px}}
+@media (max-width:900px){.logos{grid-template-columns:repeat(2,1fr)}.lga{opacity:1;transform:none}.lgv{aspect-ratio:1.15;padding-bottom:40px}.logoHead{flex-wrap:wrap;gap:10px}}
 
 /* lisibilité */
 :root{--ink2:rgba(18,26,74,.9)}
@@ -2117,7 +2117,7 @@ $('#again').onclick=()=>{ $('#form').classList.remove('sent'); $('#form .fields'
 
 const LOGOS=[['Bleu','fond clair','#3567B5','#F2EEE3'],['Écume','fond foncé','#F2EEE3','#3567B5'],['Noir','impression','#111111','#FFFFFF'],['Pastille','réseaux sociaux','#F2EEE3','#0A1030',1]];
 const svgOf=(fg,pst)=>pst?`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="500" fill="#3567B5"/><g transform="translate(160 270) scale(.586)"><path fill="${fg}" fill-rule="evenodd" transform="translate(-40 -45)" d="${LOGO_D}"/></g></svg>`:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 45 1160 780"><path fill="${fg}" fill-rule="evenodd" d="${LOGO_D}"/></svg>`;
-$('#logos').innerHTML=LOGOS.map((l,i)=>`<figure class="lg"><div class="lgv" style="background:${l[3]}">${l[4]?'<span class="pst"><svg viewBox="40 45 1160 780" fill="'+l[2]+'"><use href="#dw"/></svg></span>':'<svg viewBox="40 45 1160 780" fill="'+l[2]+'"><use href="#dw"/></svg>'}<div class="lga"><button data-i="${i}" data-a="svg">SVG ↓</button><button data-i="${i}" data-a="png">PNG ↓</button><button data-i="${i}" data-a="copy">Copier</button></div></div><figcaption><b>${l[0]}</b>${l[1]}</figcaption></figure>`).join('');
+$('#logos').innerHTML=LOGOS.map((l,i)=>`<figure class="lg"><div class="lgv" style="background:${l[3]}">${l[4]?'<span class="pst"><svg viewBox="40 45 1160 780" fill="'+l[2]+'"><use href="#dw" x="40" y="45" width="1160" height="780"/></svg></span>':'<svg viewBox="40 45 1160 780" fill="'+l[2]+'"><use href="#dw" x="40" y="45" width="1160" height="780"/></svg>'}<div class="lga"><button data-i="${i}" data-a="svg">SVG ↓</button><button data-i="${i}" data-a="png">PNG ↓</button></div></div><figcaption><b>${l[0]}</b>${l[1]}</figcaption></figure>`).join('');
 const say=m=>{ $('#copied').textContent=m; clearTimeout(window._cp); window._cp=setTimeout(()=>$('#copied').textContent='',3200); };
 $$('#logos .lga button').forEach(b=>b.onclick=async()=>{ const l=LOGOS[+b.dataset.i]; if(b.dataset.a==='copy'){ try{ await navigator.clipboard.writeText(svgOf(l[2],l[4])); say('Code SVG « '+l[0]+' » copié : à coller dans Figma, Illustrator ou un site.'); }catch(_){ say('Copie refusée par le navigateur ici. Elle marchera sur le vrai site.'); } } else { const a=document.createElement('a'); a.href='presse/logos/DistantWaters-logo-'+['bleu','ecume','noir','pastille'][+b.dataset.i]+'.'+b.dataset.a; a.download=''; document.body.appendChild(a); a.click(); a.remove(); say('Logo « '+l[0]+' » en '+b.dataset.a.toUpperCase()+' téléchargé.'); } });
 
