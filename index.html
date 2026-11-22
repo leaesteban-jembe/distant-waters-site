@@ -1448,7 +1448,6 @@ html.inapp #fp .hpCaus{display:none}
 @media (hover:hover){.insPl:hover .insHit{pointer-events:auto}}
 .insGo{position:relative;overflow:hidden;border:0;cursor:pointer;align-self:flex-start;font:700 10px var(--mono);letter-spacing:.14em;background:var(--plancton);color:var(--nuit);padding:8px 13px;border-radius:999px;text-decoration:none}
 @media(max-width:900px){.insB{padding:16px 14px;justify-content:flex-start;overflow:hidden}.insB .insK{font-size:8px;letter-spacing:.1em}.insB .insT{font-size:17px!important;margin:8px 0 2px}.insB .insA{font-size:12px}.insB .insQ{font-size:12px!important;line-height:1.4;margin:8px 0 12px!important;display:-webkit-box!important;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.insGo{padding:7px 11px;font-size:9px}.insProg{margin-top:10px}.insRond .an{opacity:.32;filter:none;transform:scale(1.15)}.insRond .an.c{display:none}.insRond .ph{filter:grayscale(1) sepia(.45) hue-rotate(185deg) saturate(2.2) contrast(1.15) brightness(1.05)}.insPlates{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.insF{padding:22px 18px 30px}.insLat{font-size:14.5px}.insAu{font-size:10px}.insPl:last-child{grid-column:span 2;width:calc(50% - 7px);justify-self:center}.insB .insT{font-size:18px}.insB .insQ{font-size:13px;margin:10px 0 14px}}
-@media(max-width:400px){.insF{min-height:330px;justify-content:center}.insB .insQ{-webkit-line-clamp:3}}
 @media(max-width:360px){.insLat{white-space:normal;font-size:14px}.insF{padding:20px 15px 28px}}
 footer a{color:inherit}
 footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,.3)}
@@ -1519,6 +1518,25 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 /* Échos : cartes d'origine, sans l'en-tête écho / profondeur ni contour */
 #ecGrid .ec .c .hd{display:none!important}
 #ecGrid .ec .c{border:0!important}
+
+/* Inspirations sur téléphone : planches à l'horizontale, une par ligne */
+@media(max-width:900px){
+ .insPlates{grid-template-columns:1fr!important;gap:14px;max-width:560px}
+ .insPl:last-child{grid-column:auto!important;width:auto!important;justify-self:stretch!important}
+ .insF{display:grid!important;grid-template-columns:36% 1fr;grid-template-rows:auto 1fr auto;column-gap:18px;padding:18px 20px 22px!important;min-height:0!important}
+ .insHd{grid-column:1/-1}
+ .insImg{grid-column:1;grid-row:2/4;margin:14px 0 0!important}
+ .insRond{width:100%!important}
+ .insLat{grid-column:2;grid-row:2;align-self:end;text-align:left!important;white-space:normal!important;font-size:19px!important;line-height:1.15!important}
+ .insAu{grid-column:2;grid-row:3;align-self:start;text-align:left!important;font-size:11px!important;margin-top:5px}
+ .insNow{left:auto!important;right:22px;bottom:16px!important;transform:none!important}
+ .insB{padding:16px 20px!important;justify-content:center!important}
+ .insB .insQ{-webkit-line-clamp:2!important}
+ .insB{display:grid!important;grid-template-columns:auto 1fr;align-content:center;column-gap:14px}
+ .insB>.insK,.insB>.insT,.insB>.insA,.insB>.insQ{grid-column:1/-1}
+ .insB .insProg{margin:0!important;align-self:center}
+}
+@media(max-width:360px){.insB .insQ{-webkit-line-clamp:1!important}.insB .insT{font-size:16px!important}}
 </style>
 </head>
 <body>
