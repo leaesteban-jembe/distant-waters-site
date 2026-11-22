@@ -1437,6 +1437,7 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 .touchAudio #playBtn{overflow:hidden}
 .touchAudio #playBtn.rowOn .ghost{pointer-events:none;visibility:hidden}
 .touchAudio #rel button .ghost{border-radius:inherit}
+.touchAudio #blips .blip .ghost{border-radius:50%;inset:-14px}
 .touchAudio #mixRow .mw{border-radius:50%}
 .touchAudio .mixRow .pl{opacity:1;background:rgba(10,16,48,.28)}
 .touchAudio .mixRow button.soon{opacity:.55}.touchAudio .mixRow button.soon .pl{display:none}
@@ -1917,7 +1918,7 @@ const releases=[
  {vc:'120,72,30',vg:'224,181,123',bpm:[124,118,128,112],c:'DW01',t:'The First Dive',s:'SANS SUCRE · MAI 2021 · VINYLE',tr:[['A1','Sans Sucre','Tetrodoxin'],['A2','Sans Sucre','Aqualung'],['B1','Sans Sucre','Sequential Hermaphrodism'],['B2','Sans Sucre','Ampullae of Lorenzini']],rpm:45},
  {vc:'20,70,110',vg:'158,211,230',bpm:[122,126,130,120],c:'DW02',t:'Synchronized Hunting',s:'VARIOUS ARTISTS · AOÛT 2022 · VINYLE',img:['dw02a','dw02b'],tr:[['A1','Solidwood','Evolution Of Dreams'],['A2','Sans Sucre','The Sea Banquet'],['B1','Groenogen & Soyouz',"Warmin' Liquid"],['B2','Human Logo','Scuba Disco']],rpm:45},
  {vc:'52,30,120',vg:'160,128,240',bpm:[128,124,132,118],c:'DW03',t:'Keepers Of The Ruins',s:'EMI ÖMAR & SANS SUCRE · MARS 2023 · VINYLE',img:['dw03b','dw03a'],tr:[['A1','Emi Ömar','????'],['A2','Emi Ömar','Aquaboulevard'],['B1','Sans Sucre','The Living Wreck'],['B2','Sans Sucre','The Riddle']],rpm:33},
- {vc:'40,110,90',vg:'217,242,92',bpm:[116,120,126,134],c:'DW04',t:'The Bell On Ice',s:'AKYKI · JUIN 2024 · NUMÉRIQUE',tr:[['1','Akyki','One Hundred Years'],['2','Akyki','Salted Suite'],['3','Akyki','The Bell On Ice'],['4','Akyki','River Denizens']],rpm:33}];
+ {vc:'40,110,90',vg:'217,242,92',bpm:[116,120,126,134],c:'DW04',t:'The Bell On Ice',s:'AKYKI · JUIN 2024 · NUMÉRIQUE',tr:[['A1','Akyki','One Hundred Years'],['A2','Akyki','Salted Suite'],['B1','Akyki','The Bell On Ice'],['B2','Akyki','River Denizens']],rpm:33}];
 let R=0, face='a', TR=0;
 const pos=[[28,32],[74,24],[66,64],[32,74]];
 function renderRel(){ $('#rel').innerHTML=releases.map((r,i)=>`<button class="${i===R?'on':''}" data-i="${i}"><span class="c">${r.c}</span><span class="t">${r.t}</span><span class="s">${r.s}</span></button>`).join(''); $$('#rel button').forEach(b=>b.onclick=()=>{ const dk=$('#deck'); const r=dk.getBoundingClientRect(); if(r.top>innerHeight*.55||r.bottom<80) dk.scrollIntoView({behavior:'smooth',block:'center'});
@@ -2277,6 +2278,24 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
   /* pendant qu'une sortie lancée depuis la liste joue, le bouton de la platine et le disque servent de pause */
   const rowPause=e=>{ if(!rowG||!rowG.on) return; e.stopImmediatePropagation(); e.preventDefault(); hardStop(rowG); };
   pb.addEventListener('click',rowPause,true); disc.addEventListener('click',rowPause,true);
+
+  /* points A1 A2 B1 B2 autour du disque : toucher un titre le lance directement et coupe ce qui joue */
+  const baseTracks=renderTracks; let blipsFor=-1;
+  renderTracks=function(){ const r=releases[R];
+    if(blipsFor===R&&$$('#blips .blip').length===r.tr.length){
+      $$('#blips .blip').forEach((b,i)=>{ const tk=r.tr[i]; b.classList.toggle('on',i===TR); b.querySelector('span').textContent=tk[0]+(i===TR?' · '+(tk[2]||'titre ?'):''); });
+      const tk=r.tr[TR], name=`${tk[0]} · ${tk[1]} · ${tk[2]||'titre à compléter'}`; $('#np').textContent=name; const pt=$('#pt'); if(pt) pt.textContent=r.c+' · '+name; return; }
+    for(let k=G.length-1;k>=0;k--){ const o=G[k]; if(!o.blip) continue; if(o.on){ try{ o.wd&&o.wd.pause(); }catch(_){} gOff(o,'sortie'); } if(o.f) o.f.remove(); G.splice(k,1); }
+    baseTracks(); blipsFor=R; const rr=R;
+    $$('#blips .blip').forEach((b,i)=>{ const s=TRK[rr]&&TRK[rr][i]; if(!s) return;
+      const g=ghost(b,s[0],0,{
+        play:wd=>{ if(rowG!==g){ rowG=g; g.seek=s[1]||0; TR=i; face=i<2?'a':'b'; renderLabel(); renderTracks(); deckSource(); pb.classList.add('rowOn'); }
+          if(wd&&g.seek){ wd.seekTo(g.seek*1000); g.seek=0; } deckOn(); },
+        stop:()=>{ if(rowG===g){ rowG=null; pb.classList.remove('rowOn'); deckOff(); } },
+        prog:t=>{ const st=s[1]||0; $('#air').textContent=fmt(t>=st?t-st:t)+' / '+fmt(DUR); } });
+      g.row=true; g.blip=true; io.observe(b); });
+  };
+  blipsFor=-1; renderTracks();
 
   /* mixes : les bulles des résident·es, on touche la photo et le mix part */
   $$('#mixRow button').forEach((btn,i)=>{ const c=crew[i], m=MIX[c.k]; const mp=btn.querySelector('.mw');
