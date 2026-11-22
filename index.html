@@ -8,7 +8,13 @@
 <title>Distant Waters · Prototype press kit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="image" href="img/p1809.webp">
 <link href="https://fonts.googleapis.com/css2?family=Calistoga&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
+<style>@font-face{font-family:'Calistoga';src:url(fonts/calistoga-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Instrument Sans';src:url(fonts/instrument-sans-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Instrument Sans';src:url(fonts/instrument-sans-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Instrument Sans';src:url(fonts/instrument-sans-latin-600-normal.woff2) format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url(fonts/jetbrains-mono-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'JetBrains Mono';src:url(fonts/jetbrains-mono-latin-700-normal.woff2) format('woff2');font-weight:700;font-display:swap}
+
 :root{
   --ecume:#F2EEE3;--lagon:#9ED3E6;--bleu:#3567B5;--outremer:#1D2F8C;--nuit:#121A4A;--abysse:#0A1030;
   --plancton:#D9F25C;--anemone:#FF5FB0;--corail:#FF5A3C;--sable:#E0B57B;--beige:#F3F0DF;
@@ -636,7 +642,7 @@ footer{margin-top:60px;padding-bottom:110px;text-align:center;font:700 11px var(
 .echoBand{position:relative;margin-top:80px}
 .ebHead .kicker{color:var(--outremer)}
 .ebHead h3{font:300 clamp(30px,3.6vw,46px)/1.05 var(--serif);color:var(--nuit);max-width:560px}
-.ecGrid{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:14px;margin-top:34px;--f:0}
+.ecGrid{position:relative;display:grid;grid-template-columns:repeat(8,1fr);gap:14px;margin-top:34px;--f:0}
 .thr{position:absolute;left:14px;right:14px;top:30px;height:2px;background:repeating-linear-gradient(90deg,rgba(18,26,74,.3) 0 6px,transparent 6px 12px);pointer-events:none}
 .thr b{position:absolute;left:0;top:0;height:100%;width:calc(var(--f)*100%);background:linear-gradient(90deg,var(--outremer),var(--nuit));transition:width 1.8s cubic-bezier(.3,.7,.2,1);border-radius:2px}
 .thr s{position:absolute;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--plancton);box-shadow:0 0 0 3px rgba(18,26,74,.85),0 0 16px var(--plancton);left:0;opacity:0;animation:runH 4s linear infinite}
@@ -1263,7 +1269,7 @@ section.palier{overflow:visible!important;overflow-x:clip!important;overflow-y:v
 @keyframes mixSpin{to{transform:rotate(360deg)}}
 @keyframes mixWave{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.75);opacity:0}}
 @keyframes mixBreath{50%{transform:scale(1.03)}}
-.mixRow .eq{display:flex;gap:3px;height:14px;margin:-4px 0 -4px;align-items:flex-end;opacity:0;transition:opacity .3s}
+.mixRow .eq{display:none;gap:3px;height:14px;margin:-4px 0 -4px;align-items:flex-end;opacity:0;transition:opacity .3s}.mixRow button.on .eq{display:flex}.mixRow small{margin-top:-6px}
 .mixRow .eq i{width:3px;height:30%;background:var(--plancton);border-radius:2px}
 .mixRow button.on .eq{opacity:1}
 .mixRow button.on .eq i{animation:mixEq .9s ease-in-out infinite}
@@ -1357,6 +1363,88 @@ section.palier{overflow:visible!important;overflow-x:clip!important;overflow-y:v
 /* Navigateurs intégrés (Messenger, Instagram, WebView Android) : pas de boucles décoratives ni de fusions de calques */
 html.inapp *,html.inapp *::before,html.inapp *::after{animation-iteration-count:1!important;mix-blend-mode:normal!important}
 html.inapp #fp .hpCaus{display:none}
+
+/* Seacast + inspirations */
+.sea-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.seaMeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.seaActs{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.seaLog{position:relative;border-radius:26px;padding:26px 26px 20px;background:linear-gradient(160deg,rgba(158,211,230,.10),rgba(242,238,227,.03));outline:1px solid rgba(158,211,230,.22);overflow:hidden}
+.seaLog::before{content:'';position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;border:1px dashed rgba(158,211,230,.25);box-shadow:0 0 0 40px rgba(158,211,230,.03),0 0 0 80px rgba(158,211,230,.02)}
+.slHead{display:flex;justify-content:space-between;gap:12px;font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--lagon);padding-bottom:14px;border-bottom:1px solid rgba(158,211,230,.2)}
+#seaList{list-style:none;margin:0;padding:0}
+#seaList li+li{border-top:1px solid rgba(158,211,230,.12)}
+.ep{width:100%;display:grid;grid-template-columns:64px minmax(0,1fr) 44px;align-items:center;gap:16px;padding:14px 4px;background:none;border:0;color:var(--ecume);text-align:left;cursor:pointer;border-radius:14px;transition:background .3s,transform .3s}
+.ep:hover{background:rgba(242,238,227,.06)}
+.ep .no{font:400 40px/1 var(--serif,'Calistoga'),serif;color:var(--sable);letter-spacing:-.02em}
+.ep .who{display:flex;flex-direction:column;gap:3px}
+.ep .who b{font:500 19px/1.2 var(--sans)}
+.ep .who small{font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--lagon)}
+.ep .pb{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(242,238,227,.4);transition:background .3s,border-color .3s}
+.ep .pb::after{content:'';border-left:12px solid var(--ecume);border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+.ep:hover .pb{border-color:var(--plancton)}
+.ep.on{background:rgba(217,242,92,.08)}
+.ep.on .no{color:var(--plancton)}
+.ep.on .pb{background:var(--plancton);border-color:var(--plancton)}
+.ep.on .pb::after{border:0;width:12px;height:14px;margin:0;background:linear-gradient(90deg,#0E1640 0 35%,transparent 35% 65%,#0E1640 65%)}
+.slMore{display:inline-block;margin-top:14px;font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--plancton);text-decoration:none;border-bottom:1px solid rgba(217,242,92,.4)}
+.inspi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;margin-top:40px}
+.inspi .ic{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 14px 20px;border-radius:22px;background:rgba(242,238,227,.05);outline:1px solid rgba(158,211,230,.18);color:var(--ecume);text-decoration:none;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s}
+.inspi a.ic:hover{transform:translateY(-4px);background:rgba(242,238,227,.1)}
+.inspi .ip{width:96px;height:96px;border-radius:50%;overflow:hidden;outline:2px solid var(--sable);outline-offset:4px}
+.inspi .ip img{width:100%;height:100%;object-fit:cover}
+.inspi .in{font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--plancton);margin-top:6px}
+.inspi .it{font:500 17px/1.3 var(--sans)}
+.inspi .ia{font-size:14px;opacity:.75}
+.inspi .ic.todo .it{opacity:.55;font-style:italic}
+.inspi .go{font:700 10px var(--mono);letter-spacing:.12em;color:var(--lagon);margin-top:4px}
+footer a{color:inherit}
+footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,.3)}
+@media (max-width:900px){.sea-grid{grid-template-columns:1fr;gap:32px}.seaLog{padding:20px 16px 16px}.ep{grid-template-columns:52px minmax(0,1fr) 44px;gap:12px}.ep .no{font-size:32px}.ep .who b{font-size:17px}.slHead span+span{display:none}.inspi{grid-template-columns:repeat(2,1fr);gap:12px}.inspi .ip{width:76px;height:76px}}
+
+/* frise sur 2 rangées (tablette, petit portable) : chaque point est relié au suivant */
+@media (max-width:1100px) and (min-width:901px){
+ #ecGrid .ec::after{content:'';position:absolute;left:14px;top:30px;width:calc(100% + 14px);height:2px;background:repeating-linear-gradient(90deg,rgba(242,238,227,.55) 0 6px,transparent 6px 12px);z-index:1;pointer-events:none}
+ #ecGrid .ec.on::after{background:linear-gradient(90deg,var(--lagon),var(--plancton))}
+ #ecGrid .ec:nth-child(4n+2)::after,#ecGrid .ec:last-child::after{display:none}
+ #ecGrid .ec{row-gap:0;margin-bottom:26px}
+}
+/* le trait vertical entre chaque point et sa fiche, partout au-dessus de 900 px */
+@media (min-width:901px){ #ecGrid .ec .c::before{display:block!important;background:linear-gradient(rgba(242,238,227,.7),rgba(242,238,227,.15))!important} }
+#scDock.nudge{animation:dockNudge .6s ease-in-out 3}@keyframes dockNudge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* colonne droite réservée à la jauge et au HUD : le contenu ne passe jamais dessous */
+@media (min-width:901px){
+ .wrap{padding-right:max(28px,calc(170px - (100vw - 1180px)/2))}
+ #hud{flex-direction:column;gap:8px;right:22px;bottom:18px;width:128px;padding:10px 12px;font-size:10px}
+ #hud>*{display:flex;flex-direction:column;gap:2px}
+}
+@media (min-width:901px) and (max-height:820px){ #hud{display:none} }
+
+/* équipage sur tablette et petit portable : une rangée nette, toutes les bulles de la même taille, rien sous la jauge */
+@media (min-width:901px) and (max-width:1240px){
+ .crew{height:auto!important;display:flex!important;flex-wrap:wrap;justify-content:flex-start;gap:30px 22px;padding:20px 0 10px!important}
+ .crew .p{position:static!important;display:flex;flex-direction:column;align-items:center;width:calc(33.3% - 15px)}
+ .crew .p .ph{width:170px!important;height:170px!important}
+}
+
+/* son sur téléphone */
+.mobPlay{display:none}
+.touchAudio .mobPlay{display:block;margin:16px auto 0;max-width:560px;border-radius:16px;background:var(--ecume);padding:8px 8px 6px;box-shadow:0 14px 34px rgba(0,0,0,.3)}
+.touchAudio .mobPlay iframe,.touchAudio .miFrame{display:block;width:100%;height:120px;border:0;border-radius:10px;background:#fff}
+.touchAudio .mpHint{font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--nuit);padding:4px 6px 8px}
+.touchAudio #playBtn,.touchAudio #pressLab{display:none}
+.mobPlay.pulse,.mi.pulse{animation:dockNudge .6s ease-in-out 2}
+.mixM{display:grid!important;grid-template-columns:1fr;gap:14px;max-width:560px;margin:0 auto}
+.mixM .mi{text-align:left;display:grid;grid-template-columns:52px 1fr;gap:10px 12px;align-items:center;background:rgba(242,238,227,.07);border-radius:16px;padding:10px;outline:1px solid rgba(158,211,230,.16)}
+.mixM .mi img{width:52px;height:52px;border-radius:50%;object-fit:cover;outline:2px solid var(--sable);outline-offset:2px}
+.mixM .mi b{display:block;font:500 18px var(--sans);color:var(--ecume)}
+.mixM .mi small{font:700 10px var(--mono);letter-spacing:.12em;color:var(--plancton)}
+.mixM .mi iframe,.mixM .miSoon{grid-column:1 / -1}
+.mixM .miSoon{margin:0;font-size:14px;opacity:.7}
+.touchAudio .seaFrame{display:block;width:100%;height:400px;border:0;border-radius:12px;background:#fff;margin-top:14px}
+
+/* fiche résident·e : on change de profil avec les photos du haut, plus de précédent / suivant */
+.snav{display:none!important}
 </style>
 </head>
 <body>
@@ -1387,7 +1475,7 @@ html.inapp #fp .hpCaus{display:none}
 <div id="bar"><div class="prog"><i id="barProg"></i></div><div class="bl"><div class="nm" id="barName">Surface</div><div class="inst"><span><b id="barDepth">0 M</b></span><span><b id="bT">18 °C</b></span><span><b id="bL">100 %</b></span></div></div><button class="btn btn-plancton" data-book style="padding:10px 18px">Booker →</button></div>
 
 <div id="map"><button class="round close" id="mapClose">✕</button><div class="k">CARTE DE PLONGÉE</div>
- <a href="#surface"><span>Surface</span><small>0 M</small></a><a href="#manifeste"><span>Manifeste</span><small>– 20 M</small></a><a href="#equipage"><span>Équipage</span><small>– 80 M</small></a><a href="#abord"><span>À bord</span><small>– 140 M</small></a><a href="#soirees"><span>Soirées</span><small>– 200 M</small></a><a href="#son"><span>Le son</span><small>– 1 000 M</small></a><a href="#contact"><span>Contact</span><small>– 4 000 M</small></a></div>
+ <a href="#surface"><span>Surface</span><small>0 M</small></a><a href="#manifeste"><span>Manifeste</span><small>– 20 M</small></a><a href="#equipage"><span>Équipage</span><small>– 80 M</small></a><a href="#abord"><span>À bord</span><small>– 140 M</small></a><a href="#soirees"><span>Soirées</span><small>– 200 M</small></a><a href="#son"><span>Le son</span><small>– 1 000 M</small></a><a href="#seacast"><span>Seacast</span><small>– 2 000 M</small></a><a href="#inspirations"><span>Inspirations</span><small>– 3 000 M</small></a><a href="#contact"><span>Contact</span><small>– 4 000 M</small></a></div>
 
 <main>
 <!-- 1 SURFACE -->
@@ -1395,9 +1483,9 @@ html.inapp #fp .hpCaus{display:none}
  <div class="wrap surf-grid">
   <div>
    <div class="bigLogo reveal" id="bigLogo" data-note><svg class="refrSvg" viewBox="40 45 1160 780" style="overflow:visible"><use href="#dw" fill="#E6F6FA" opacity=".42" x="40" y="45" width="1160" height="780" class="refr"/></svg><div class="strips" id="strips" aria-hidden="true"></div><span class="note-pin"><b>LOGO LIQUIDE</b>Mouvance aquatique : le lettrage est vu à travers l'eau (déformation qui coule lentement), un reflet clair décalé comme une réfraction, et la lumière des caustiques qui joue sur les lettres. Toucher : onde. Effet actif aussi sur mobile, allégé.</span></div>
-   <div class="sub">LABEL ET COLLECTIF ÉLECTRONIQUE · NANTES · DEPUIS 2019</div>
-   <h1 class="display words" id="promise">House australe, electro et new wave.</h1>
-   <p class="heroSub reveal">Cinq résident·es, quatre sorties vinyle, plus de 40 plongées en club et open air. Une (i)ode aux mélodies australes.</p>
+   <div class="sub">LABEL ET COLLECTIF ÉLECTRONIQUE · NANTES · DEPUIS 2020</div>
+   <h1 class="display words" id="promise">House &amp; co.</h1>
+   <p class="heroSub reveal">Cinq résident·es, quatre sorties vinyle, plus de 40 plongées en club et open air.</p>
    <div class="heroActs reveal"><a class="btn hA1" href="#son">▶ Écouter</a><button class="btn hA2" data-book>Booker</button><a class="btn hA3" href="kit.html">Kit presse ↓</a></div>
   </div>
   <div class="heroPhoto reveal" id="fp">
@@ -1405,7 +1493,6 @@ html.inapp #fp .hpCaus{display:none}
    <div class="hpBack" aria-hidden="true"></div>
    <div class="hpBlob"><img fetchpriority="high" decoding="async" src="img/groupe.webp" alt="L'équipage de Distant Waters sous le Serpent d'océan, Saint-Brevin"><span class="hpCaus" aria-hidden="true"></span><span class="hpShine" aria-hidden="true"></span></div>
    <i class="hpB b1"></i><i class="hpB b2"></i><i class="hpB b3"></i><i class="hpB b4"></i>
-   <a class="nextPill" href="#pass" data-alert><i></i><span>Prochaine plongée · À annoncer<span class="npMore"> · Me prévenir</span> →</span></a>
   </div>
  </div>
 
@@ -1419,20 +1506,20 @@ html.inapp #fp .hpCaus{display:none}
   <div class="man-grid">
    <div>
     <h2 class="words manTitle">La curiosité plutôt que l'entre-soi.</h2>
-    <div class="code reveal" data-note><span class="pill">01 · Fêtes inclusives</span><span class="pill">02 · Parité</span><span class="pill">03 · Artistes inédits à Nantes</span><span class="note-pin"><b>CODE DE BORD</b>Les trois engagements du collectif, tirés de leur press kit.</span></div>
-    <p class="chapo reveal">Né à Nantes en 2020, dans le sillage d'un label fondé un an plus tôt, Distant Waters réunit des passionnés qui sortent des sentiers battus pour faire découvrir des artistes émergents, souvent inédits sur la scène nantaise.</p>
+    <div class="code reveal" data-note><span class="pill">Fêtes inclusives</span><span class="pill">Parité</span><span class="pill">Artistes inédits à Nantes</span><span class="note-pin"><b>CODE DE BORD</b>Les trois engagements du collectif, tirés de leur press kit.</span></div>
+    <p class="chapo reveal">Né à Nantes en 2020, Distant Waters réunit des passionné·es qui sortent des sentiers battus pour organiser des événements et faire découvrir des artistes émergents, souvent inédits sur la scène nantaise.</p>
     <button class="readmore btn" id="readmore"><span>Lire le manifeste en entier</span><i>↓</i></button>
     <div class="more" id="more">
-     <p>Distant Waters est une (i)ode musicale aux mélodies australes, aux rythmes rebondissants et aux grooves acérés. On y joue une house décomplexée, nourrie d'Electro et de riffs synthétiques comme de la mélancolie assumée de la New Wave.</p>
-     <p>Notre identité est ancrée à Nantes, entre l'héritage de Jules Verne, la proximité de l'océan et une fascination commune pour les mondes marins. Chaque événement est conçu comme une plongée : partir de la surface, explorer les profondeurs, atteindre un sommet d'énergie collective, puis remonter à la lumière.</p>
+     <p>On y joue une house décomplexée, nourrie d'electro, de riffs synthétiques et de la mélancolie assumée de la new wave.</p>
+     <p>Notre identité est ancrée à Nantes, entre rayonnement culturel, proximité de l'océan et essor de la scène électronique. Née d'une fascination commune pour les mondes marins, elle fait de chaque événement une plongée exaltante dans un nouveau monde musical.</p>
      <p>Nos décors sont fabriqués à la main, à partir de matériaux récupérés et upcyclés. Nous défendons des fêtes inclusives, bienveillantes et ouvertes à toutes et tous, où la curiosité l'emporte sur l'entre-soi.</p>
     </div>
    </div>
    <div class="lamp reveal" id="lamp" data-note><img loading="lazy" decoding="async" src="img/lino.webp" alt="Linogravure du collectif"><div class="veil"></div><div class="cap"><b>PROMENEZ LA LAMPE</b><p>Nos décors sont fabriqués à la main, en matériaux récupérés et upcyclés.</p></div><span class="note-pin"><b>LAMPE TORCHE</b>Déplacez la souris ou le doigt : le dessin se révèle comme en plongée de nuit.</span></div>
   </div>
   <div class="echoBand" id="echoBand" data-note><span class="note-pin"><b>ÉCHOS SONAR</b>Chaque date est un écho : le point s'allume et envoie ses ondes quand on l'atteint, le texte sort du flou. Bande sombre pleine largeur, comme une zone d'ombre qu'on traverse.</span>
-   <div class="ebIn"><div class="ebHead"><div class="kicker">ÉCHOS · NOTRE HISTOIRE</div><h3>Ce que le sonar a capté depuis 2019.</h3></div>
-   <div class="ecGrid" id="ecGrid"><i class="thr"><b></b></i><div class="radar" id="radar" aria-hidden="true"><div class="scope"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="cx"></i><i class="cy"></i><div class="sweep3"></div><div class="blips3" id="blips3"></div></div><div class="ro"><small>SONAR · ÉCHO <b id="roN">01</b> / 07</small><strong id="roY">2019</strong><span id="roT">Le label</span><em id="roD">– 140 m</em></div></div><div class="ec" style="--d:0ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2019</div><h4>Le label</h4><p>Distant Waters Records voit le jour.</p></div></div><div class="ec" style="--d:180ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2020</div><h4>Le collectif</h4><p>Vic et Sans Sucre lancent le collectif.</p></div></div><div class="ec" style="--d:360ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2021</div><h4>DW01</h4><p>The First Dive, premier EP de Sans Sucre.</p></div></div><div class="ec" style="--d:540ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2022</div><h4>40 Pieds</h4><p>Premiers bacs posés au 40 Pieds. Jpeg et Buzz embarquent.</p></div></div><div class="ec" style="--d:720ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><span class='pill todo'>Date à compléter</span><h4>Résidence CO2</h4><p>Une résidence qui installe le collectif.</p></div></div><div class="ec" style="--d:900ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><span class='pill todo'>Date à compléter</span><h4>Macadam</h4><p>La résidence actuelle, au cœur des plongées.</p></div></div><div class="ec now" style="--d:1080ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2026</div><h4>Cinq à bord</h4><p>Vic, Sans Sucre, Jpeg, Buzz et Yola.</p></div></div></div></div>
+   <div class="ebIn"><div class="ebHead"><div class="kicker">ÉCHOS · NOTRE HISTOIRE</div><h3>Ce que le sonar a capté depuis 2020.</h3></div>
+   <div class="ecGrid" id="ecGrid"><i class="thr"><b></b></i><div class="radar" id="radar" aria-hidden="true"><div class="scope"><i class="r1"></i><i class="r2"></i><i class="r3"></i><i class="cx"></i><i class="cy"></i><div class="sweep3"></div><div class="blips3" id="blips3"></div></div><div class="ro"><small>SONAR · ÉCHO <b id="roN">01</b> / 08</small><strong id="roY">2020</strong><span id="roT">Le label et le collectif</span><em id="roD">– 140 m</em></div></div><div class="ec" style="--d:0ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2020</div><h4>Le label et le collectif</h4><p>Vic et Sans Sucre lancent Distant Waters à Nantes.</p></div></div><div class="ec" style="--d:160ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2021</div><h4>DW01</h4><p>The First Dive, premier EP de Sans Sucre.</p></div></div><div class="ec" style="--d:320ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2021</div><h4>Seacast</h4><p>En mars, premier épisode de la série Seacast.</p></div></div><div class="ec" style="--d:480ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2022</div><h4>40 Pieds</h4><p>Premiers bacs posés au 40 Pieds. Jpeg et Buzz embarquent.</p></div></div><div class="ec" style="--d:640ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2022</div><h4>Résidence CO2</h4><p>De juin 2022 à février 2024.</p></div></div><div class="ec" style="--d:800ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2023</div><h4>Macadam</h4><p>Depuis septembre 2023, la résidence au cœur des plongées.</p></div></div><div class="ec" style="--d:960ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2024</div><h4>Atelier du Dahu</h4><p>Une résidence au Dahu depuis 2024.</p></div></div><div class="ec now" style="--d:1120ms"><i class="src"><b class="sw"></b></i><i class="rg"></i><i class="rg"></i><i class="rg"></i><div class="c"><div class=yr>2026</div><h4>Cinq à bord</h4><p>Vic, Sans Sucre, Jpeg, Buzz et Yola.</p></div></div></div></div></div></div>
   </div>
  </div>
 </section>
@@ -1443,7 +1530,7 @@ html.inapp #fp .hpCaus{display:none}
  <div class="wrap">
   <div class="kicker">– 80 M · RÉCIF</div>
   <h2 class="words">L'équipage</h2>
-  <p class="chapo reveal">Cinq passionnés réunis par une même envie : sortir des sentiers battus et faire découvrir des artistes émergents.</p>
+  <p class="chapo reveal">Cinq passionné·es réunis par une même envie : sortir des sentiers battus et faire découvrir des artistes émergents.</p>
   <div class="crew" id="crew" data-note><span class="note-pin" style="left:auto;right:0"><b>PORTRAITS QUI FLOTTENT</b>Chacun dérive à sa vitesse. Clic ou toucher : la fiche s'ouvre. Les photos gardent leur lumière dorée.</span></div>
  </div>
 </section>
@@ -1455,8 +1542,8 @@ html.inapp #fp .hpCaus{display:none}
   <h2 class="words">Ils sont passés à bord.</h2>
   <p class="chapo reveal">Depuis 2022, l'équipage a fait venir des artistes rarement programmés à Nantes. Quelques chiffres et des noms.</p>
   <div class="abStats reveal"><div><b>40+</b><span>PLONGÉES DEPUIS 2022</span></div><div><b>9</b><span>LIEUX À NANTES ET AUTOUR</span></div><div><b>4</b><span>SORTIES SUR LE LABEL</span></div></div>
-  <div class="abNames reveal"><span>Cecilio<small>SLOW LIFE</small></span><span>Innuendo<small>DAS FIRMAMENT</small></span><span>Carl H</span><span>Akyki</span><span>Super Venus</span><span>Oriana</span><span>Matias Rich</span><span>Itarixy</span><span>Tau Car</span><span>Arnic</span><span>Wendy Bkz</span><span>Jimmy Batt</span><span>Charlou</span><span>Mayell</span><span>Kizoku</span><span>Soyouz</span><span>Groenogen</span></div>
-  <div class="abQuote reveal">« A melody that won't let you be gloomy. »<div class="abCap">TROMMEL MUSIC · À PROPOS DE THE LIVING WRECK, SANS SUCRE (DW03)</div></div>
+  <div class="abNames reveal"><span>Mari.te</span><span>Vass</span><span>Alex</span><span>Marco</span><span>Akaj</span><span>Anah &amp; Lumiere</span><span>Desin</span><span>UuU</span><span>Gnarly J</span><span>Juani</span><span>Ethel</span><span>Rubi</span><span>Vincent Allix</span><span>Richer</span><span>La Gugga</span><span>Leef</span><span>Boréal</span><span>Manipulate</span><span>FA7</span><span>Soulbird</span><span>Luje</span><span>Brume</span><span>Theovar</span><span>Luttoni</span><span>Emi Ömar</span><span>Jorge Escribano</span><span>Gwenn</span><span>Piedcheveu</span><span>Sibil</span></div>
+  
  </div>
 </section>
 
@@ -1467,7 +1554,7 @@ html.inapp #fp .hpCaus{display:none}
   <div class="kicker">– 200 M · RÉCIF PROFOND</div>
   <div class="soiTop"><div class="soiHead">
     <h2 class="words">Soirées</h2>
-    <p class="chapo reveal">Chaque soirée est une plongée : on part de la surface, on explore les profondeurs, on touche un sommet d'énergie collective, puis on remonte à la lumière.</p>
+    <p class="chapo reveal">Chaque événement est conçu comme une plongée exaltante dans un nouveau monde musical.</p>
   </div>
   <div class="pass reveal" id="pass" data-note><span class="note-pin"><b>CARTE D'EMBARQUEMENT</b>La prochaine date prend la forme d'une carte d'embarquement de ferry : départ Nantes, escale, heures de descente et de remontée. Sans date annoncée, l'escale reste à annoncer et le talon propose une alerte. Dès que la date tombe, le talon affiche « Prendre sa place ».</span>
    <div class="pMain">
@@ -1485,7 +1572,7 @@ html.inapp #fp .hpCaus{display:none}
     <div class="pSon" aria-hidden="true"><i></i><i></i><b></b></div>
     <p>On vous prévient dès que l'escale est annoncée.</p>
     <button class="btn tkBtn" id="alertBtn">Me prévenir →</button>
-    <form class="buoyForm" id="buoyForm"><input type="email" placeholder="votre@mail.fr" required><button class="btn tkBtn">Lâcher une bouée</button></form>
+    <form class="buoyForm" id="buoyForm" name="alerte" method="POST" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="alerte"><p hidden><input name="bot-field"></p><input type="email" name="mail" placeholder="votre@mail.fr" required><button class="btn tkBtn">Lâcher une bouée</button></form>
     <div class="toast" id="toast"></div>
    </div>
   </div>
@@ -1505,7 +1592,7 @@ html.inapp #fp .hpCaus{display:none}
   <div class="son-grid">
    <div>
     <h2 class="words">Le son</h2>
-    <p class="chapo reveal" style="font-size:19px">Un label, quatre sorties et une même patte : aquatique et funky, à la fois solaire, acid et liquide.</p>
+    <p class="chapo reveal" style="font-size:19px">Un label, quatre sorties et autant de singularités.</p>
     <div class="rel reveal" id="rel"></div>
     <div class="diver reveal" id="diver" data-note><div class="hub"><img loading="lazy" decoding="async" src="img/dw02b.webp" alt=""></div><div><b>CLIP · THE DIVER</b><div style="font-weight:500">Sans Sucre</div><small>Réalisé par @planet.bich</small></div><span class="note-pin"><b>HUBLOT</b>Le clip se lance dans le hublot, plein écran au clic.</span></div>
    </div>
@@ -1525,6 +1612,35 @@ html.inapp #fp .hpCaus{display:none}
  </div>
 </section>
 
+<!-- 5b SEACAST -->
+<section class="palier dark" id="seacast" data-depth="2000" data-name="Seacast">
+ <img decoding="async" class="lino lA" src="img/jelly.svg" alt="">
+ <div class="wrap sea-grid">
+  <div>
+   <div class="kicker">– 2 000 M · FOSSE</div>
+   <h2 class="words">Seacast</h2>
+   <p class="chapo reveal">Une tribune d'expression pour les artistes qui nous tiennent à cœur et qu'on a envie de faire grandir. Chaque épisode est une plongée signée par un·e invité·e.</p>
+   <div class="seaMeta reveal"><span class="pill">12 épisodes</span><span class="pill">Mars 2021 · Août 2024</span></div>
+   <div class="seaActs reveal"><button class="btn btn-plancton" type="button" id="seaPlay">▶ Écouter le dernier épisode</button><a class="btn btn-ghost" href="#contact" data-demo>Proposer un podcast →</a></div>
+  </div>
+  <div class="seaLog reveal">
+   <div class="slHead"><span>Journal de bord</span><span>Épisode · artiste · équipage</span></div>
+   <ol id="seaList"></ol>
+   <a class="slMore" href="https://soundcloud.com/distantwaters/sets/seacast-serie" target="_blank" rel="noopener">Tous les épisodes sur SoundCloud ↗</a>
+  </div>
+ </div>
+</section>
+
+<!-- 5c INSPIRATIONS -->
+<section class="palier dark" id="inspirations" data-depth="3000" data-name="Inspirations">
+ <div class="wrap">
+  <div class="kicker">– 3 000 M · LUMIÈRES DES ABYSSES</div>
+  <h2 class="words">Les inspirations de l'équipage.</h2>
+  <p class="chapo reveal">Un morceau par résident·e : celui qui les a fait plonger, ou qui tourne en boucle en ce moment.</p>
+  <div class="inspi reveal" id="inspi"></div>
+ </div>
+</section>
+
 <!-- 6 CONTACT -->
 <section class="palier dark" id="contact" data-depth="4000" data-name="Contact">
  <img decoding="async" class="lino lE" src="img/trait2.webp" alt="">
@@ -1533,17 +1649,17 @@ html.inapp #fp .hpCaus{display:none}
   <div class="con-grid">
    <div>
     <h2 class="words" style="font-style:italic">Bouteille à la mer.</h2>
-    <p class="chapo reveal">Booking, presse ou démo : choisissez votre canal, glissez votre message dans la bouteille. On vous répond depuis le fond.</p>
-    <div class="chans" id="buoys" data-note><button class="buoy on" data-s="booking"><span class="ani"><svg viewBox="0 0 32 32"><g class="tn" fill="none" stroke="#FF5FB0" stroke-width="2.6" stroke-linecap="round"><path d="M10 16.5c-.5 4-4 4.5-3.6 8"/><path d="M13.6 18c0 4-2.2 5.5-.6 8.5"/><path d="M18.4 18c0 4 2.2 5.5.6 8.5"/><path d="M22 16.5c.5 4 4 4.5 3.6 8"/></g><path d="M8.5 16.5C8.5 11 12 7 16 7s7.5 4 7.5 9.5c0 1.8-3.4 2.6-7.5 2.6s-7.5-.8-7.5-2.6z" fill="#FF5FB0"/><path d="M12 10.5c1-1.4 2.4-2 3.6-2" stroke="#FFC2E0" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="13.4" cy="14.4" r="1.3" fill="#121A4A"/><circle cx="18.6" cy="14.4" r="1.3" fill="#121A4A"/></svg></span><b>Booker</b><small>Une date, un club, un festival</small></button><button class="buoy" data-s="presse"><span class="ani"><svg viewBox="0 0 32 32"><defs><radialGradient id="jg" cx="50%" cy="30%" r="70%"><stop offset="0" stop-color="#F2FFC0"/><stop offset="1" stop-color="#9ED3E6"/></radialGradient></defs><g class="tn" fill="none" stroke="#9ED3E6" stroke-width="1.6" stroke-linecap="round" opacity=".9"><path d="M11.5 17.5c1.2 3-1.2 5 0 8"/><path d="M16 17.5c-1.2 3 1.2 5.2 0 9"/><path d="M20.5 17.5c1.2 3-1.2 5 0 8"/></g><path d="M7.5 16.5C7.5 11 11.3 7 16 7s8.5 4 8.5 9.5c-1.4 1-2.8-.5-4.2.4s-2.8.9-4.3 0-2.8.9-4.3 0-2.8.6-4.2-.4z" fill="url(#jg)"/><circle cx="16" cy="12" r="2.2" fill="#D9F25C" opacity=".9"/></svg></span><b>Presse</b><small>Interview, article, photos</small></button><button class="buoy" data-s="demo"><span class="ani"><svg viewBox="0 0 32 32"><g class="tn" fill="none" stroke="#D9F25C" stroke-width="1.8" stroke-linecap="round"><path d="M14.8 9.6c0-2 .9-3.4 2.1-3.4"/><path d="M16.4 9.6c0-2-.9-3.4-2.1-3.4"/></g><path d="M3.5 18.5c2-5 8-7.4 14-6.4 4 .7 6 2 8.3 0 0 3-1 4.3-2 5.3 1 1 3 1 4.2 0-1 3.2-4.2 4.4-6.2 3.3-3 3-8 4-13 3-3.2-.6-5.3-2-5.3-5.2z" fill="#3567B5"/><path d="M6 21c3 1.6 8 1.8 12.5.6" stroke="#9ED3E6" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="9" cy="16.6" r="1.1" fill="#F2EEE3"/></svg></span><b>Démo</b><small>Proposer un morceau au label</small></button><span class="note-pin"><b>CANAL</b>On choisit pourquoi on écrit. Chaque canal a son animal, comme sur leurs affiches : poulpe pour booker, méduse pour la presse, baleine pour les démos. L'animal du canal choisi s'anime, les champs s'adaptent.</span></div>
-    <form class="form reveal" id="form" data-note><span class="note-pin"><b>BOUTEILLE</b>À l'envoi, le message s'enroule et part dans une bouteille. Prototype : rien n'est envoyé.</span>
+    <p class="chapo reveal">Booking, presse ou démo (morceau ou podcast) : choisissez votre canal, glissez votre message dans la bouteille. On vous répond depuis le fond.</p>
+    <div class="chans" id="buoys" data-note><button class="buoy on" data-s="booking"><span class="ani"><svg viewBox="0 0 32 32"><g class="tn" fill="none" stroke="#FF5FB0" stroke-width="2.6" stroke-linecap="round"><path d="M10 16.5c-.5 4-4 4.5-3.6 8"/><path d="M13.6 18c0 4-2.2 5.5-.6 8.5"/><path d="M18.4 18c0 4 2.2 5.5.6 8.5"/><path d="M22 16.5c.5 4 4 4.5 3.6 8"/></g><path d="M8.5 16.5C8.5 11 12 7 16 7s7.5 4 7.5 9.5c0 1.8-3.4 2.6-7.5 2.6s-7.5-.8-7.5-2.6z" fill="#FF5FB0"/><path d="M12 10.5c1-1.4 2.4-2 3.6-2" stroke="#FFC2E0" stroke-width="1.4" fill="none" stroke-linecap="round"/><circle cx="13.4" cy="14.4" r="1.3" fill="#121A4A"/><circle cx="18.6" cy="14.4" r="1.3" fill="#121A4A"/></svg></span><b>Booker</b><small>Une date, un club, un festival</small></button><button class="buoy" data-s="presse"><span class="ani"><svg viewBox="0 0 32 32"><defs><radialGradient id="jg" cx="50%" cy="30%" r="70%"><stop offset="0" stop-color="#F2FFC0"/><stop offset="1" stop-color="#9ED3E6"/></radialGradient></defs><g class="tn" fill="none" stroke="#9ED3E6" stroke-width="1.6" stroke-linecap="round" opacity=".9"><path d="M11.5 17.5c1.2 3-1.2 5 0 8"/><path d="M16 17.5c-1.2 3 1.2 5.2 0 9"/><path d="M20.5 17.5c1.2 3-1.2 5 0 8"/></g><path d="M7.5 16.5C7.5 11 11.3 7 16 7s8.5 4 8.5 9.5c-1.4 1-2.8-.5-4.2.4s-2.8.9-4.3 0-2.8.9-4.3 0-2.8.6-4.2-.4z" fill="url(#jg)"/><circle cx="16" cy="12" r="2.2" fill="#D9F25C" opacity=".9"/></svg></span><b>Presse</b><small>Interview, article, photos</small></button><button class="buoy" data-s="demo"><span class="ani"><svg viewBox="0 0 32 32"><g class="tn" fill="none" stroke="#D9F25C" stroke-width="1.8" stroke-linecap="round"><path d="M14.8 9.6c0-2 .9-3.4 2.1-3.4"/><path d="M16.4 9.6c0-2-.9-3.4-2.1-3.4"/></g><path d="M3.5 18.5c2-5 8-7.4 14-6.4 4 .7 6 2 8.3 0 0 3-1 4.3-2 5.3 1 1 3 1 4.2 0-1 3.2-4.2 4.4-6.2 3.3-3 3-8 4-13 3-3.2-.6-5.3-2-5.3-5.2z" fill="#3567B5"/><path d="M6 21c3 1.6 8 1.8 12.5.6" stroke="#9ED3E6" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="9" cy="16.6" r="1.1" fill="#F2EEE3"/></svg></span><b>Démo</b><small>Proposer un morceau ou un podcast au label</small></button><span class="note-pin"><b>CANAL</b>On choisit pourquoi on écrit. Chaque canal a son animal, comme sur leurs affiches : poulpe pour booker, méduse pour la presse, baleine pour les démos. L'animal du canal choisi s'anime, les champs s'adaptent.</span></div>
+    <form class="form reveal" id="form" name="bouteille" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-note><span class="note-pin"><b>BOUTEILLE</b>À l'envoi, le message s'enroule et part dans une bouteille, et arrive sur la boîte mail du collectif.</span><input type="hidden" name="form-name" value="bouteille"><input type="hidden" name="canal" value="booking"><p hidden><label>Ne pas remplir <input name="bot-field"></label></p>
      <div class="fields">
-      <div class="row"><label>NOM<input placeholder="Votre nom"></label><label>MAIL<input type="email" placeholder="votre@mail.fr"></label></div>
-      <div class="row opt show" data-for="booking"><label>STRUCTURE OU LIEU<input placeholder="Club, festival…"></label><label>DATE ENVISAGÉE<input placeholder="JJ / MM / AA"></label></div>
-      <div class="opt" data-for="presse"><label>MÉDIA<input placeholder="Nom du média"></label></div>
-      <div class="opt" data-for="demo"><label>LIEN D'ÉCOUTE<input placeholder="SoundCloud, Bandcamp…"></label></div>
-      <label>MESSAGE<textarea rows="3" placeholder="Racontez-nous votre projet de plongée."></textarea></label>
+      <div class="row"><label>NOM<input name="nom" placeholder="Votre nom" required></label><label>MAIL<input name="mail" type="email" placeholder="votre@mail.fr" required></label></div>
+      <div class="row opt show" data-for="booking"><label>STRUCTURE OU LIEU<input name="structure" placeholder="Club, festival…"></label><label>DATE ENVISAGÉE<input name="date" placeholder="JJ / MM / AA"></label></div>
+      <div class="opt" data-for="presse"><label>MÉDIA<input name="media" placeholder="Nom du média"></label></div>
+      <div class="opt" data-for="demo"><label>LIEN D'ÉCOUTE<input name="lien" placeholder="SoundCloud, Bandcamp…"></label></div>
+      <label>MESSAGE<textarea name="message" rows="3" placeholder="Racontez-nous votre projet de plongée." required></textarea></label>
       <button class="btn btn-plancton">Jeter la bouteille →</button>
-      <div class="direct">booking@ · presse@ <span class="pill todo" style="color:var(--ecume)">À compléter</span></div>
+      <div class="direct"><a href="mailto:distant.waters.music@gmail.com" style="color:inherit">distant.waters.music@gmail.com</a></div>
      </div>
      <svg class="bottle" viewBox="0 0 60 140"><path d="M24 4h12v22c0 6 14 12 14 30v70c0 6-4 10-10 10H20c-6 0-10-4-10-10V56c0-18 14-24 14-30z" fill="rgba(158,211,230,.25)" stroke="#9ED3E6" stroke-width="2"/><rect x="22" y="0" width="16" height="10" rx="2" fill="#E0B57B"/><rect x="18" y="70" width="24" height="40" rx="3" fill="#F2EEE3" transform="rotate(-8 30 90)"/></svg>
      <div class="sentMsg">
@@ -1551,9 +1667,8 @@ html.inapp #fp .hpCaus{display:none}
       <div class="kicker" style="color:var(--plancton)">BOUTEILLE LANCÉE · <span id="sentCh">BOOKING</span></div>
       <h3>Elle dérive vers nous.</h3>
       <p>Merci <b id="sentName">!</b> Votre message flotte vers l'équipage. On vous répond depuis le fond, en général sous quelques jours.</p>
-      <div class="sentRow"><span class="pill">↳ booking@distantwaters</span><span class="pill">Réponse sous 72 h</span></div>
+      <div class="sentRow"><span class="pill">↳ distant.waters.music@gmail.com</span><span class="pill">Réponse sous 72 h</span></div>
       <button type="button" class="btn btn-ghost" id="again">Écrire une autre bouteille</button>
-      <small class="proto">Prototype : rien n'est envoyé pour l'instant.</small>
      </div>
     </form>
    </div>
@@ -1562,15 +1677,15 @@ html.inapp #fp .hpCaus{display:none}
      <div class="ph"><img loading="lazy" decoding="async" src="img/groupe.webp" alt="Le collectif sous le Serpent d'océan"><span class="pill">Sous le Serpent d'océan, Saint-Brevin</span></div>
      <div class="bd"><div class="k">CAISSON ÉTANCHE · KIT PRESSE</div><h3>Le kit presse, prêt à l'emploi.</h3>
       <ul><li><span>Kit presse complet<small><a href="kit/DistantWaters-KitPresse-2026.pdf" download>PDF ↓</a></small></span></li><li><span>Logos, 5 déclinaisons<small><a href="presse/DistantWaters-Logos.zip" download>SVG · PNG ↓</a></small></span></li><li><span>Photos du collectif et portraits<small>JPG</small></span></li><li><span>Illustrations lino<small>SVG · PNG</small></span></li><li><span>Bios courte, moyenne, longue<small>TXT</small></span></li></ul>
-      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-plancton" href="presse/DistantWaters-PackPresse.zip" download>Tout télécharger (.zip, 12 Mo) ↓</a><a class="btn btn-ghost" id="kitBtn" href="kit.html">Ouvrir le kit presse →</a></div></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-plancton" href="presse/DistantWaters-PackPresse.zip" download>Tout télécharger (.zip, 13 Mo) ↓</a><a class="btn btn-ghost" id="kitBtn" href="kit.html">Ouvrir le kit presse →</a></div></div>
     </div>
-    <div class="logoHead"><span>LOGOS · 4 DÉCLINAISONS</span><a class="pill" id="allLogos" href="presse/DistantWaters-Logos.zip" download>Tous les logos (.zip) ↓</a></div>
+    <div class="logoHead"><span>LOGOS · 5 DÉCLINAISONS</span><a class="pill" id="allLogos" href="presse/DistantWaters-Logos.zip" download>Tous les logos (.zip) ↓</a></div>
     <div class="logos" id="logos"></div>
     <div class="copied" id="copied" aria-live="polite"></div>
    </div>
   </div>
   <div class="up"><button id="upBtn"><i>↑</i>Remonter à la surface</button></div>
-  <footer>INSTAGRAM · SOUNDCLOUD · BANDCAMP · LINKTREE<br><br>PROTOTYPE · DISTANT WATERS · NANTES</footer>
+  <footer><nav class="socials"><a href="https://www.instagram.com/distantwatersrecords/" target="_blank" rel="noopener">Instagram</a> · <a href="https://soundcloud.com/distantwaters" target="_blank" rel="noopener">SoundCloud</a> · <a href="https://distantwaters.bandcamp.com/" target="_blank" rel="noopener">Bandcamp</a> · <a href="https://linktr.ee/distantwaters" target="_blank" rel="noopener">Linktree</a></nav><br>Photos : <a href="https://www.instagram.com/roz_galerie" target="_blank" rel="noopener">Roz Galerie</a><br><br>DISTANT WATERS · NANTES</footer>
  </div>
 </section>
 </main>
@@ -1579,7 +1694,7 @@ html.inapp #fp .hpCaus{display:none}
 <aside class="bookSheet" id="book" aria-label="Booker Distant Waters"><div class="bsTop"><span class="kicker" style="margin:0">BOOKING</span><button class="round" id="bookX" aria-label="Fermer">✕</button></div>
  <h3>Booker Distant Waters</h3><p>Une date, un club, un festival : un·e résident·e, un b2b ou un plateau complet avec décor.</p>
  <ul><li><span>Formats</span><b>Club · open air · b2b</b></li><li><span>Durée</span><b>2 h à toute la nuit</b></li><li><span>Fiche technique</span><b><a href="kit.html#p6">Voir ↗</a></b></li><li><span>Kit presse</span><b><a href="kit.html">Ouvrir ↗</a></b></li><li><span>Réponse</span><b>sous 72 h</b></li></ul>
- <a class="btn btn-plancton" href="mailto:booking@distantwaters.fr">booking@distantwaters.fr →</a><small>Adresse à confirmer par le collectif</small></aside>
+ <a class="btn btn-plancton" href="mailto:distant.waters.music@gmail.com">distant.waters.music@gmail.com →</a></aside>
 <div class="ftoast" id="ftoast"></div>
 <aside class="sheet" id="sheet"></aside>
 <div id="player"><div class="pdot"></div><div class="pt" id="pt">DW03 · B1 · The Living Wreck · Sans Sucre</div><div class="pbar"><i id="pbar"></i></div><div class="mono" style="font-size:12px" id="ptime">00:00</div></div>
@@ -1589,8 +1704,8 @@ html.inapp #fp .hpCaus{display:none}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const LOGO_D=document.querySelector('#dw path').getAttribute('d');
 /* ---------- depth & sea color ---------- */
-const stopsD=[[0,'#8FD6DC'],[20,'#9ED3E6'],[80,'#2F5DAE'],[140,'#2645A0'],[200,'#1D2F8C'],[1000,'#121A4A'],[4000,'#060A22']];
-const stopsM=[[0,'#8FD6DC'],[20,'#6AA8D3'],[80,'#2F58AA'],[140,'#25429E'],[200,'#1C2E88'],[1000,'#101848'],[4000,'#050820']];
+const stopsD=[[0,'#8FD6DC'],[20,'#9ED3E6'],[80,'#2F5DAE'],[140,'#2645A0'],[200,'#1D2F8C'],[1000,'#121A4A'],[2000,'#0E1540'],[3000,'#0A1032'],[4000,'#060A22']];
+const stopsM=[[0,'#8FD6DC'],[20,'#6AA8D3'],[80,'#2F58AA'],[140,'#25429E'],[200,'#1C2E88'],[1000,'#101848'],[2000,'#0C133C'],[3000,'#090E2E'],[4000,'#050820']];
 let IS_MOB=innerWidth<=900; addEventListener('resize',()=>{IS_MOB=innerWidth<=900;}); let stops=stopsD;
 const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const mixA=(a,b,t)=>hex(a).map((v,i)=>Math.round(v+(hex(b)[i]-v)*t)).join(',');
@@ -1615,7 +1730,7 @@ function onScroll(){
   $('#sand').style.opacity=Math.max(0,1-D*1.25); $('#glare').style.opacity=Math.max(0,1-D*1.1);
   const DM=IS_MOB?D*1.3:D; const co=Math.max(0,.42-DM*.6), ro=Math.max(0,1-DM*.45), so=Math.max(0,1-DM*1.25); $('#causSvg').style.opacity=co; $('#causSvg').style.display=co<.01?'none':''; $('#rays').style.opacity=ro; $('#rays').style.display=ro<.01?'none':''; $('#sand').style.display=so<.01?'none':'';
   $('#vignette').style.opacity=Math.min(1,Math.max(0,(D-1.2)/3)); TORCH_BASE=Math.min(1,Math.max(0,(D-2.6)/1.4));
-  const tp=[18,16,13,11,9,5,2]; const tmp=(tp[d0]+(tp[d1]-tp[d0])*ease); const li=Math.max(0,Math.round(100*Math.exp(-curDepth/90)));
+  const tp=[18,16,13,11,9,5,4,3,2]; const tmp=(tp[d0]+(tp[d1]-tp[d0])*ease); const li=Math.max(0,Math.round(100*Math.exp(-curDepth/90)));
   $('#hD').textContent=(curDepth?'– ':'')+curDepth.toLocaleString('fr-FR')+' m'; $('#hT').textContent=tmp.toFixed(0)+' °C'; $('#hL').textContent=li+' %'; $('#bT').textContent=tmp.toFixed(0)+' °C'; $('#bL').textContent=li+' %';
   if(i!==curIdx){ if(i>0 && i>curIdx){ const T=$('#toastP'); $('#toastK').textContent='PALIER '+(i+1)+' · – '+(+s.dataset.depth).toLocaleString('fr-FR')+' M'; $('#toastN').textContent=s.dataset.name;  for(let q=0;q<12;q++) bub(Math.random()*innerWidth,innerHeight+10+Math.random()*80,2+Math.random()*6); } curIdx=i; $$('#nav a').forEach((a,k)=>a.classList.toggle('on',k===i-1)); $$('#gauge .tick').forEach((g,k)=>g.classList.toggle('on',k===i)); $('#barName').textContent=s.dataset.name; }
   $('#barDepth').textContent=(curDepth?'– ':'')+curDepth.toLocaleString('fr-FR')+' M';
@@ -1715,28 +1830,43 @@ let lampVis=false; new IntersectionObserver(es=>{lampVis=es[0].isIntersecting;})
 
 /* ---------- équipage ---------- */
 const crew=[
- {k:'vic',n:'Vic',real:'Victor · co-fondateur',role:'RÉSIDENCE DW',tags:['Résidence DW','Co-fondateur'],bio:"Explorateur sonore depuis plus de dix ans, Vic se passionne pour les vinyles méconnus, les faces B oubliées et les remixes de pop méconnaissables. Trance d'une autre époque, house offensive, Electro syncopée et chaleur de l'Italo Disco : des sets puissants et colorés.",pos:[40,170,190],d:7},
- {k:'sanssucre',n:'Sans Sucre',real:'Gabriel · co-fondateur',role:'RÉSIDENCE DW',tags:['Résidence DW','Co-fondateur'],bio:"Compositeur passionné de synthés, il signe le premier EP du label après plusieurs V/A (Antam, Planet Tapes, Distrikt Paris). De la Minimal à la House, en passant par le Break, le Funk et l'Electro : une musique romantique et sensuelle, qui scande la liberté et le lâcher-prise.",pos:[300,70,250],d:9},
- {k:'jpeg',n:'Jpeg',real:'Jean-Philippe',role:'RÉSIDENCE DW',tags:['Résidence DW','Digger'],bio:"Digger chevronné, du genre à annuler un rencard parce que son disquaire préféré fait une nocturne. Biberonné au rock psychédélique des années 70 : basses enrobées, percussions incisives et synthés empruntés au funk et à la disco.",pos:[190,410,170],d:8},
- {k:'buzz',n:'Buzz',real:'Louis',role:'RÉSIDENCE DW',tags:['Résidence DW','Sélecta'],bio:"Une curiosité presque maladive : vieilleries oubliées et discrètes nouveautés, de la Synth-Pop à la Trance, du Breakbeat au Krautrock. Il a le don de reconnaître ce qui fédère, et le sens du timing.",pos:[600,330,200],d:10},
- {k:'yola',n:'Yola',real:'Nouvelle recrue',role:'NOUVELLE RECRUE',tags:['Résidence DW','Depuis 2025'],bio:"Sur la scène nantaise depuis 2025. La house en porte-étendard, entre dub, deep et tech house : des sets instinctifs et fédérateurs, des basses enveloppantes et des rythmiques entraînantes.",pos:[680,30,180],d:7.5,dates:[['02.09.26','Off Tonique, Fort Tonique Dinan'],['18.09.26','Macadam, Nantes'],['05.12.26','Voiceless Session, LAB Nantes']]}];
+ {k:'vic',n:'Vic',bio:"Explorateur sonore depuis plus de dix ans, Vic se passionne pour les vinyles méconnus, les faces B oubliées et les remixes de pop méconnaissables. Trance d'une autre époque, house offensive, Electro syncopée et chaleur de l'Italo Disco : des sets puissants et colorés.",pos:[40,170,200],d:7},
+ {k:'sanssucre',n:'Sans Sucre',bio:"Co-fondateur du label et collectif Distant Waters, Sans Sucre est un compositeur passionné qui se découvre une casquette de DJ sur le tard. Il porte une affection particulière pour la chaleur des sonorités rétro-futuristes, les mélodies envoûtantes et les grooves rebondissants. Il parfait sa collection de morceaux en constante évolution pour livrer des sets dansants et mélancoliques où l'electro rencontre le rock, l'italo, la new wave et l'acid house.",pos:[300,70,200],d:9},
+ {k:'jpeg',n:'Jpeg',bio:"Digger chevronné, du genre à annuler un rencard parce que son disquaire préféré fait une nocturne. Biberonné au rock psychédélique des années 70 : basses enrobées, percussions incisives et synthés empruntés au funk et à la disco.",pos:[190,410,200],d:8},
+ {k:'buzz',n:'Buzz',bio:"C'est dans une curiosité presque maladive que Buzz a construit son univers musical depuis petit, des sonorités rock au groove du trip hop jusqu'aux musiques électroniques. Le flair affûté et les oreilles grandes ouvertes, il déniche aussi bien des vieilleries oubliées que de discrètes nouveautés. Il a ce don particulier de reconnaître ce qui fédère, mêlé d'un sens du timing avisé. Sans limite de style ni d'époque, Buzz est capable de rythmer des journées calmes tout comme des nuits sans fin.",pos:[600,330,200],d:10},
+ {k:'yola',n:'Yola',bio:"Sur la scène nantaise depuis 2025. La house en porte-étendard, entre dub, deep et tech house : des sets instinctifs et fédérateurs, des basses enveloppantes et des rythmiques entraînantes.",pos:[680,30,200],d:7.5,dates:[['02.09.26','Off Tonique, Fort Tonique Dinan'],['18.09.26','Macadam, Nantes'],['05.12.26','Voiceless Session, LAB Nantes']]}];
 const crewEl=$('#crew');
-crew.forEach((c,i)=>{ const el=document.createElement('div'); el.className='p'; el.style.left=c.pos[0]+'px'; el.style.top=c.pos[1]+'px'; el.style.animationDuration=c.d+'s'; el.style.animationDelay=(-i*1.7)+'s';
-  el.innerHTML=`<div class="ph" style="width:${c.pos[2]}px;height:${c.pos[2]}px"><img decoding="async" src="img/${c.k}.webp" alt="${c.n}"></div><h3>${c.n}</h3><small>${c.role}</small>`; el.onclick=()=>openSheet(i); crewEl.appendChild(el); });
+crew.forEach((c,i)=>{ const el=document.createElement('div'); el.className='p'; el.style.left=`calc((100% - ${c.pos[2]+20}px) * ${(c.pos[0]/680).toFixed(3)})`; el.style.top=c.pos[1]+'px'; el.style.animationDuration=c.d+'s'; el.style.animationDelay=(-i*1.7)+'s';
+  el.innerHTML=`<div class="ph" style="width:${c.pos[2]}px;height:${c.pos[2]}px"><img decoding="async" src="img/${c.k}.webp" alt="${c.n}"></div><h3>${c.n}</h3>`; el.onclick=()=>openSheet(i); crewEl.appendChild(el); });
 let SI=-1;
-function openSheet(i,dir){ const c=crew[i]; SI=i; $$('.crew .p').forEach((p,k)=>p.classList.toggle('sel',k===i)); const pv=crew[(i+4)%5], nx=crew[(i+1)%5];
-  const real=c.real.split(' · ')[0];
-  $('#sheet').innerHTML=`<div class="top"><span>RÉSIDENT·E ${i+1} / 5</span><button class="round" id="sx" aria-label="Fermer">✕</button></div>
+function openSheet(i,dir){ const c=crew[i]; SI=i; $$('.crew .p').forEach((p,k)=>p.classList.toggle('sel',k===i)); const N=crew.length, pv=crew[(i+N-1)%N], nx=crew[(i+1)%N];
+  $('#sheet').innerHTML=`<div class="top"><span>RÉSIDENT·E ${i+1} / ${N}</span><button class="round" id="sx" aria-label="Fermer">✕</button></div>
   <div class="thumbs">${crew.map((m,k)=>`<button data-k="${k}" class="${k===i?'on':''}" aria-label="${m.n}"><img loading="lazy" decoding="async" src="img/${m.k}.webp" alt=""></button>`).join('')}</div>
-  <div class="sbody ${dir?'in-'+dir:''}"><div class="big"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></div><h3>${c.n}</h3><div class="real">${real}</div><div class="tags"><span class="pill">${c.tags[0]}</span><span class="pill a">${c.tags[1]}</span></div><p>${c.bio}</p>${c.dates?'<ul class="dates">'+c.dates.map(d=>`<li><span>${d[0]}</span>${d[1]}</li>`).join('')+'</ul>':'<ul class="dates"><li><span>DATES</span>Dernières dates à compléter</li></ul>'}<button class="btn mixBtn" data-mix="${i}">▶ Écouter son mix</button><div class="links"><a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://instagram.com/distantwatersrecords" target="_blank" rel="noopener">Instagram ↗</a></div><a class="btn btn-plancton" href="#contact" id="bk">Booker ${c.n} →</a></div>
+  <div class="sbody ${dir?'in-'+dir:''}"><div class="big"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></div><h3>${c.n}</h3><p>${c.bio}</p>${c.dates?'<ul class="dates">'+c.dates.map(d=>`<li><span>${d[0]}</span>${d[1]}</li>`).join('')+'</ul>':'<ul class="dates"><li><span>DATES</span>Dernières dates à compléter</li></ul>'}<button class="btn mixBtn" data-mix="${i}">▶ Écouter son mix</button><div class="links"><a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://instagram.com/distantwatersrecords" target="_blank" rel="noopener">Instagram ↗</a></div><a class="btn btn-plancton" href="#contact" id="bk">Booker ${c.n} →</a></div>
   <nav class="snav"><button id="pv"><small>← PRÉCÉDENT</small>${pv.n}</button><button id="nx"><small>SUIVANT →</small>${nx.n}</button></nav>`;
   $('#sheet').classList.add('open'); $('#scrim').classList.add('open'); $('#sx').onclick=closeSheet; $('#bk').onclick=closeSheet;
-  $('#pv').onclick=()=>openSheet((i+4)%5,'l'); $('#nx').onclick=()=>openSheet((i+1)%5,'r'); $$('.thumbs button').forEach(b=>b.onclick=()=>{ const k=+b.dataset.k; if(k!==i) openSheet(k,k>i?'r':'l'); }); }
-(()=>{ let x0=null,y0=0; const sh=$('#sheet'); sh.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true}); sh.addEventListener('touchend',e=>{ if(x0===null||SI<0) return; const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4) openSheet(dx<0?(SI+1)%5:(SI+4)%5, dx<0?'r':'l'); x0=null; },{passive:true}); })();
-addEventListener('keydown',e=>{ if(!$('#sheet').classList.contains('open')) return; if(e.key==='ArrowRight') openSheet((SI+1)%5,'r'); if(e.key==='ArrowLeft') openSheet((SI+4)%5,'l'); });
+  $('#pv').onclick=()=>openSheet((i+N-1)%N,'l'); $('#nx').onclick=()=>openSheet((i+1)%N,'r'); $$('.thumbs button').forEach(b=>b.onclick=()=>{ const k=+b.dataset.k; if(k!==i) openSheet(k,k>i?'r':'l'); }); }
+(()=>{ let x0=null,y0=0; const sh=$('#sheet'); sh.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true}); sh.addEventListener('touchend',e=>{ if(x0===null||SI<0) return; const dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0; if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4) openSheet(dx<0?(SI+1)%crew.length:(SI+crew.length-1)%crew.length, dx<0?'r':'l'); x0=null; },{passive:true}); })();
+addEventListener('keydown',e=>{ if(!$('#sheet').classList.contains('open')) return; if(e.key==='ArrowRight') openSheet((SI+1)%crew.length,'r'); if(e.key==='ArrowLeft') openSheet((SI+crew.length-1)%crew.length,'l'); });
 function closeSheet(){ SI=-1; $('#sheet').classList.remove('open'); $('#scrim').classList.remove('open'); $$('.crew .p').forEach(p=>p.classList.remove('sel')); }
 $('#scrim').onclick=closeSheet; addEventListener('keydown',e=>{ if(e.key==='Escape'){closeSheet(); $('#map').classList.remove('open');} });
 
+
+/* Seacast : épisodes joués dans le lecteur du site, depuis la playlist SoundCloud */
+const SEA=[['07','Bigraf','La Récré'],['06','Thysme','Soulbirde'],['05','Brume','Discrete Society'],['04','Jpeg','Distant Waters'],['03','Piedcheveu','']];
+const SEA_URL='distantwaters/sets/seacast-serie';
+$('#seaList').innerHTML=SEA.map(([n,a,c],i)=>`<li><button type="button" class="ep" data-i="${i}" aria-pressed="false"><span class="no">${n}</span><span class="who"><b>${a}</b>${c?`<small>${c}</small>`:''}</span><span class="pb" aria-hidden="true"></span></button></li>`).join('');
+function seaUI(k){ $$('.ep').forEach((x,j)=>{ x.classList.toggle('on',j===k); x.setAttribute('aria-pressed',j===k); }); $('#seaPlay').textContent='❚❚ Pause'; }
+function seaOff(){ $$('.ep').forEach(x=>{ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); }); $('#seaPlay').textContent='▶ Écouter le dernier épisode'; }
+function seaToggle(i){ if(scp.owner==='sea:'+i&&scp.on){ scPause(); seaOff(); return; } if(playing) pause(true); mixOff(); au.pause(); scp.au=false; scPlay([SEA_URL,0,0,i],'sea:'+i,()=>window.open('https://soundcloud.com/'+SEA_URL,'_blank')); seaUI(i); }
+$$('.ep').forEach(b=>b.onclick=()=>seaToggle(+b.dataset.i));
+$('#seaPlay').onclick=()=>seaToggle(scp.owner&&scp.owner.startsWith('sea:')?+scp.owner.slice(4):0);
+
+/* Inspirations de l'équipage : un morceau par résident·e (à compléter) */
+const INSPI={vic:null,sanssucre:null,jpeg:null,buzz:null,yola:null};
+$('#inspi').innerHTML=crew.map(c=>{ const s=INSPI[c.k]; const inner=`<span class="ip"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></span><span class="in">${c.n}</span>${s?`<span class="it">${s.t}</span><span class="ia">${s.a}</span><span class="go">ÉCOUTER ↗</span>`:'<span class="it">Morceau à venir</span>'}`;
+  return s?`<a class="ic" href="${s.u}" target="_blank" rel="noopener">${inner}</a>`:`<div class="ic todo">${inner}</div>`; }).join('');
+document.addEventListener('click',e=>{ const d=e.target.closest('[data-demo]'); if(d){ const b=document.querySelector('.buoy[data-s="demo"]'); b&&setTimeout(()=>b.click(),400); } });
 /* ---------- soirées ---------- */
 
 let posters=[];
@@ -1775,7 +1905,7 @@ let bankVis=false, bankSeen=false; new IntersectionObserver(es=>{ const v=es[0].
 let dAcc=0; (function drift(t){ if(!drag && t>hold && bankVis){ dAcc+=IS_TOUCH?.35:.5; const st=Math.floor(dAcc); if(st>=1){ bank.scrollLeft+=st; dAcc-=st; } const third=bank.scrollWidth/3; if(bank.scrollLeft>=third*2) bank.scrollLeft-=third; } requestAnimationFrame(drift); })(0);
 document.querySelectorAll('[data-alert]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();$('#pass').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{if($('#alertBtn').style.display!=='none')$('#alertBtn').click();},900);}));
 $('#alertBtn').onclick=()=>{ $('#buoyForm').classList.add('open'); $('#alertBtn').style.display='none'; $('#buoyForm input').focus(); };
-$('#buoyForm').onsubmit=e=>{ e.preventDefault(); const r=e.submitter.getBoundingClientRect(); const b=document.createElement('div'); b.className='buoyUp'; b.style.left=(r.left+r.width/2-17)+'px'; b.style.top=(r.top-10)+'px'; document.body.appendChild(b); setTimeout(()=>b.remove(),2500);
+$('#buoyForm').onsubmit=e=>{ e.preventDefault(); netSend($('#buoyForm')).catch(()=>{}); const r=e.submitter.getBoundingClientRect(); const b=document.createElement('div'); b.className='buoyUp'; b.style.left=(r.left+r.width/2-17)+'px'; b.style.top=(r.top-10)+'px'; document.body.appendChild(b); setTimeout(()=>b.remove(),2500);
   $('#toast').textContent='Bouée lâchée. Prototype : aucune alerte n\'est encore envoyée.'; e.target.reset(); };
 
 /* ---------- le son ---------- */
@@ -1809,28 +1939,28 @@ const TRK=[
  [[DW02X,0,90],['sanssucre-music/the-sea-banquet'],['recordeep-mag/premiere-groenogen-soyouz-warmin-liquid-dw02'],[DW02X,270,90]],
  [['emiomar/sfhjrjjjoqpx'],['emiomar/aquaboulevard'],['sanssucre-music/the-living-wreck'],['sanssucre-music/the-riddle']],
  [['recordeep-mag/premiere-akyki-one-hundred-years-dw04'],['recordeep-mag/premiere-akyki-salted-suite-dw04'],['distantwaters/b1-the-bell-on-ice-snippet'],['distantwaters/b2-river-denizens-snippet']]];
-const MIX={vic:['ouargue/ouargue-2-vic-celt-mix-shire'],sanssucre:['macadamnantes/sans-sucre-macadam-burning-waves-2-120823-macadam-nantes'],jpeg:['recordeep-mag/sundaysession006-jpeg-distant-waters']};
+const MIX={vic:['ouargue/ouargue-2-vic-celt-mix-shire'],sanssucre:['sans-sucre-ajoute/late-80s-love'],yola:['yola-lf'],jpeg:['recordeep-mag/sundaysession006-jpeg-distant-waters']};
 const MIX_DEF=['distantwaters/emi-omar-sans-sucre-keepers-of-the-ruins-ep-dw03'];
 const scp={api:null,w:null,key:'',owner:null,on:false,pos:0,dur:0,start:0,len:0,seeked:true,t:null};
 const IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 function scApi(){ if(!scp.api) scp.api=new Promise((res,rej)=>{ const s=document.createElement('script'); s.src='https://w.soundcloud.com/player/api.js'; s.onload=()=>{ if(window.SC){ scp.ok=true; res(window.SC);} else rej(); }; s.onerror=rej; document.head.appendChild(s); }); return scp.api; }
 function scDockEl(){ let d=$('#scDock'); if(!d){ d=document.createElement('div'); d.id='scDock'; d.innerHTML='<button type="button" id="scX" aria-label="Fermer le lecteur">×</button>'; document.body.appendChild(d); $('#scX').onclick=()=>{ scPause(); if(playing) pause(true); mixOff(); d.classList.remove('show','live'); }; } return d; }
 addEventListener('load',()=>setTimeout(()=>scApi().catch(()=>{}),1200));
-function scArm(owner){ clearTimeout(scp.t); scp.t=setTimeout(()=>{ if(!scp.on&&scp.owner===owner&&scp.w){ scDockEl().classList.add('show'); if(!IOS) fToast('Touche ▶ dans le lecteur pour lancer le son'); } },4500); }
-function scPlay(spec,owner,onFail){ const u=spec[0], start=spec[1]||0, len=spec[2]||0, key=u+'@'+start, d=scDockEl();
+function scArm(owner){ clearTimeout(scp.t); scp.t=setTimeout(()=>{ if(!scp.on&&!scp.au&&scp.owner===owner){ const d=scDockEl(); d.classList.add('show','nudge'); setTimeout(()=>d.classList.remove('nudge'),2400); fToast('Le son attend un clic : touche ▶ dans le petit lecteur SoundCloud en bas'); } },3500); }
+function scPlay(spec,owner,onFail){ const u=spec[0], start=spec[1]||0, len=spec[2]||0, idx=spec[3]||0, key=u+'@'+start+'#'+idx, d=scDockEl();
   if(!scp.au&&scp.w&&scp.key===key){ scp.owner=owner; scp.w.play(); scArm(owner); return; }
   const old=d.querySelector('iframe'); if(old){ try{ scp.w&&scp.w.pause(); }catch(_){} old.remove(); }
   Object.assign(scp,{w:null,key,owner,on:false,pos:0,dur:len,start,len,seeked:!start}); d.classList.add('live');
   const f=document.createElement('iframe'); f.title='Lecteur SoundCloud'; f.allow='autoplay; encrypted-media'; f.setAttribute('scrolling','no'); f.setAttribute('frameborder','no');
   f.src='https://w.soundcloud.com/player/?url='+encodeURIComponent(SCB+u)+'&auto_play=true&visual=false&show_artwork=true&hide_related=true&show_comments=false&show_teaser=false&show_reposts=false&color=%231D2F8C';
   d.appendChild(f);
-  scApi().then(SC=>{ if(!f.isConnected) return; const w=SC.Widget(f), E=SC.Widget.Events; scp.w=w;
+  scApi().then(SC=>{ if(!f.isConnected) return; const w=SC.Widget(f), E=SC.Widget.Events; scp.w=w; if(idx) w.bind(E.READY,()=>{ w.skip(idx); });
     w.bind(E.PLAY,()=>{ if(scp.w!==w) return; scp.on=true; clearTimeout(scp.t); d.classList.add('live'); scVol();
       if(!scp.seeked){ scp.seeked=true; w.seekTo(start*1000); } if(!len) w.getDuration(x=>{ scp.dur=x/1000; }); syncUI(); });
     w.bind(E.PAUSE,()=>{ if(scp.w!==w) return; scp.on=false; syncUI(); });
     w.bind(E.FINISH,()=>{ if(scp.w!==w) return; scp.on=false; syncUI(true); });
     w.bind(E.PLAY_PROGRESS,e=>{ if(scp.w!==w||!scp.seeked) return; scp.pos=Math.max(0,e.currentPosition/1000-start); if(len&&scp.pos>=len){ w.pause(); scp.on=false; syncUI(true); } });
-  }).catch(()=>{ f.remove(); scp.key=''; onFail&&onFail(); });
+  }).catch(()=>{ scp.w=null; d.classList.add('show'); onFail&&onFail(); });
   scArm(owner); }
 /* Fichiers hébergés sur le site (dossier audio/) : prioritaires sur SoundCloud, un seul toucher suffit, même sur iPhone */
 const LOCAL={}; const audKey=(r,t)=>'dw0'+(r+1)+'-'+['a1','a2','b1','b2'][t];
@@ -1850,7 +1980,8 @@ function scPause(){ clearTimeout(scp.t); if(scp.w) scp.w.pause(); au.pause(); sc
 function nextTrack(){ TR=(TR+1)%releases[R].tr.length; face=TR<2?'a':'b'; renderLabel(); renderTracks(); elapsed=0; deckSource(); }
 function syncUI(ended){ const o=scp.owner||'';
   if(o==='deck'){ if(ended&&playing) nextTrack(); else if(scp.on&&!playing) play(); else if(!scp.on&&playing&&!ended){ /* pause venue du lecteur SoundCloud */ pause(true); } }
-  else if(o.startsWith('mix:')){ const k=+o.slice(4); if(scp.on){ if(playing) pause(true); mixUI(k);} else mixOff(); } }
+  else if(o.startsWith('mix:')){ const k=+o.slice(4); if(scp.on){ if(playing) pause(true); mixUI(k);} else mixOff(); }
+  else if(o.startsWith('sea:')){ const k=+o.slice(4); if(scp.on){ if(playing) pause(true); seaUI(k);} else if(!ended) seaOff(); } }
 function mixUI(k){ $$('#mixRow button').forEach((x,j)=>{ x.classList.toggle('on',j===k); x.setAttribute('aria-pressed',j===k); }); $('#mixRow').classList.add('playing'); $$('.mixBtn').forEach(b=>b.textContent=(+b.dataset.mix===k?'❚❚ Pause':'▶ Écouter son mix')); }
 function mixOff(){ $$('#mixRow button').forEach(x=>{ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); }); const r=$('#mixRow'); r&&r.classList.remove('playing'); $$('.mixBtn').forEach(b=>b.textContent='▶ Écouter son mix'); }
 /* audio engine (WebAudio, synthétisé : secours si SoundCloud ne répond pas) */
@@ -1885,10 +2016,10 @@ function play(){ if(playing) return;
   if(amb){ wasAmb=true; stopAmb(); } else wasAmb=false; setTimeout(sndUI,0);
   playing=true; disc.classList.add('play'); deck.classList.add('play'); $('#pIcon').innerHTML=ICON_PAUSE; $('#playBtn').setAttribute('aria-label','Pause'); $('#pressLab').textContent='EN LECTURE · TOUCHER POUR METTRE EN PAUSE';
   mixOff(); deckSource(); document.body.classList.add('withplayer'); $('#player').classList.add('show'); lastT=performance.now();
-  const loop=()=>{ if(!playing) return; const n=performance.now(); if(scp.owner==='deck'&&scp.on){ elapsed=scp.pos; DUR=scp.dur||DUR; } else { elapsed=(elapsed+(n-lastT)/1000)%DUR; } lastT=n; setProg(); requestAnimationFrame(loop); }; loop(); }
+  const loop=()=>{ if(!playing) return; const n=performance.now(); const live=scp.owner==='deck'&&scp.on; if(live){ elapsed=scp.pos; DUR=scp.dur||DUR; } lastT=n; setProg(); if(!live) $('#air').textContent='Chargement du son…'; requestAnimationFrame(loop); }; loop(); }
 function deckSource(){ groove&&groove.stop(); groove=null; const u=TRK[R][TR]; $('#pt').textContent=releases[R].c+' · '+releases[R].tr[TR][0]+' · '+(releases[R].tr[TR][2]||'titre à venir')+' · '+releases[R].tr[TR][1];
-  playSrc(audKey(R,TR),u,'deck',()=>{ if(playing&&!groove){ DUR=372; groove=startGroove(); } }); }
-function pause(keepSc){ if(!playing) return; playing=false; disc.classList.remove('play'); deck.classList.remove('play'); groove&&groove.stop(); groove=null; if(!keepSc&&scp.owner==='deck') scPause(); $('#pIcon').innerHTML=ICON_PLAY; $('#playBtn').setAttribute('aria-label','Lecture'); $('#pressLab').textContent='TOUCHER POUR ÉCOUTER';
+  playSrc(audKey(R,TR),u,'deck',()=>{ if(playing){ pause(true); fToast('Touche ▶ dans le lecteur SoundCloud en bas pour écouter'); } }); }
+function pause(keepSc){ if(!playing) return; playing=false; disc.classList.remove('play'); deck.classList.remove('play'); groove&&groove.stop(); groove=null; if(!keepSc&&scp.owner==='deck') scPause(); $('#pIcon').innerHTML=ICON_PLAY; $('#playBtn').setAttribute('aria-label','Lecture'); $('#pressLab').textContent='TOUCHER POUR ÉCOUTER'; setProg();
   if(wasAmb){ startAmb(); setVol(); wasAmb=false; } sndUI(); }
 const toggle=()=>playing?pause():play();
 disc.addEventListener('click',toggle); $('#playBtn').addEventListener('click',toggle);
@@ -1897,21 +2028,44 @@ $('#diver').onclick=()=>{ $('#diver small').textContent='Le clip se lancera ici 
 /* ambiance sous-marine : grondement, bulles, chants lointains, sonar dans les abysses */
 let amb=null;
 function impulse(sec,decay){ const len=AC.sampleRate*sec, b=AC.createBuffer(2,len,AC.sampleRate); for(let c=0;c<2;c++){ const d=b.getChannelData(c); for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay); } return b; }
-function startAmb(){ ac(); const out=AC.createGain(); out.gain.value=0; out.gain.setTargetAtTime(1,AC.currentTime,1.2); out.connect(master);
+function startAmb(){ ac(); const out=AC.createGain(); out.gain.value=0; out.gain.setValueAtTime(0,AC.currentTime); out.gain.linearRampToValueAtTime(1,AC.currentTime+12); out.connect(master);
   const lp=AC.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=900; lp.connect(out);
   const rev=AC.createConvolver(); rev.buffer=impulse(4,2.6); const wet=AC.createGain(); wet.gain.value=.55; rev.connect(wet); wet.connect(lp);
   // grondement profond et très doux
-  const src=AC.createBufferSource(); src.buffer=noiseBuf(); src.loop=true; const r1=AC.createBiquadFilter(); r1.type='lowpass'; r1.frequency.value=140; r1.Q.value=.3; const rg=AC.createGain(); rg.gain.value=0; src.connect(r1); r1.connect(rg); rg.connect(lp); src.start();
-  // nappe tonale (eau qui résonne)
-  const pads=[55,82.4,110.5].map((f,k)=>{ const o=AC.createOscillator(); o.type='sine'; o.frequency.value=f; const g=AC.createGain(); g.gain.value=.018; const l=AC.createOscillator(); l.frequency.value=.05+k*.03; const lg=AC.createGain(); lg.gain.value=.012; l.connect(lg); lg.connect(g.gain); l.start(); o.connect(g); g.connect(lp); g.connect(rev); o.start(); return o; });
-  function bloop(){ if(!amb) return; const n=1+((Math.random()*3)|0); for(let k=0;k<n;k++){ const t0=AC.currentTime+k*(.06+Math.random()*.12); const o=AC.createOscillator(); o.type='sine'; const f=300+Math.random()*700; o.frequency.setValueAtTime(f,t0); o.frequency.exponentialRampToValueAtTime(f*2.4,t0+.07); const g=AC.createGain(); g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(.05,t0+.01); g.gain.exponentialRampToValueAtTime(.0001,t0+.09); o.connect(g); g.connect(lp); g.connect(rev); o.start(t0); o.stop(t0+.12); }
-    amb.tb=setTimeout(bloop, (DEPTH<2? 700:1800)+Math.random()*2200); }
-  function song(){ if(!amb) return; const t0=AC.currentTime; const o=AC.createOscillator(); o.type='sine'; const base=110+Math.random()*90; o.frequency.setValueAtTime(base,t0); o.frequency.linearRampToValueAtTime(base*1.9,t0+1.4); o.frequency.linearRampToValueAtTime(base*1.2,t0+3.2);
-    const v=AC.createOscillator(); v.frequency.value=5; const vg=AC.createGain(); vg.gain.value=6; v.connect(vg); vg.connect(o.frequency); v.start(t0); v.stop(t0+3.6);
-    const g=AC.createGain(); g.gain.setValueAtTime(.0001,t0); g.gain.linearRampToValueAtTime(.03,t0+.8); g.gain.linearRampToValueAtTime(.0001,t0+3.4); o.connect(g); g.connect(rev); o.start(t0); o.stop(t0+3.6);
-    amb.ts=setTimeout(song,9000+Math.random()*12000); }
-  function ping(){ if(!amb) return; if(DEPTH>3.3){ const t0=AC.currentTime; const o=AC.createOscillator(); o.type='sine'; o.frequency.value=1180; const g=AC.createGain(); g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(.05,t0+.01); g.gain.exponentialRampToValueAtTime(.0001,t0+.6); o.connect(g); g.connect(rev); g.connect(lp); o.start(t0); o.stop(t0+.7); }
-    amb.tp=setTimeout(ping,4200+Math.random()*2500); }
+  const src=AC.createBufferSource(); src.buffer=noiseBuf(); src.loop=true; const r1=AC.createBiquadFilter(); r1.type='lowpass'; r1.frequency.value=180; r1.Q.value=.2; const r2=AC.createBiquadFilter(); r2.type='lowpass'; r2.frequency.value=260; const rg=AC.createGain(); rg.gain.value=.09; src.connect(r1); r1.connect(r2); r2.connect(rg); rg.connect(out); src.start(); const cur=AC.createOscillator(); cur.frequency.value=.07; const curG=AC.createGain(); curG.gain.value=.06; cur.connect(curG); curG.connect(rg.gain); cur.start(); const cur2=AC.createOscillator(); cur2.frequency.value=.031; const cur2G=AC.createGain(); cur2G.gain.value=70; cur2.connect(cur2G); cur2G.connect(r1.frequency); cur2.start();
+  // nappe d'accords lents (ré dorien) : Dm9, B♭maj7, Fmaj7/A, C6/9, qui fondent l'un dans l'autre
+  const CH=[[73.42,110,130.81,174.61,220],[58.27,116.54,146.83,174.61,220],[55,110,130.81,174.61,261.63],[65.41,98,130.81,146.83,220]];
+  const padBus=AC.createGain(); padBus.gain.value=1; const padOut=AC.createGain(); padOut.gain.value=.35; padBus.connect(padOut); padOut.connect(rev); const padDry=AC.createGain(); padDry.gain.value=.25; padOut.connect(padDry); padDry.connect(lp);
+  let chI=0; const pads=[];
+  function chord(t0,dur){ CH[chI%CH.length].forEach((f,k)=>{ [0,1].forEach(j=>{ const o=AC.createOscillator(); o.type=j?'triangle':'sine'; o.frequency.value=f*(j?1.004:1)*(DEPTH>3?0.5:1); const g=AC.createGain(); const v=(k===0?.02:.011)*(j?.5:1); g.gain.setValueAtTime(.0001,t0); g.gain.linearRampToValueAtTime(v,t0+1.6); g.gain.setValueAtTime(v,t0+dur-.4); g.gain.linearRampToValueAtTime(.0001,t0+dur+2.2); o.connect(g); g.connect(padBus); o.start(t0); o.stop(t0+dur+2.4); }); }); chI++; }
+  // cloches d'eau : une mélodie lente qui s'improvise sur la gamme, plus grave en descendant
+  const SC=[293.66,349.23,392,440,523.25,587.33,698.46,783.99,880,1046.5];
+  let lastN=4;
+  function bell(f,t0,v){ [[1,1],[2.76,.18],[5.4,.05]].forEach(([m,a])=>{ const o=AC.createOscillator(); o.type='sine'; o.frequency.value=f*m; const g=AC.createGain(); g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(v*a,t0+.09); g.gain.exponentialRampToValueAtTime(.0001,t0+(m===1?3.6:1.1)); o.connect(g); g.connect(rev); o.start(t0); o.stop(t0+3.4); }); }
+  function melody(t0){ const step=[-2,-1,-1,1,1,2,0][(Math.random()*7)|0]; lastN=Math.max(0,Math.min(SC.length-1,lastN+step)); const oct=DEPTH>3?.5:DEPTH>1.6?.75:1;
+    bell(SC[lastN]*oct,t0,.006); if(Math.random()<.25){ const n2=Math.max(0,Math.min(SC.length-1,lastN+(Math.random()<.5?2:-2))); bell(SC[n2]*oct,t0+60/118,.004); } }
+  // groove house lointain, comme une fête entendue depuis le fond : kick étouffé, basse, accords qui pompent
+  const gBus=AC.createGain(); gBus.gain.value=.3; const gLp=AC.createBiquadFilter(); gLp.type='lowpass'; gLp.frequency.value=650; gLp.Q.value=.4; gBus.connect(gLp); gLp.connect(out); const gRev=AC.createGain(); gRev.gain.value=.25; gBus.connect(gRev); gRev.connect(rev);
+  const BPM=118, S16=60/BPM/4; let gNext=AC.currentTime+.3, gStep=0; const roots=[73.42,58.27,55,65.41];
+  const shBuf=noiseBuf();
+  function groove(){ if(!amb) return; while(gNext<AC.currentTime+.25){ const t0=gNext, st=gStep%16, bar=(gStep/16)|0;
+      if(st===0&&bar%4===0) chord(t0,16*4*S16);
+      if(st%4===0){ const o=AC.createOscillator(), g=AC.createGain(); o.frequency.setValueAtTime(115,t0); o.frequency.exponentialRampToValueAtTime(44,t0+.14); g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(.32,t0+.006); g.gain.exponentialRampToValueAtTime(.0001,t0+.32); o.connect(g); g.connect(gBus); o.start(t0); o.stop(t0+.35);
+        padBus.gain.setValueAtTime(.35,t0); padBus.gain.linearRampToValueAtTime(1,t0+S16*3.2); }
+      if(st%4===2){ const f=roots[((bar/4)|0)%4]*(st===14?1.5:1), o=AC.createOscillator(), g=AC.createGain(); o.type='triangle'; o.frequency.value=f; g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(.045,t0+.01); g.gain.exponentialRampToValueAtTime(.0001,t0+S16*1.8); o.connect(g); g.connect(gBus); o.start(t0); o.stop(t0+S16*2);
+}
+      gNext+=S16*(st%2?.92:1.08); gStep++; } }
+
+  function bub(t0,size,v){ const o=AC.createOscillator(); o.type='sine'; const f=440/size; o.frequency.setValueAtTime(f,t0); o.frequency.exponentialRampToValueAtTime(f*(1.25+Math.random()*.45),t0+.05+size*.025); const bl=AC.createBiquadFilter(); bl.type='lowpass'; bl.frequency.value=800; const g=AC.createGain(); g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(v,t0+.004); g.gain.exponentialRampToValueAtTime(.0001,t0+.05+size*.03); const pan=AC.createStereoPanner?AC.createStereoPanner():null; o.connect(bl); if(pan){ pan.pan.value=Math.random()*1.6-.8; bl.connect(g); g.connect(pan); pan.connect(lp); pan.connect(rev); } else { bl.connect(g); g.connect(lp); g.connect(rev); } o.start(t0); o.stop(t0+.2+size*.04); }
+  function bloop(){ if(!amb) return; const t0=AC.currentTime+.05;
+    if(Math.random()<.22){ const n=5+((Math.random()*7)|0); let tt=t0; for(let k=0;k<n;k++){ bub(tt,1.6-k*.12+Math.random()*.3,.022); tt+=.08+Math.random()*.16; } }
+    else { const n=1+((Math.random()*3)|0); for(let k=0;k<n;k++) bub(t0+k*(.05+Math.random()*.15),.8+Math.random()*2.2,.018+Math.random()*.014); }
+    amb.tb=setTimeout(bloop,(DEPTH<2?1100:2000)+Math.random()*2800); }
+  function song(){ if(!amb) return; const t0=AC.currentTime, d=3+Math.random()*3, base=(DEPTH>2.5?70:95)+Math.random()*60, up=1.4+Math.random()*.8, sh=Math.random()<.5;
+    const wf=AC.createBiquadFilter(); wf.type='lowpass'; wf.frequency.value=900; wf.Q.value=4; const g=AC.createGain(); g.gain.setValueAtTime(.0001,t0); g.gain.linearRampToValueAtTime(.03,t0+d*.3); g.gain.linearRampToValueAtTime(.022,t0+d*.7); g.gain.linearRampToValueAtTime(.0001,t0+d); wf.connect(g); g.connect(rev); const dry=AC.createGain(); dry.gain.value=.3; g.connect(dry); dry.connect(lp);
+    [[1,'sine',1],[2,'triangle',.25],[.5,'sine',.5]].forEach(([m,ty,a])=>{ const o=AC.createOscillator(); o.type=ty; const og=AC.createGain(); og.gain.value=a; o.frequency.setValueAtTime(base*m,t0); if(sh){ o.frequency.linearRampToValueAtTime(base*up*m,t0+d*.45); o.frequency.linearRampToValueAtTime(base*.9*m,t0+d); } else { o.frequency.exponentialRampToValueAtTime(base*up*m,t0+d*.8); o.frequency.linearRampToValueAtTime(base*up*.85*m,t0+d); }
+      const v=AC.createOscillator(); v.frequency.value=3+Math.random()*3; const vg=AC.createGain(); vg.gain.value=base*m*.012; v.connect(vg); vg.connect(o.frequency); v.start(t0); v.stop(t0+d+.1); o.connect(og); og.connect(wf); o.start(t0); o.stop(t0+d+.1); });
+    amb.ts=setTimeout(song,(DEPTH>2.5?7000:10000)+Math.random()*9000); }
   // couche surface : houle claire, s'efface en descendant
   const sSrc=AC.createBufferSource(); sSrc.buffer=noiseBuf(); sSrc.loop=true; const sBp=AC.createBiquadFilter(); sBp.type='bandpass'; sBp.frequency.value=900; sBp.Q.value=.6; const sG=AC.createGain(); sG.gain.value=0;
   const sw=AC.createOscillator(); sw.frequency.value=.11; const swG=AC.createGain(); swG.gain.value=.05; sw.start(); sSrc.start(); /* houle retirée : plus de bruit de vague */
@@ -1920,15 +2074,13 @@ function startAmb(){ ac(); const out=AC.createGain(); out.gain.value=0; out.gain
   const dG=AC.createGain(); dG.gain.value=0; dG.connect(out);
   const drones=[34,51,68.5].map((f,k)=>{ const o=AC.createOscillator(); o.type=k?'sine':'triangle'; o.frequency.value=f; const l=AC.createOscillator(); l.frequency.value=.03+k*.02; const lg=AC.createGain(); lg.gain.value=1.5; l.connect(lg); lg.connect(o.frequency); l.start(); o.connect(dG); o.start(); return o; });
   const pSrc=AC.createBufferSource(); pSrc.buffer=noiseBuf(); pSrc.loop=true; const pLp=AC.createBiquadFilter(); pLp.type='lowpass'; pLp.frequency.value=70; const pG=AC.createGain(); pG.gain.value=0; pSrc.connect(pLp); pLp.connect(pG); pG.connect(out); pSrc.start();
-  function creak(){ if(!amb) return; if(DEPTH>2.6){ const t0=AC.currentTime, n=AC.createBufferSource(); n.buffer=noiseBuf(); const bp=AC.createBiquadFilter(); bp.type='bandpass'; bp.Q.value=18; bp.frequency.setValueAtTime(260,t0); bp.frequency.exponentialRampToValueAtTime(140,t0+1.4); const g=AC.createGain(); g.gain.setValueAtTime(.0001,t0); g.gain.linearRampToValueAtTime(.18,t0+.3); g.gain.linearRampToValueAtTime(.0001,t0+1.6); n.connect(bp); bp.connect(g); g.connect(rev); n.start(t0); n.stop(t0+1.8); }
-    amb.tc=setTimeout(creak,6000+Math.random()*7000); }
-  amb={out,src,pads,extra:[sSrc,sw,pSrc,...drones,...shim.map(s=>s.o)]}; bloop(); amb.ts=setTimeout(song,2500); ping(); amb.tc=setTimeout(creak,4000);
+  amb={out,src,pads,cur,cur2,extra:[sSrc,sw,pSrc,...drones,...shim.map(s=>s.o)]}; amb.gi=setInterval(groove,60); groove(); amb.tb=setTimeout(bloop,1500); amb.ts=setTimeout(song,4000);
   amb.layers=setInterval(()=>{ const D=DEPTH, now=AC.currentTime; const surf=Math.max(0,1-D/1.6), deep=Math.min(1,Math.max(0,(D-1.4)/2.6));
-    shim.forEach((s,k)=>s.g.gain.setTargetAtTime(.006*surf*(1+Math.sin(now*.3+k)),now,.8));
-    dG.gain.setTargetAtTime(.09*deep,now,1.2); pG.gain.setTargetAtTime(.22*deep,now,1.2);
-    lp.frequency.setTargetAtTime(Math.max(180,3200*Math.pow(.42,D)),now,.8); wet.gain.setTargetAtTime(.35+D*.14,now,.8); },300);
+    shim.forEach(s=>s.g.gain.setTargetAtTime(0,now,.8));
+    dG.gain.setTargetAtTime(.05*deep,now,1.2); pG.gain.setTargetAtTime(0,now,1.2);
+    lp.frequency.setTargetAtTime(Math.max(180,3200*Math.pow(.42,D)),now,.8); gLp.frequency.setTargetAtTime(Math.max(170,520*Math.pow(.72,D)),now,1); gBus.gain.setTargetAtTime(.3+.05*Math.min(1,D)-.04*Math.max(0,Math.min(4,D)-1),now,1.5); wet.gain.setTargetAtTime(.35+D*.14,now,.8); },300);
   amb.depthLoop=0; }
-function stopAmb(){ if(!amb) return; const a=amb; amb=null; clearTimeout(a.tb); clearTimeout(a.ts); clearTimeout(a.tp); clearInterval(a.depthLoop); clearInterval(a.layers); clearTimeout(a.tc); (a.extra||[]).forEach(n=>{ try{ setTimeout(()=>n.stop(),2500); }catch(_){} }); a.out.gain.setTargetAtTime(0,AC.currentTime,.5); setTimeout(()=>{ a.src.stop(); a.pads.forEach(o=>o.stop()); a.out.disconnect(); },2500); }
+function stopAmb(){ if(!amb) return; const a=amb; amb=null; clearTimeout(a.tb); clearTimeout(a.ts); clearTimeout(a.tp); clearTimeout(a.tm); clearTimeout(a.tch); clearInterval(a.gi); [a.cur,a.cur2].forEach(o=>{try{o&&o.stop(AC.currentTime+2.5)}catch(_){}}); clearInterval(a.depthLoop); clearInterval(a.layers); clearTimeout(a.tc); (a.extra||[]).forEach(n=>{ try{ setTimeout(()=>n.stop(),2500); }catch(_){} }); a.out.gain.setTargetAtTime(0,AC.currentTime,.5); setTimeout(()=>{ a.src.stop(); a.pads.forEach(o=>o.stop()); a.out.disconnect(); },2500); }
 let userMuted=false; try{ userMuted=localStorage.getItem('dwMute')==='1'; }catch(_){}
 function setVol(){ if(master) master.gain.setTargetAtTime(.8*(+$('#vol').value/100),AC.currentTime,.1); scVol(); }
 function scVol(){ if(scp.w) scp.w.setVolume(Math.min(100,+$('#vol').value*2)); if(typeof au!=='undefined') au.volume=Math.min(1,+$('#vol').value/50); }
@@ -1945,7 +2097,8 @@ sndUI();
 
 /* ---------- contact ---------- */
 $$('.buoy').forEach(b=>b.onclick=()=>{ $$('.buoy').forEach(x=>x.classList.toggle('on',x===b)); $$('.form .opt').forEach(o=>o.classList.toggle('show',o.dataset.for===b.dataset.s)); });
-$('#form').onsubmit=e=>{ e.preventDefault(); const ch=($('.buoy.on')||{}).dataset; $('#sentCh').textContent=({booking:'BOOKING',presse:'PRESSE',demo:'DÉMO'})[(ch||{}).s||'booking']; const nm=$('#form input').value.trim(); $('#sentName').textContent=nm?nm.split(' ')[0]+' !':'!'; $('#form').classList.add('sent'); setTimeout(()=>$('#form .fields').classList.add('gone'),900); };
+const netSend=f=>{ if(location.protocol==='file:') return Promise.resolve(); return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(f)).toString()}); };
+$('#form').onsubmit=e=>{ e.preventDefault(); const ch=($('.buoy.on')||{}).dataset; $('#form [name=canal]').value=(ch||{}).s||'booking'; netSend($('#form')).catch(()=>fToast('Oups, la bouteille n\'est pas partie. Écrivez-nous à distant.waters.music@gmail.com')); $('#sentCh').textContent=({booking:'BOOKING',presse:'PRESSE',demo:'DÉMO'})[(ch||{}).s||'booking']; const nm=$('#form input').value.trim(); $('#sentName').textContent=nm?nm.split(' ')[0]+' !':'!'; $('#form').classList.add('sent'); setTimeout(()=>$('#form .fields').classList.add('gone'),900); };
 $('#again').onclick=()=>{ $('#form').classList.remove('sent'); $('#form .fields').classList.remove('gone'); $('#form').reset(); };
 
 const LOGOS=[['Bleu','fond clair','#3567B5','#F2EEE3'],['Écume','fond foncé','#F2EEE3','#3567B5'],['Noir','impression','#111111','#FFFFFF'],['Pastille','réseaux sociaux','#F2EEE3','#0A1030',1]];
@@ -1973,7 +2126,7 @@ addEventListener('resize',thrFit); setTimeout(thrFit,50); addEventListener('load
 const RD=ecs.map((e,k)=>({y:(e.querySelector('.yr')||{}).textContent||'????',t:e.querySelector('h4').textContent}));
 const b3=$('#blips3'); RD.forEach((d,k)=>{ const a=(-90+k*47)*Math.PI/180, r=22+(k%3)*11+k*1.5; const s=document.createElement('i'); s.style.left=(50+Math.cos(a)*r)+'%'; s.style.top=(50+Math.sin(a)*r)+'%'; s.style.setProperty('--a',(k*47)+'deg'); b3.appendChild(s); });
 let radarCur=-2;
-function radarPing(){ try{ if(!AC||!amb) return; const t0=AC.currentTime, o=AC.createOscillator(), g=AC.createGain(); o.type='sine'; o.frequency.value=1320; g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(.035,t0+.01); g.gain.exponentialRampToValueAtTime(.0001,t0+.5); o.connect(g); g.connect(master); o.start(t0); o.stop(t0+.55); }catch(_){} }
+function radarPing(){ try{ if(!AC||!amb) return; const t0=AC.currentTime, f=[587.33,698.46,783.99,880,1046.5][(radarCur+5)%5]; [[1,.012],[2.76,.002]].forEach(([m,v])=>{ const o=AC.createOscillator(), g=AC.createGain(); o.type='sine'; o.frequency.value=f*m; g.gain.setValueAtTime(.0001,t0); g.gain.exponentialRampToValueAtTime(v,t0+.012); g.gain.exponentialRampToValueAtTime(.0001,t0+1.6); o.connect(g); g.connect(master); o.start(t0); o.stop(t0+1.7); }); }catch(_){} }
 function radarSet(cur){ if(cur===radarCur) return; radarCur=cur; const bl=[...b3.children]; bl.forEach((b,k)=>{ b.className=k<cur?'past':k===cur?'cur':''; });
   if(cur<0) return; const d=RD[cur]; $('#roN').textContent=String(cur+1).padStart(2,'0'); $('#roY').textContent=/\d/.test(d.y)?d.y:'Date ?'; $('#roT').textContent=d.t; $('#roD').textContent='– '+((cur+1)*140)+' m';
   const rd=$('#radar'); rd.classList.remove('flash'); void rd.offsetWidth; rd.classList.add('flash'); radarPing(); }
@@ -2045,6 +2198,39 @@ requestAnimationFrame(f);})();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const b=e.target,txt=b.textContent,n=parseInt(txt),suf=txt.replace(/^\d+/,'');if(red||!n)return;const t0=performance.now(),d=1400;
  (function step(now){const k=Math.min(1,(now-t0)/d),v=1-Math.pow(1-k,3);b.textContent=Math.round(n*v)+suf;if(k<1)requestAnimationFrame(step)})(t0);}),{threshold:.6});
 bs.forEach(b=>io.observe(b));})();
+
+/* ---------- son sur téléphone : le vrai lecteur SoundCloud, un seul toucher ----------
+   Sur iPhone (et la plupart des téléphones), un lecteur SoundCloud ne peut démarrer que si l'on touche
+   son propre bouton ▶. On affiche donc ses lecteurs directement aux bons endroits : un toucher = le son part. */
+const TOUCH_AUDIO=IOS||matchMedia('(hover: none) and (pointer: coarse)').matches;
+if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio');
+  const scSrc=(u,art)=>'https://w.soundcloud.com/player/?url='+encodeURIComponent(SCB+u)+'&auto_play=false&visual=false&show_artwork='+(art?'true':'false')+'&hide_related=true&show_comments=false&show_teaser=false&show_reposts=false&show_user=true&color=%231D2F8C';
+  const mkF=(cls,title,lazy)=>{ const f=document.createElement('iframe'); f.className=cls; f.title=title; f.allow='autoplay; encrypted-media'; f.setAttribute('scrolling','no'); f.setAttribute('frameborder','no'); if(lazy) f.loading='lazy'; return f; };
+  const onPlay=()=>{ if(amb){ wasAmb=true; stopAmb(); sndUI&&sndUI(); } };
+  /* platine : un lecteur sous le disque, qui suit la sortie et le titre choisis */
+  const box=document.createElement('div'); box.className='mobPlay'; box.innerHTML='<div class="mpHint">Touchez ▶ pour écouter</div>';
+  const mf=mkF('mpFrame','Lecteur SoundCloud des sorties',false); box.appendChild(mf); $('.press').after(box);
+  let mkey='', mw=null, mstart=0, seeked=true;
+  const bindDeck=()=>{ scApi().then(()=>{ mw=SC.Widget(mf); const E=SC.Widget.Events;
+      mw.bind(E.PLAY,()=>{ if(!seeked&&mstart){ mw.seekTo(mstart*1000); } seeked=true; disc.classList.add('play'); deck.classList.add('play'); onPlay(); });
+      const off=()=>{ disc.classList.remove('play'); deck.classList.remove('play'); }; mw.bind(E.PAUSE,off); mw.bind(E.FINISH,off); }).catch(()=>{}); };
+  const mobLoad=()=>{ const s=TRK[R]&&TRK[R][TR]; if(!s) return; const t=releases[R].tr[TR];
+    $('#np').textContent=t[0]+' · '+t[1]+' · '+(t[2]||'titre à venir'); mstart=s[1]||0; seeked=!mstart;
+    if(s[0]!==mkey){ mkey=s[0]; disc.classList.remove('play'); deck.classList.remove('play'); mf.src=scSrc(s[0],true); if(!mw) bindDeck(); } };
+  play=function(){ mobLoad(); box.classList.remove('pulse'); void box.offsetWidth; box.classList.add('pulse'); };
+  deckSource=function(){ mobLoad(); };
+  mobLoad();
+  /* mixes : un lecteur par résident·e */
+  const mr=$('#mixRow'); mr.className='mixRow mixM';
+  mr.innerHTML=crew.map((c,i)=>{ const m=MIX[c.k]; return `<div class="mi" id="mi-${c.k}"><img src="img/${c.k}.webp" alt=""><div><b>${c.n}</b><small>${m?(c.k==='sanssucre'?'LIVE':'MIX'):'MIX À VENIR'}</small></div>${m?'':'<p class="miSoon">Le mix arrive bientôt.</p>'}</div>`; }).join('');
+  crew.forEach(c=>{ const m=MIX[c.k]; if(!m) return; const f=mkF('miFrame','Mix de '+c.n,true); f.src=scSrc(m[0],false); $('#mi-'+c.k).appendChild(f); });
+  /* bouton « Écouter son mix » de la fiche résident·e : on amène au lecteur */
+  document.addEventListener('click',e=>{ const m=e.target.closest('[data-mix]'); if(!m) return; e.stopPropagation(); e.preventDefault();
+    const c=crew[+m.dataset.mix], el=$('#mi-'+c.k); typeof closeSheet==='function'&&closeSheet(); setTimeout(()=>{ el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); },350); },true);
+  /* Seacast : la playlist complète, chaque épisode se lance d'un toucher */
+  const sl=$('.seaLog'); if(sl){ $('#seaList').style.display='none'; const sp=$('#seaPlay'); if(sp) sp.style.display='none';
+    const f=mkF('seaFrame','Seacast, playlist SoundCloud',true); f.src=scSrc(SEA_URL,true); $('.slHead').after(f); }
+}
 </script>
 </body>
 </html>
