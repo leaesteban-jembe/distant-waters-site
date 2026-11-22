@@ -1447,7 +1447,8 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 /* le disque ne capte le doigt que sur sa partie ronde, pas dans les coins de son carré */
 .touchAudio .disc,.touchAudio .disc>*{pointer-events:none}.touchAudio .disc .vinyl{pointer-events:auto}
 .touchAudio #mixRow .mw{border-radius:50%}
-.touchAudio .mixRow .pl{opacity:1;background:rgba(10,16,48,.28)}
+@media (hover:none){.touchAudio .mixRow .pl{opacity:1;background:rgba(10,16,48,.28)}}
+@media (hover:hover){.touchAudio .mixRow .mw:hover .pl{opacity:1}}
 .touchAudio .mixRow button.soon{opacity:.55}.touchAudio .mixRow button.soon .pl{display:none}
 .touchAudio #seaList .ep{position:relative;overflow:hidden}
 .touchAudio .nudge{animation:ghostNudge .9s ease}
@@ -1924,7 +1925,7 @@ $('#buoyForm').onsubmit=e=>{ e.preventDefault(); netSend($('#buoyForm')).catch((
 /* ---------- le son ---------- */
 const releases=[
  {vc:'120,72,30',vg:'224,181,123',bpm:[124,118,128,112],c:'DW01',t:'The First Dive',s:'SANS SUCRE · MAI 2021 · VINYLE',tr:[['A1','Sans Sucre','Tetrodoxin'],['A2','Sans Sucre','Aqualung'],['B1','Sans Sucre','Sequential Hermaphrodism'],['B2','Sans Sucre','Ampullae of Lorenzini']],rpm:45},
- {vc:'20,70,110',vg:'158,211,230',bpm:[122,126,130,120],c:'DW02',t:'Synchronized Hunting',s:'VARIOUS ARTISTS · AOÛT 2022 · VINYLE',img:['dw02a','dw02b'],tr:[['A1','Solidwood','Evolution Of Dreams'],['A2','Sans Sucre','The Sea Banquet'],['B1','Groenogen & Soyouz',"Warmin' Liquid"],['B2','Human Logo','Scuba Disco']],rpm:45},
+ {vc:'20,70,110',vg:'158,211,230',bpm:[122,126,130,120],c:'DW02',t:'Synchronized Hunting',s:'VARIOUS ARTISTS · AOÛT 2022 · VINYLE',img:['dw02b','dw02a'],tr:[['A1','Solidwood','Evolution Of Dreams'],['A2','Sans Sucre','The Sea Banquet'],['B1','Groenogen & Soyouz','Liquid Warming'],['B2','Human Logo','Scuba Disco']],rpm:45},
  {vc:'52,30,120',vg:'160,128,240',bpm:[128,124,132,118],c:'DW03',t:'Keepers Of The Ruins',s:'EMI ÖMAR & SANS SUCRE · MARS 2023 · VINYLE',img:['dw03b','dw03a'],tr:[['A1','Emi Ömar','????'],['A2','Emi Ömar','Aquaboulevard'],['B1','Sans Sucre','The Living Wreck'],['B2','Sans Sucre','The Riddle']],rpm:33},
  {vc:'40,110,90',vg:'217,242,92',bpm:[116,120,126,134],c:'DW04',t:'The Bell On Ice',s:'AKYKI · JUIN 2024 · NUMÉRIQUE',tr:[['A1','Akyki','One Hundred Years'],['A2','Akyki','Salted Suite'],['B1','Akyki','The Bell On Ice'],['B2','Akyki','River Denizens']],rpm:33}];
 let R=0, face='a', TR=0;
@@ -2215,7 +2216,8 @@ bs.forEach(b=>io.observe(b));})();
 /* ---------- son sur téléphone : le vrai lecteur SoundCloud, un seul toucher ----------
    Sur iPhone (et la plupart des téléphones), un lecteur SoundCloud ne peut démarrer que si l'on touche
    son propre bouton ▶. On affiche donc ses lecteurs directement aux bons endroits : un toucher = le son part. */
-const TOUCH_AUDIO=IOS||matchMedia('(hover: none) and (pointer: coarse)').matches;
+/* les lecteurs SoundCloud cachés sous nos boutons marchent partout (Safari bloque le son lancé depuis la page, même sur ordi) : on les utilise sur tous les écrans */
+const TOUCH_AUDIO=true;
 /* Sur téléphone, un son SoundCloud ne démarre que si l'on touche le bouton ▶ du lecteur SoundCloud lui-même.
    On garde donc nos boutons à nous, et on glisse dessous, invisible, le vrai bouton ▶ SoundCloud agrandi :
    le doigt touche nos boutons, le son part du premier coup, sans aucun cadre SoundCloud à l'écran. */
