@@ -292,6 +292,10 @@ body.notes .note-pin{display:block}
 .disc .label img{width:100%;height:100%;object-fit:cover}
 .disc .label .gen{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font:700 12px var(--mono);color:var(--nuit);background:radial-gradient(circle,var(--ecume) 0 62%,var(--bleu) 63% 100%)}
 .disc .label .gen b{display:block;font:300 21px var(--serif);font-style:italic}
+/* l'étiquette tourne avec le disque, sinon on ne voit pas le vinyle tourner */
+.disc .label{animation:spin 1.8s linear infinite;animation-play-state:paused}
+.disc.play .label{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
 .disc .axis{position:absolute;inset:0;margin:auto;width:12px;height:12px;border-radius:50%;background:#C9CCD6;box-shadow:0 0 0 3px rgba(0,0,0,.4)}
 .arm{position:absolute;right:-8px;top:-30px;width:40%;height:64%;pointer-events:none;transform-origin:84% 12%;transform:rotate(-26deg);transition:transform 1s cubic-bezier(.4,.1,.2,1);filter:drop-shadow(0 12px 14px rgba(0,0,0,.5))}
 .deckWrap.play .arm{transform:rotate(0deg)}
@@ -538,7 +542,7 @@ footer{margin-top:60px;padding-bottom:110px;text-align:center;font:700 11px var(
 .sonar2 i{position:absolute;border-radius:50%;border:1px solid rgba(158,211,230,.16)}
 .sonar2 .c1{inset:12%}.sonar2 .c2{inset:24%}.sonar2 .c3{inset:6%;border-style:dashed;border-color:rgba(158,211,230,.12)}
 .sonar2 .axisH{left:0;right:0;top:50%;height:0;border-radius:0;border:0;border-top:1px dashed rgba(158,211,230,.22)}
-.sonar2 .sweep2{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(217,242,92,.28),transparent 55deg);-webkit-mask:radial-gradient(circle,transparent 0 37%,#000 38%);mask:radial-gradient(circle,transparent 0 37%,#000 38%);opacity:.25;animation:spin 5s linear infinite;animation-play-state:paused;transition:opacity .6s}
+.sonar2 .sweep2{display:none!important;position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(217,242,92,.28),transparent 55deg);-webkit-mask:radial-gradient(circle,transparent 0 37%,#000 38%);mask:radial-gradient(circle,transparent 0 37%,#000 38%);opacity:.25;animation:spin 5s linear infinite;animation-play-state:paused;transition:opacity .6s}
 .deckWrap.play .sonar2 .sweep2{opacity:1;animation-play-state:running}
 .sonar2 span{position:absolute;font:700 9px var(--mono);letter-spacing:.16em;color:rgba(158,211,230,.75)}
 .sonar2 .lblA{top:3%;left:50%;transform:translateX(-50%)}.sonar2 .lblB{bottom:3%;left:50%;transform:translateX(-50%)}
@@ -1437,7 +1441,11 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 .touchAudio #playBtn{overflow:hidden}
 .touchAudio #playBtn.rowOn .ghost{pointer-events:none;visibility:hidden}
 .touchAudio #rel button .ghost{border-radius:inherit}
-.touchAudio #blips .blip .ghost{border-radius:50%;inset:-14px}
+.touchAudio .quads{position:absolute;inset:-34%;border-radius:50%;overflow:hidden;z-index:1;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;-webkit-tap-highlight-color:transparent}
+.touchAudio .quads .q{position:relative;border-radius:0}
+.touchAudio #blips,.touchAudio #blips .blip{pointer-events:none!important}
+/* le disque ne capte le doigt que sur sa partie ronde, pas dans les coins de son carré */
+.touchAudio .disc,.touchAudio .disc>*{pointer-events:none}.touchAudio .disc .vinyl{pointer-events:auto}
 .touchAudio #mixRow .mw{border-radius:50%}
 .touchAudio .mixRow .pl{opacity:1;background:rgba(10,16,48,.28)}
 .touchAudio .mixRow button.soon{opacity:.55}.touchAudio .mixRow button.soon .pl{display:none}
@@ -1930,7 +1938,7 @@ function renderTracks(){ const r=releases[R]; const S=$('#blips'); S.innerHTML='
     b.setAttribute('aria-label',tk[0]+' '+(tk[2]||'titre à compléter')); b.innerHTML=`<span>${tk[0]}${i===TR?' · '+(tk[2]||'titre ?'):''}</span>`; b.title=(tk[2]||'Titre à compléter');
     b.onclick=e=>{ e.stopPropagation(); TR=i; face=i<2?'a':'b'; renderLabel(); renderTracks(); if(playing) restartIfPlaying(); else play(); }; S.appendChild(b); });
   const tk=r.tr[TR]; const name=`${tk[0]} · ${tk[1]} · ${tk[2]||'titre à compléter'}`; $('#np').textContent=name; $('#pt').textContent=r.c+' · '+name; }
-function renderAll(anim){ renderRel(); $('#relName').textContent=releases[R].c+' · '+releases[R].t; const dk=$('#deck'); dk.style.setProperty('--vc',releases[R].vc); dk.style.setProperty('--vg',releases[R].vg); if(anim){ $('#disc').classList.add('flipping'); setTimeout(()=>$('#disc').classList.remove('flipping'),600);} renderLabel(); renderTracks(); $('.disc .vinyl').style.animationDuration=(r=>r.rpm===45?'1.33s':'1.8s')(releases[R]); }
+function renderAll(anim){ renderRel(); $('#relName').textContent=releases[R].c+' · '+releases[R].t; const dk=$('#deck'); dk.style.setProperty('--vc',releases[R].vc); dk.style.setProperty('--vg',releases[R].vg); if(anim){ $('#disc').classList.add('flipping'); setTimeout(()=>$('#disc').classList.remove('flipping'),600);} renderLabel(); renderTracks(); { const d=releases[R].rpm===45?'1.33s':'1.8s'; $('.disc .vinyl').style.animationDuration=d; $('#label').style.animationDuration=d; } }
 $$('.faces button').forEach(b=>b.onclick=()=>{ face=b.dataset.face; TR=face==='a'?0:2; $('#disc').classList.add('flipping'); if(playing) restartIfPlaying(); else play(); setTimeout(()=>{renderLabel();renderTracks();},300); setTimeout(()=>$('#disc').classList.remove('flipping'),600); });
 function restartIfPlaying(){ if(playing){ elapsed=0; deckSource(); } }
 renderAll();
@@ -2279,23 +2287,19 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
   const rowPause=e=>{ if(!rowG||!rowG.on) return; e.stopImmediatePropagation(); e.preventDefault(); hardStop(rowG); };
   pb.addEventListener('click',rowPause,true); disc.addEventListener('click',rowPause,true);
 
-  /* points A1 A2 B1 B2 autour du disque : toucher un titre le lance directement et coupe ce qui joue */
-  const baseTracks=renderTracks; let blipsFor=-1;
-  renderTracks=function(){ const r=releases[R];
-    if(blipsFor===R&&$$('#blips .blip').length===r.tr.length){
-      $$('#blips .blip').forEach((b,i)=>{ const tk=r.tr[i]; b.classList.toggle('on',i===TR); b.querySelector('span').textContent=tk[0]+(i===TR?' · '+(tk[2]||'titre ?'):''); });
-      const tk=r.tr[TR], name=`${tk[0]} · ${tk[1]} · ${tk[2]||'titre à compléter'}`; $('#np').textContent=name; const pt=$('#pt'); if(pt) pt.textContent=r.c+' · '+name; return; }
-    for(let k=G.length-1;k>=0;k--){ const o=G[k]; if(!o.blip) continue; if(o.on){ try{ o.wd&&o.wd.pause(); }catch(_){} gOff(o,'sortie'); } if(o.f) o.f.remove(); G.splice(k,1); }
-    baseTracks(); blipsFor=R; const rr=R;
-    $$('#blips .blip').forEach((b,i)=>{ const s=TRK[rr]&&TRK[rr][i]; if(!s) return;
-      const g=ghost(b,s[0],0,{
-        play:wd=>{ if(rowG!==g){ rowG=g; g.seek=s[1]||0; TR=i; face=i<2?'a':'b'; renderLabel(); renderTracks(); deckSource(); pb.classList.add('rowOn'); }
-          if(wd&&g.seek){ wd.seekTo(g.seek*1000); g.seek=0; } deckOn(); },
-        stop:()=>{ if(rowG===g){ rowG=null; pb.classList.remove('rowOn'); deckOff(); } },
-        prog:t=>{ const st=s[1]||0; $('#air').textContent=fmt(t>=st?t-st:t)+' / '+fmt(DUR); } });
-      g.row=true; g.blip=true; io.observe(b); });
-  };
-  blipsFor=-1; renderTracks();
+  /* autour du disque : 4 grandes zones invisibles en camembert (A1 en haut à gauche, A2 en haut à droite,
+     B1 en bas à gauche, B2 en bas à droite). Toucher une zone lance le titre et coupe ce qui joue.
+     Le disque et le bouton ▶ restent au-dessus : eux servent toujours de lecture / pause. */
+  const quads=document.createElement('div'); quads.className='quads'; quads.setAttribute('aria-hidden','true'); deck.appendChild(quads);
+  const QG=[0,1,2,3].map(i=>{ const q=document.createElement('div'); q.className='q q'+i; quads.appendChild(q);
+    const g=ghost(q,(TRK[R][i]||[''])[0],0,{
+      play:wd=>{ const s=TRK[R][i]||[0,0]; if(rowG!==g){ rowG=g; g.seek=s[1]||0; TR=i; face=i<2?'a':'b'; renderLabel(); renderTracks(); deckSource(); pb.classList.add('rowOn'); }
+        if(wd&&g.seek){ wd.seekTo(g.seek*1000); g.seek=0; } deckOn(); },
+      stop:()=>{ if(rowG===g){ rowG=null; pb.classList.remove('rowOn'); deckOff(); } },
+      prog:t=>{ const st=(TRK[R][i]||[0,0])[1]||0; $('#air').textContent=fmt(t>=st?t-st:t)+' / '+fmt(DUR); } });
+    g.row=true; io.observe(q); return g; });
+  const baseTracks=renderTracks; let quadsFor=R;
+  renderTracks=function(){ baseTracks(); if(quadsFor!==R){ quadsFor=R; QG.forEach((g,i)=>{ const s=TRK[R][i]; if(s) retune(g,s[0]); }); } };
 
   /* mixes : les bulles des résident·es, on touche la photo et le mix part */
   $$('#mixRow button').forEach((btn,i)=>{ const c=crew[i], m=MIX[c.k]; const mp=btn.querySelector('.mw');
