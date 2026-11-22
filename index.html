@@ -1394,16 +1394,36 @@ html.inapp #fp .hpCaus{display:none}
 .ep.on .pb{background:var(--plancton);border-color:var(--plancton)}
 .ep.on .pb::after{border:0;width:12px;height:14px;margin:0;background:linear-gradient(90deg,#0E1640 0 35%,transparent 35% 65%,#0E1640 65%)}
 .slMore{display:inline-block;margin-top:14px;font:700 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--plancton);text-decoration:none;border-bottom:1px solid rgba(217,242,92,.4)}
-.inspi{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px;margin-top:40px}
-.inspi .ic{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:22px 14px 20px;border-radius:22px;background:rgba(242,238,227,.05);outline:1px solid rgba(158,211,230,.18);color:var(--ecume);text-decoration:none;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s}
-@media (hover:hover){.inspi a.ic:hover{transform:translateY(-4px);background:rgba(242,238,227,.1)}}
-.inspi .ip{width:96px;height:96px;border-radius:50%;overflow:hidden;outline:2px solid var(--sable);outline-offset:4px}
-.inspi .ip img{width:100%;height:100%;object-fit:cover}
-.inspi .in{font:700 10px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--plancton);margin-top:6px}
-.inspi .it{font:500 17px/1.3 var(--sans)}
-.inspi .ia{font-size:14px;opacity:.75}
-.inspi .ic.todo .it{opacity:.55;font-style:italic}
-.inspi .go{font:700 10px var(--mono);letter-spacing:.12em;color:var(--lagon);margin-top:4px}
+.insHint{margin-top:14px;font:700 10px var(--mono);letter-spacing:.14em;color:var(--plancton)}
+.insPlates{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;margin-top:40px}
+.insPl{perspective:1000px;display:flex;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+.insIn{position:relative;flex:1;display:flex;transition:transform .75s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+@media (hover:hover){.insPl:hover .insIn{transform:rotateY(180deg)}}
+.insPl.flip .insIn,.insPl:focus-visible .insIn{transform:rotateY(180deg)}
+.insF,.insB{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;display:flex;flex-direction:column}
+.insF{position:relative;flex:1;color:var(--nuit);border:1px solid #d6c9a6;box-shadow:0 20px 40px rgba(0,0,0,.35);padding:26px 24px 34px;background:#efe6cf radial-gradient(circle at 18% 22%,rgba(150,110,40,.07),transparent 30%);background-image:radial-gradient(circle at 18% 22%,rgba(150,110,40,.07),transparent 30%),radial-gradient(circle at 82% 78%,rgba(150,110,40,.09),transparent 34%),radial-gradient(circle at 70% 15%,rgba(150,110,40,.05),transparent 20%)}
+.insF::before{content:'';position:absolute;inset:8px;border:2px solid rgba(18,26,74,.7);pointer-events:none}
+.insF::after{content:'';position:absolute;inset:12px;border:.5px solid rgba(18,26,74,.55);pointer-events:none}
+.insHd{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:baseline;font:12px Georgia,serif;font-variant:small-caps;letter-spacing:.06em;border-bottom:.5px solid rgba(18,26,74,.45);padding-bottom:5px;white-space:nowrap}
+.insHd i{font:italic 12px Georgia,serif;font-variant:normal;letter-spacing:0}
+.insImg{display:grid;place-items:center;margin:16px 0 14px}
+.insRond{position:relative;display:block;width:78%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:1px solid rgba(18,26,74,.45);isolation:isolate}
+.insRond img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.insRond .ph{filter:grayscale(1) sepia(.5) hue-rotate(185deg) saturate(2.4) contrast(1.05);mix-blend-mode:multiply}
+.insRond .an{filter:blur(.5px);mix-blend-mode:multiply;opacity:.75;transform:scale(1.04);transition:opacity .5s,transform 1.2s}
+.insRond .an.c{filter:invert(1) hue-rotate(180deg) brightness(1.15) blur(.9px);mix-blend-mode:screen;opacity:.45}
+@media (hover:hover){.insPl:hover .insRond .an{opacity:.9;transform:scale(1.1)}.insPl:hover .insRond .an.c{opacity:.6}}
+.insLat{font:italic 17px/1.1 Georgia,'Times New Roman',serif;text-align:center;white-space:nowrap}
+.insAu{text-align:center;font:11px Georgia,serif;font-variant:small-caps;letter-spacing:.12em;margin-top:3px;opacity:.85}
+.insB{position:absolute;inset:0;transform:rotateY(180deg);background:var(--nuit);color:var(--ecume);border:1px solid rgba(158,211,230,.3);justify-content:center;box-shadow:0 20px 40px rgba(0,0,0,.35);padding:22px}
+.insB .k{font:700 9px var(--mono);letter-spacing:.16em;color:var(--sable)}
+.insB .t{font:400 21px/1.12 var(--serif);margin:10px 0 3px}
+.insB .a{font-size:13px;color:var(--lagon)}
+.insB .q{font:italic 14px/1.5 Georgia,serif;margin:14px 0 18px;color:rgba(242,238,227,.88)}
+.insB .t.todo{opacity:.6;font-style:italic}
+.insGo{align-self:flex-start;font:700 10px var(--mono);letter-spacing:.14em;background:var(--plancton);color:var(--nuit);padding:8px 13px;border-radius:999px;text-decoration:none}
+@media(max-width:900px){.insPlates{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.insF{padding:22px 18px 30px}.insLat{font-size:14.5px}.insAu{font-size:10px}.insPl:last-child{grid-column:span 2;width:calc(50% - 7px);justify-self:center}.insB .t{font-size:18px}.insB .q{font-size:13px;margin:10px 0 14px}}
+@media(max-width:360px){.insLat{white-space:normal;font-size:14px}.insF{padding:20px 15px 28px}}
 footer a{color:inherit}
 footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,.3)}
 @media (max-width:900px){.sea-grid{grid-template-columns:1fr;gap:32px}.seaLog{padding:20px 16px 16px}.ep{grid-template-columns:52px minmax(0,1fr) 44px;gap:12px}.ep .no{font-size:32px}.ep .who b{font-size:17px}.slHead span+span{display:none}.inspi{grid-template-columns:repeat(2,1fr);gap:12px}.inspi .ip{width:76px;height:76px}}
@@ -1649,9 +1669,10 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 <section class="palier dark" id="inspirations" data-depth="3000" data-name="Inspirations">
  <div class="wrap">
   <div class="kicker">– 3 000 M · LUMIÈRES DES ABYSSES</div>
-  <h2 class="words">Les inspirations de l'équipage.</h2>
-  <p class="chapo reveal">Un morceau par résident·e : celui qui les a fait plonger, ou qui tourne en boucle en ce moment.</p>
-  <div class="inspi reveal" id="inspi"></div>
+  <h2 class="words">Avant de plonger, on inspire.</h2>
+  <p class="chapo reveal">Cinq spécimens, cinq morceaux : celui qui les a fait plonger, ou qui tourne en boucle en ce moment.</p>
+  <div class="insHint reveal" id="insHint">↻ SURVOLEZ UNE PLANCHE POUR LA RETOURNER</div>
+  <div class="insPlates reveal" id="inspi"></div>
  </div>
 </section>
 
@@ -1877,9 +1898,14 @@ function seaToggle(i){ if(scp.owner==='sea:'+i&&scp.on){ scPause(); seaOff(); re
 $$('.ep').forEach(b=>b.onclick=()=>seaToggle(+b.dataset.i));
 
 /* Inspirations de l'équipage : un morceau par résident·e (à compléter) */
+/* Inspirations : une planche d'encyclopédie par résident·e. Remplir INSPI dès qu'on a le morceau : {t:'titre', a:'artiste · année', q:'la phrase', u:'lien'} */
 const INSPI={vic:null,sanssucre:null,jpeg:null,buzz:null,yola:null};
-$('#inspi').innerHTML=crew.map(c=>{ const s=INSPI[c.k]; const inner=`<span class="ip"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></span><span class="in">${c.n}</span>${s?`<span class="it">${s.t}</span><span class="ia">${s.a}</span><span class="go">ÉCOUTER ↗</span>`:'<span class="it">Morceau à venir</span>'}`;
-  return s?`<a class="ic" href="${s.u}" target="_blank" rel="noopener">${inner}</a>`:`<div class="ic todo">${inner}</div>`; }).join('');
+const PLANCHE={vic:['Victopus vinylus','poulpe',2020],sanssucre:['Sansucrites insipidus','ammonite',2020],jpeg:['Jpelagia noctiluca','meduse',2022],buzz:['Buzzcinus maenas','crabe',2022],yola:['Yolasterias japonica','etoile',2026]};
+$('#inspi').innerHTML=crew.filter(c=>PLANCHE[c.k]).map((c,i)=>{ const P=PLANCHE[c.k], s=INSPI[c.k];
+  const back=s?`<span class="t">${s.t}</span><span class="a">${s.a}</span>${s.q?`<span class="q">${s.q}</span>`:''}${s.u?`<a class="insGo" href="${s.u}" target="_blank" rel="noopener" onclick="event.stopPropagation()">ÉCOUTER ↗</a>`:''}`:`<span class="t todo">Morceau à venir</span><span class="a">Bientôt dans le journal de bord.</span>`;
+  return `<div class="insPl" tabindex="0" role="button" aria-label="Retourner la planche de ${c.n}"><div class="insIn"><div class="insF"><div class="insHd"><span>Pl. ${['I','II','III','IV','V'][i]}</span><i>Fig. ${i+1}</i></div><div class="insImg"><span class="insRond"><img class="ph" loading="lazy" decoding="async" src="img/${c.k}.webp" alt="${c.n}"><img class="an" loading="lazy" decoding="async" src="img/inspi/${P[1]}.webp" alt="" aria-hidden="true"><img class="an c" loading="lazy" decoding="async" src="img/inspi/${P[1]}.webp" alt="" aria-hidden="true"></span></div><div class="insLat">${P[0]}</div><div class="insAu">${c.n} · ${P[2]}</div></div><div class="insB"><span class="k">CE QUI L'A FAIT PLONGER</span>${back}</div></div></div>`; }).join('');
+$$('.insPl').forEach(p=>{ p.onclick=()=>p.classList.toggle('flip'); p.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); p.classList.toggle('flip'); } }; });
+if(matchMedia('(hover:none)').matches) $('#insHint').textContent='↻ TOUCHEZ UNE PLANCHE POUR LA RETOURNER';
 document.addEventListener('click',e=>{ const d=e.target.closest('[data-demo]'); if(d){ const b=document.querySelector('.buoy[data-s="demo"]'); b&&setTimeout(()=>b.click(),400); } });
 /* ---------- soirées ---------- */
 
