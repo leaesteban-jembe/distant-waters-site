@@ -1286,6 +1286,7 @@ section.palier{overflow:visible!important;overflow-x:clip!important;overflow-y:v
 .mixRow small{font:700 9.5px var(--mono);letter-spacing:.12em;color:var(--plancton)}
 .mixRow button.on small{display:none}
 @media (prefers-reduced-motion:reduce){.mixRow button.on .ring,.mixRow button.on .w1,.mixRow button.on .w2,.mixRow button.on .w3,.mixRow button.on .mw,.mixRow button.on .eq i{animation:none}}
+.mixSoon{display:inline-block;margin:18px 0 0;font:500 14px var(--sans);color:var(--lagon);border:1px dashed rgba(158,211,230,.5);padding:10px 16px;border-radius:999px}
 .mixBtn{margin:18px 0 0;background:var(--plancton)!important;color:var(--nuit)!important;border:0;cursor:pointer;padding:12px 18px;border-radius:999px;font-weight:600}
 .bookSheet{position:fixed;z-index:80;right:24px;bottom:24px;width:min(420px,calc(100% - 24px));background:var(--beige);color:var(--nuit);border-radius:22px;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.45);transform:translateY(120%);opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s;pointer-events:none}
 .bookSheet.open{transform:none;opacity:1;pointer-events:auto}
@@ -1486,7 +1487,17 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 .touchAudio #mixRow .mw{border-radius:50%}
 @media (hover:none){.touchAudio .mixRow .pl{opacity:1;background:rgba(10,16,48,.28)}}
 @media (hover:hover){.touchAudio .mixRow .mw:hover .pl{opacity:1}}
-.touchAudio .mixRow button.soon{opacity:.55}.touchAudio .mixRow button.soon .pl{display:none}
+.touchAudio .mixRow button.soon .pl{display:none}
+.mixRow button.soon .mp img{filter:grayscale(.5) brightness(.85)}
+.mixRow button.soon small{color:var(--lagon)}
+.soonB{position:absolute;inset:0;pointer-events:none}
+.soonB i{position:absolute;bottom:18%;width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(242,238,227,.85);opacity:0;animation:soonUp 3.6s ease-in infinite}
+.soonB i:nth-child(1){left:38%}.soonB i:nth-child(2){left:52%;width:6px;height:6px;animation-delay:1.2s}.soonB i:nth-child(3){left:60%;animation-delay:2.4s}
+@keyframes soonUp{0%{transform:translateY(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-70px);opacity:0}}
+.soonTip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translate(-50%,6px);white-space:nowrap;font:500 12px var(--sans);background:var(--ecume);color:var(--nuit);padding:6px 10px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:4}
+.mixRow button.soon.tip .soonTip{opacity:1;transform:translate(-50%,0)}
+@media (hover:hover){.mixRow button.soon:hover .soonTip{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.soonB i{animation:none}}
 .touchAudio #seaList .ep{position:relative;overflow:hidden}
 .touchAudio .nudge{animation:ghostNudge .9s ease}
 /* ?voir dans l'adresse : rend les lecteurs cachés visibles, pour vérifier qu'ils sont bien sous les boutons */
@@ -1898,7 +1909,7 @@ let SI=-1;
 function openSheet(i,dir){ const c=crew[i]; SI=i; $$('.crew .p').forEach((p,k)=>p.classList.toggle('sel',k===i)); const N=crew.length, pv=crew[(i+N-1)%N], nx=crew[(i+1)%N];
   $('#sheet').innerHTML=`<div class="top"><span>RÉSIDENT·E ${i+1} / ${N}</span><button class="round" id="sx" aria-label="Fermer">✕</button></div>
   <div class="thumbs">${crew.map((m,k)=>`<button data-k="${k}" class="${k===i?'on':''}" aria-label="${m.n}"><img loading="lazy" decoding="async" src="img/${m.k}.webp" alt=""></button>`).join('')}</div>
-  <div class="sbody ${dir?'in-'+dir:''}"><div class="big"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></div><h3>${c.n}</h3><p>${c.bio}</p>${c.dates?'<ul class="dates">'+c.dates.map(d=>`<li><span>${d[0]}</span>${d[1]}</li>`).join('')+'</ul>':'<ul class="dates"><li><span>DATES</span>Dernières dates à compléter</li></ul>'}<button class="btn mixBtn" data-mix="${i}">▶ Écouter son mix</button><div class="links"><a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://instagram.com/distantwatersrecords" target="_blank" rel="noopener">Instagram ↗</a></div><a class="btn btn-plancton" href="#contact" id="bk">Booker ${c.n} →</a></div>
+  <div class="sbody ${dir?'in-'+dir:''}"><div class="big"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></div><h3>${c.n}</h3><p>${c.bio}</p>${c.dates?'<ul class="dates">'+c.dates.map(d=>`<li><span>${d[0]}</span>${d[1]}</li>`).join('')+'</ul>':'<ul class="dates"><li><span>DATES</span>Dernières dates à compléter</li></ul>'}${MIX[c.k]?`<button class="btn mixBtn" data-mix="${i}">▶ Écouter son mix</button>`:`<span class="mixSoon">〰 Mix encore au large, bientôt à la surface</span>`}<div class="links"><a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://instagram.com/distantwatersrecords" target="_blank" rel="noopener">Instagram ↗</a></div><a class="btn btn-plancton" href="#contact" id="bk">Booker ${c.n} →</a></div>
   <nav class="snav"><button id="pv"><small>← PRÉCÉDENT</small>${pv.n}</button><button id="nx"><small>SUIVANT →</small>${nx.n}</button></nav>`;
   $('#sheet').classList.add('open'); $('#scrim').classList.add('open'); $('#sx').onclick=closeSheet; $('#bk').onclick=closeSheet;
   $('#pv').onclick=()=>openSheet((i+N-1)%N,'l'); $('#nx').onclick=()=>openSheet((i+1)%N,'r'); $$('.thumbs button').forEach(b=>b.onclick=()=>{ const k=+b.dataset.k; if(k!==i) openSheet(k,k>i?'r':'l'); }); }
@@ -2355,7 +2366,7 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
 
   /* mixes : les bulles des résident·es, on touche la photo et le mix part */
   $$('#mixRow button').forEach((btn,i)=>{ const c=crew[i], m=MIX[c.k]; const mp=btn.querySelector('.mw');
-    if(!m){ btn.classList.add('soon'); btn.querySelector('small').textContent='MIX À VENIR'; return; }
+    if(!m){ btn.classList.add('soon'); btn.querySelector('small').textContent='ENCORE AU LARGE'; mp.insertAdjacentHTML('beforeend','<span class="soonB" aria-hidden="true"><i></i><i></i><i></i></span><span class="soonTip">Son mix remonte bientôt à la surface</span>'); btn.setAttribute('aria-label','Mix de '+c.n+' : encore au large, bientôt à la surface'); btn.onclick=e=>{ e.preventDefault(); e.stopImmediatePropagation(); btn.classList.toggle('tip'); }; return; }
     const g=ghost(mp,m[0],0,{ play:()=>mixUI(i), stop:()=>{ if(!G.some(o=>o.on&&o.mix)) mixOff(); } }); g.mix=true; io.observe(mp); });
   /* bouton « Écouter son mix » de la fiche résident·e : on amène à sa bulle */
   document.addEventListener('click',e=>{ const m=e.target.closest('.mixBtn[data-mix]'); if(!m) return; e.stopPropagation(); e.preventDefault();
