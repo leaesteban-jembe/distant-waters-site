@@ -1429,19 +1429,17 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 
 /* son sur téléphone */
 .mobPlay{display:none}
-.touchAudio .mobPlay{display:block;margin:16px auto 0;max-width:560px;border-radius:16px;background:var(--ecume);padding:8px 8px 6px;box-shadow:0 14px 34px rgba(0,0,0,.3)}
-.touchAudio .mobPlay iframe,.touchAudio .miFrame{display:block;width:100%;height:120px;border:0;border-radius:10px;background:#fff}
-.touchAudio .mpHint{font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--nuit);padding:4px 6px 8px}
-.touchAudio #playBtn,.touchAudio #pressLab{display:none}
-.mobPlay.pulse,.mi.pulse{animation:dockNudge .6s ease-in-out 2}
-.mixM{display:grid!important;grid-template-columns:1fr;gap:14px;max-width:560px;margin:0 auto}
-.mixM .mi{text-align:left;display:grid;grid-template-columns:52px 1fr;gap:10px 12px;align-items:center;background:rgba(242,238,227,.07);border-radius:16px;padding:10px;outline:1px solid rgba(158,211,230,.16)}
-.mixM .mi img{width:52px;height:52px;border-radius:50%;object-fit:cover;outline:2px solid var(--sable);outline-offset:2px}
-.mixM .mi b{display:block;font:500 18px var(--sans);color:var(--ecume)}
-.mixM .mi small{font:700 10px var(--mono);letter-spacing:.12em;color:var(--plancton)}
-.mixM .mi iframe,.mixM .miSoon{grid-column:1 / -1}
-.mixM .miSoon{margin:0;font-size:14px;opacity:.7}
-.touchAudio .seaFrame{display:block;width:100%;height:400px;border:0;border-radius:12px;background:#fff;margin-top:14px}
+.touchAudio .ghost{position:absolute;inset:0;overflow:hidden;border-radius:inherit;z-index:6;-webkit-tap-highlight-color:transparent}
+.touchAudio .ghost iframe{position:absolute;left:0;top:0;width:300px;height:120px;border:0;transform-origin:0 0;opacity:.012}
+.touchAudio #playBtn{overflow:hidden}
+.touchAudio #mixRow .mw{border-radius:50%}
+.touchAudio .mixRow .pl{opacity:1;background:rgba(10,16,48,.28)}
+.touchAudio .mixRow button.soon{opacity:.55}.touchAudio .mixRow button.soon .pl{display:none}
+.touchAudio #seaList .ep{position:relative;overflow:hidden}
+.touchAudio .nudge{animation:ghostNudge .9s ease}
+/* ?voir dans l'adresse : rend les lecteurs cachés visibles, pour vérifier qu'ils sont bien sous les boutons */
+.voirGhost .ghost iframe{opacity:.45}
+@keyframes ghostNudge{0%,100%{scale:1}35%{scale:1.08}65%{scale:.97}}
 
 /* fiche résident·e : on change de profil avec les photos du haut, plus de précédent / suivant */
 .snav{display:none!important}
@@ -1856,8 +1854,8 @@ $('#scrim').onclick=closeSheet; addEventListener('keydown',e=>{ if(e.key==='Esca
 const SEA=[['07','Bigraf','La Récré'],['06','Thysme','Soulbirde'],['05','Brume','Discrete Society'],['04','Jpeg','Distant Waters'],['03','Piedcheveu','']];
 const SEA_URL='distantwaters/sets/seacast-serie';
 $('#seaList').innerHTML=SEA.map(([n,a,c],i)=>`<li><button type="button" class="ep" data-i="${i}" aria-pressed="false"><span class="no">${n}</span><span class="who"><b>${a}</b>${c?`<small>${c}</small>`:''}</span><span class="pb" aria-hidden="true"></span></button></li>`).join('');
-function seaUI(k){ $$('.ep').forEach((x,j)=>{ x.classList.toggle('on',j===k); x.setAttribute('aria-pressed',j===k); }); $('#seaPlay').textContent='❚❚ Pause'; }
-function seaOff(){ $$('.ep').forEach(x=>{ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); }); $('#seaPlay').textContent='▶ Écouter le dernier épisode'; }
+function seaUI(k){ $$('.ep').forEach((x,j)=>{ x.classList.toggle('on',j===k); x.setAttribute('aria-pressed',j===k); }); ($('#seaPlay .lbl')||$('#seaPlay')).textContent='❚❚ Pause'; }
+function seaOff(){ $$('.ep').forEach(x=>{ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); }); ($('#seaPlay .lbl')||$('#seaPlay')).textContent='▶ Écouter le dernier épisode'; }
 function seaToggle(i){ if(scp.owner==='sea:'+i&&scp.on){ scPause(); seaOff(); return; } if(playing) pause(true); mixOff(); au.pause(); scp.au=false; scPlay([SEA_URL,0,0,i],'sea:'+i,()=>window.open('https://soundcloud.com/'+SEA_URL,'_blank')); seaUI(i); }
 $$('.ep').forEach(b=>b.onclick=()=>seaToggle(+b.dataset.i));
 $('#seaPlay').onclick=()=>seaToggle(scp.owner&&scp.owner.startsWith('sea:')?+scp.owner.slice(4):0);
@@ -2203,33 +2201,54 @@ bs.forEach(b=>io.observe(b));})();
    Sur iPhone (et la plupart des téléphones), un lecteur SoundCloud ne peut démarrer que si l'on touche
    son propre bouton ▶. On affiche donc ses lecteurs directement aux bons endroits : un toucher = le son part. */
 const TOUCH_AUDIO=IOS||matchMedia('(hover: none) and (pointer: coarse)').matches;
-if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio');
-  const scSrc=(u,art)=>'https://w.soundcloud.com/player/?url='+encodeURIComponent(SCB+u)+'&auto_play=false&visual=false&show_artwork='+(art?'true':'false')+'&hide_related=true&show_comments=false&show_teaser=false&show_reposts=false&show_user=true&color=%231D2F8C';
-  const mkF=(cls,title,lazy)=>{ const f=document.createElement('iframe'); f.className=cls; f.title=title; f.allow='autoplay; encrypted-media'; f.setAttribute('scrolling','no'); f.setAttribute('frameborder','no'); if(lazy) f.loading='lazy'; return f; };
-  const onPlay=()=>{ if(amb){ wasAmb=true; stopAmb(); sndUI&&sndUI(); } };
-  /* platine : un lecteur sous le disque, qui suit la sortie et le titre choisis */
-  const box=document.createElement('div'); box.className='mobPlay'; box.innerHTML='<div class="mpHint">Touchez ▶ pour écouter</div>';
-  const mf=mkF('mpFrame','Lecteur SoundCloud des sorties',false); box.appendChild(mf); $('.press').after(box);
-  let mkey='', mw=null, mstart=0, seeked=true;
-  const bindDeck=()=>{ scApi().then(()=>{ mw=SC.Widget(mf); const E=SC.Widget.Events;
-      mw.bind(E.PLAY,()=>{ if(!seeked&&mstart){ mw.seekTo(mstart*1000); } seeked=true; disc.classList.add('play'); deck.classList.add('play'); onPlay(); });
-      const off=()=>{ disc.classList.remove('play'); deck.classList.remove('play'); }; mw.bind(E.PAUSE,off); mw.bind(E.FINISH,off); }).catch(()=>{}); };
+/* Sur téléphone, un son SoundCloud ne démarre que si l'on touche le bouton ▶ du lecteur SoundCloud lui-même.
+   On garde donc nos boutons à nous, et on glisse dessous, invisible, le vrai bouton ▶ SoundCloud agrandi :
+   le doigt touche nos boutons, le son part du premier coup, sans aucun cadre SoundCloud à l'écran. */
+if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]voir\b/.test(location.search)) document.documentElement.classList.add('voirGhost');
+  const SCX=30, SCY=32, SCR=17; /* centre et rayon utile du bouton ▶ dans le lecteur SoundCloud compact */
+  const scSrc=(u,st)=>'https://w.soundcloud.com/player/?url='+encodeURIComponent(SCB+u)+'&auto_play=false&visual=false&show_artwork=false&hide_related=true&show_comments=false&show_teaser=false&show_reposts=false&show_user=true&buying=false&sharing=false&download=false'+(st?'&start_track='+st:'');
+  const G=[]; let cur=null;
+  const fit=g=>{ const r=g.host.getBoundingClientRect(); if(!r.width) return; const half=Math.hypot(r.width,r.height)/2, k=Math.max(1.6,(half+10)/SCR);
+    g.f.style.transform=`translate(${r.width/2-SCX*k}px,${r.height/2-SCY*k}px) scale(${k})`; };
+  function ghost(host,url,st,h){ const w=document.createElement('span'); w.className='ghost'; host.appendChild(w);
+    const g={host,w,url,st,h,f:null,wd:null,on:false}; G.push(g); return g; }
+  function arm(g){ if(g.f) return; const f=document.createElement('iframe'); f.title='Lecture'; f.allow='autoplay; encrypted-media'; f.setAttribute('scrolling','no'); f.setAttribute('frameborder','no'); f.setAttribute('tabindex','-1');
+    f.src=scSrc(g.url,g.st); g.w.appendChild(f); g.f=f; fit(g); bindG(g); }
+  function bindG(g){ scApi().then(()=>{ const wd=SC.Widget(g.f), E=SC.Widget.Events; g.wd=wd;
+      wd.bind(E.PLAY,()=>{ G.forEach(o=>{ if(o!==g&&o.on&&o.wd){ o.wd.pause(); } }); g.on=true; cur=g; if(amb){ wasAmb=true; stopAmb(); sndUI&&sndUI(); } g.h.play&&g.h.play(wd); });
+      const off=()=>{ g.on=false; if(cur===g) cur=null; g.h.stop&&g.h.stop(); }; wd.bind(E.PAUSE,off); wd.bind(E.FINISH,off);
+      if(g.h.prog) wd.bind(E.PLAY_PROGRESS,e=>g.h.prog(e.currentPosition/1000)); }).catch(()=>{}); }
+  function retune(g,url){ if(g.url===url) return; g.url=url; if(g.on&&g.wd) g.wd.pause(); g.on=false; if(g.f){ g.f.src=scSrc(url,g.st); } }
+  /* on ne charge chaque lecteur invisible qu'à l'approche, pour garder la page légère */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const g=G.find(o=>o.host===e.target); g&&arm(g); io.unobserve(e.target); } }),{rootMargin:'700px 0px'});
+  addEventListener('resize',()=>G.forEach(g=>g.f&&fit(g)));
+
+  /* platine : notre gros bouton ▶ jaune, avec le titre choisi */
+  const pb=$('#playBtn'); let mstart=0;
+  const playIco='<path d="M7 4v16l13-8z" fill="currentColor"/>', pauseIco='<path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/>';
+  const deckG=ghost(pb,'',0,{
+    play:wd=>{ if(mstart){ const s=mstart; mstart=0; wd.seekTo(s*1000); } disc.classList.add('play'); deck.classList.add('play'); $('#pIcon').innerHTML=pauseIco; },
+    stop:()=>{ disc.classList.remove('play'); deck.classList.remove('play'); $('#pIcon').innerHTML=playIco; },
+    prog:t=>{ const s=TRK[R]&&TRK[R][TR]; const st=s?s[1]||0:0; const e=Math.max(0,t-st); $('#air').textContent=fmt(e)+' / '+fmt(DUR); } });
   const mobLoad=()=>{ const s=TRK[R]&&TRK[R][TR]; if(!s) return; const t=releases[R].tr[TR];
-    $('#np').textContent=t[0]+' · '+t[1]+' · '+(t[2]||'titre à venir'); mstart=s[1]||0; seeked=!mstart;
-    if(s[0]!==mkey){ mkey=s[0]; disc.classList.remove('play'); deck.classList.remove('play'); mf.src=scSrc(s[0],true); if(!mw) bindDeck(); } };
-  play=function(){ mobLoad(); box.classList.remove('pulse'); void box.offsetWidth; box.classList.add('pulse'); };
+    $('#np').textContent=t[0]+' · '+t[1]+' · '+(t[2]||'titre à venir'); mstart=s[1]||0;
+    if(s[0]!==deckG.url){ deckG.h.stop(); retune(deckG,s[0]); } else if(deckG.on&&deckG.wd&&mstart){ deckG.wd.seekTo(mstart*1000); mstart=0; }
+    pb.classList.remove('nudge'); void pb.offsetWidth; pb.classList.add('nudge'); };
+  play=function(){ mobLoad(); };
   deckSource=function(){ mobLoad(); };
-  mobLoad();
-  /* mixes : un lecteur par résident·e */
-  const mr=$('#mixRow'); mr.className='mixRow mixM';
-  mr.innerHTML=crew.map((c,i)=>{ const m=MIX[c.k]; return `<div class="mi" id="mi-${c.k}"><img src="img/${c.k}.webp" alt=""><div><b>${c.n}</b><small>${m?(c.k==='sanssucre'?'LIVE':'MIX'):'MIX À VENIR'}</small></div>${m?'':'<p class="miSoon">Le mix arrive bientôt.</p>'}</div>`; }).join('');
-  crew.forEach(c=>{ const m=MIX[c.k]; if(!m) return; const f=mkF('miFrame','Mix de '+c.n,true); f.src=scSrc(m[0],false); $('#mi-'+c.k).appendChild(f); });
-  /* bouton « Écouter son mix » de la fiche résident·e : on amène au lecteur */
-  document.addEventListener('click',e=>{ const m=e.target.closest('[data-mix]'); if(!m) return; e.stopPropagation(); e.preventDefault();
-    const c=crew[+m.dataset.mix], el=$('#mi-'+c.k); typeof closeSheet==='function'&&closeSheet(); setTimeout(()=>{ el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); },350); },true);
-  /* Seacast : la playlist complète, chaque épisode se lance d'un toucher */
-  const sl=$('.seaLog'); if(sl){ $('#seaList').style.display='none'; const sp=$('#seaPlay'); if(sp) sp.style.display='none';
-    const f=mkF('seaFrame','Seacast, playlist SoundCloud',true); f.src=scSrc(SEA_URL,true); $('.slHead').after(f); }
+  deckG.url=(TRK[R]&&TRK[R][TR]||[''])[0]; mstart=(TRK[R]&&TRK[R][TR]||[0,0])[1]||0; mobLoad(); io.observe(pb);
+
+  /* mixes : les bulles des résident·es, on touche la photo et le mix part */
+  $$('#mixRow button').forEach((btn,i)=>{ const c=crew[i], m=MIX[c.k]; const mp=btn.querySelector('.mw');
+    if(!m){ btn.classList.add('soon'); btn.querySelector('small').textContent='MIX À VENIR'; return; }
+    const g=ghost(mp,m[0],0,{ play:()=>mixUI(i), stop:()=>{ if(!G.some(o=>o.on&&o.mix)) mixOff(); } }); g.mix=true; io.observe(mp); });
+  /* bouton « Écouter son mix » de la fiche résident·e : on amène à sa bulle */
+  document.addEventListener('click',e=>{ const m=e.target.closest('.mixBtn[data-mix]'); if(!m) return; e.stopPropagation(); e.preventDefault();
+    const btn=$$('#mixRow button')[+m.dataset.mix]; typeof closeSheet==='function'&&closeSheet(); setTimeout(()=>{ btn.scrollIntoView({behavior:'smooth',block:'center'}); btn.classList.remove('nudge'); void btn.offsetWidth; btn.classList.add('nudge'); },350); },true);
+
+  /* Seacast : notre journal de bord, chaque épisode se lance d'un toucher */
+  $$('#seaList .ep').forEach((ep,i)=>{ const g=ghost(ep,SEA_URL,i,{ play:()=>seaUI(i), stop:()=>{ if(!G.some(o=>o.on&&o.sea)) seaOff(); } }); g.sea=true; io.observe(ep); });
+  const sp=$('#seaPlay'); if(sp){ sp.style.position='relative'; sp.innerHTML='<span class="lbl">'+sp.textContent+'</span>'; const g=ghost(sp,SEA_URL,0,{ play:()=>seaUI(0), stop:()=>{ if(!G.some(o=>o.on&&o.sea)) seaOff(); } }); g.sea=true; io.observe(sp); }
 }
 </script>
 </body>
