@@ -240,11 +240,11 @@ body.notes .note-pin{display:block}
 .bank .lab{font:700 12px var(--mono);letter-spacing:.14em;color:var(--lagon);margin-bottom:16px}
 .bank-track{display:flex;gap:28px;overflow-x:auto;scrollbar-width:none;padding:20px 6px 30px;cursor:grab}
 .bank-track::-webkit-scrollbar{display:none}
-.bank-track figure{flex:none;width:200px;position:relative;transition:transform .5s}
+.bank-track figure{flex:none;width:auto;position:relative;transition:transform .5s}
 .bank-track figure:nth-child(odd){transform:rotate(3deg) translateY(10px)}
 .bank-track figure:nth-child(even){transform:rotate(-3deg)}
 @media (hover:hover){.bank-track figure:hover{transform:rotate(0) scale(1.06);z-index:2}}
-.bank-track img{width:100%;border-radius:6px;box-shadow:0 20px 40px rgba(0,0,0,.45);pointer-events:none}
+.bank-track img{display:block;height:270px;width:auto;max-width:none;border-radius:6px;box-shadow:0 20px 40px rgba(0,0,0,.45);pointer-events:none}
 .bank-track figcaption{position:absolute;left:8px;bottom:8px;background:rgba(10,16,48,.88);font:700 11px var(--mono);padding:5px 9px;border-radius:999px;color:var(--ecume)}
 .bank-track .credit{position:absolute;left:0;right:0;bottom:-22px;font-size:11px;color:var(--lagon);opacity:0;transition:opacity .3s;text-align:center}
 @media (hover:hover){.bank-track figure:hover .credit{opacity:1}}
