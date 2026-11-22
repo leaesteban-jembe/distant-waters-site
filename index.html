@@ -1435,6 +1435,8 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 .touchAudio .ghost{position:absolute;inset:0;overflow:hidden;border-radius:inherit;z-index:6;-webkit-tap-highlight-color:transparent}
 .touchAudio .ghost iframe{position:absolute;left:0;top:0;width:300px;height:120px;border:0;transform-origin:0 0;opacity:.012}
 .touchAudio #playBtn{overflow:hidden}
+.touchAudio #playBtn.rowOn .ghost{pointer-events:none;visibility:hidden}
+.touchAudio #rel button .ghost{border-radius:inherit}
 .touchAudio #mixRow .mw{border-radius:50%}
 .touchAudio .mixRow .pl{opacity:1;background:rgba(10,16,48,.28)}
 .touchAudio .mixRow button.soon{opacity:.55}.touchAudio .mixRow button.soon .pl{display:none}
@@ -2222,7 +2224,9 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
   const dbg=/[?&]voir\b/.test(location.search)?Object.assign(document.createElement('div'),{className:'ghostLog'}):null; if(dbg) document.body.appendChild(dbg);
   const log=m=>{ if(dbg){ dbg.textContent=(m+'\n'+dbg.textContent).slice(0,400); } };
   /* allumer / éteindre un lecteur : appelé par SoundCloud quand il prévient, ou par nous quand on voit le doigt toucher */
-  function gOn(g,src){ if(g.on){ if(src==='sc'&&g.h.play) g.h.play(g.wd); return; } G.forEach(o=>{ if(o!==g&&o.on){ o.wd&&o.wd.pause(); gOff(o,'autre'); } }); g.on=true; cur=g; g.t0=Date.now(); g.base=g.pos||0;
+  /* arrêt sûr : on demande la pause à SoundCloud, et si on n'est pas sûr qu'il écoute, on recharge son lecteur caché */
+  function hardStop(g){ try{ g.wd&&g.wd.pause(); }catch(_){} gOff(g,'stop'); if(g.f&&(!g.ev||g.row)){ g.f.remove(); g.f=null; g.wd=null; arm(g); } }
+  function gOn(g,src){ if(g.on){ if(src==='sc'&&g.h.play) g.h.play(g.wd); return; } G.forEach(o=>{ if(o!==g&&o.on) hardStop(o); }); g.on=true; cur=g; g.t0=Date.now(); g.base=g.pos||0;
     if(amb){ wasAmb=true; stopAmb(); sndUI(); } g.h.play&&g.h.play(g.wd); log('▶ '+src); }
   function gOff(g,src){ if(!g.on) return; g.on=false; if(cur===g) cur=null; g.pos=g.base+(Date.now()-g.t0)/1000; g.h.stop&&g.h.stop(); log('❚❚ '+src); }
   function bindG(g){ scApi().then(()=>{ const wd=SC.Widget(g.f), E=SC.Widget.Events; g.wd=wd; log('api ok');
@@ -2255,6 +2259,24 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
   play=function(){ mobLoad(); };
   deckSource=function(){ mobLoad(); };
   deckG.url=(TRK[R]&&TRK[R][TR]||[''])[0]; mstart=(TRK[R]&&TRK[R][TR]||[0,0])[1]||0; mobLoad(); io.observe(pb);
+
+  /* liste des sorties : toucher une sortie la lance directement, et on descend voir le vinyle tourner */
+  let rowG=null;
+  const deckOn=()=>{ disc.classList.add('play'); deck.classList.add('play'); $('#pIcon').innerHTML=pauseIco; };
+  const deckOff=()=>{ disc.classList.remove('play'); deck.classList.remove('play'); $('#pIcon').innerHTML=playIco; };
+  $$('#rel button').forEach((b,i)=>{ const s=TRK[i]&&TRK[i][0]; if(!s) return; b.style.position='relative'; b.style.overflow='hidden';
+    const g=ghost(b,s[0],0,{
+      play:wd=>{ if(rowG!==g){ rowG=g; g.seek=s[1]||0; R=i; TR=0; face='a'; renderAll(true); deckSource(); pb.classList.add('rowOn');
+          const dk=$('#deck'); setTimeout(()=>dk.scrollIntoView({behavior:'smooth',block:'center'}),120); }
+        if(wd&&g.seek){ wd.seekTo(g.seek*1000); g.seek=0; } deckOn(); },
+      stop:()=>{ if(rowG===g){ rowG=null; pb.classList.remove('rowOn'); deckOff(); } },
+      prog:t=>{ const st=s[1]||0; $('#air').textContent=fmt(t>=st?t-st:t)+' / '+fmt(DUR); } });
+    g.row=true; io.observe(b); });
+  /* la liste ne se redessine plus (sinon on perdrait les lecteurs cachés), on change juste la sortie active */
+  renderRel=function(){ $$('#rel button').forEach((b,i)=>b.classList.toggle('on',i===R)); };
+  /* pendant qu'une sortie lancée depuis la liste joue, le bouton de la platine et le disque servent de pause */
+  const rowPause=e=>{ if(!rowG||!rowG.on) return; e.stopImmediatePropagation(); e.preventDefault(); hardStop(rowG); };
+  pb.addEventListener('click',rowPause,true); disc.addEventListener('click',rowPause,true);
 
   /* mixes : les bulles des résident·es, on touche la photo et le mix part */
   $$('#mixRow button').forEach((btn,i)=>{ const c=crew[i], m=MIX[c.k]; const mp=btn.querySelector('.mw');
