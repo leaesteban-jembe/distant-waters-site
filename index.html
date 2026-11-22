@@ -554,6 +554,9 @@ footer{margin-top:60px;padding-bottom:110px;text-align:center;font:700 11px var(
 .press{margin-top:142px}
 @media (max-width:900px){
  .son-grid{grid-template-columns:1fr!important}
+ /* téléphone : la liste des sorties colle à la platine, le clip passe après */
+ .son-grid>div:first-child{display:contents}
+ .son-grid #diver{order:1;margin-top:0}
  .deck{padding:24vw 0 0}
  .deckWrap{width:56vw}
  .press{margin-top:26vw}
@@ -1439,6 +1442,7 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 .touchAudio .nudge{animation:ghostNudge .9s ease}
 /* ?voir dans l'adresse : rend les lecteurs cachés visibles, pour vérifier qu'ils sont bien sous les boutons */
 .voirGhost .ghost iframe{opacity:.45}
+.ghostLog{position:fixed;left:8px;top:8px;z-index:9999;max-width:60vw;white-space:pre;font:10px/1.3 var(--mono);background:rgba(0,0,0,.75);color:#d9f25c;padding:6px 8px;border-radius:6px;pointer-events:none}
 @keyframes ghostNudge{0%,100%{scale:1}35%{scale:1.08}65%{scale:.97}}
 
 /* fiche résident·e : on change de profil avec les photos du haut, plus de précédent / suivant */
@@ -1601,7 +1605,7 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
      <div class="blips" id="blips"></div>
      <button class="playBtn" id="playBtn" aria-label="Lecture"><svg viewBox="0 0 24 24" id="pIcon"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button>
      <span class="note-pin" style="left:50%;top:-40px"><b>PLATINE</b>Clic sur le disque ou le bouton : lecture / pause. Le bras se pose, le vinyle tourne, l'anneau suit la progression. L'ambiance de fond se coupe pendant l'écoute. Autour, le sonar : chaque titre est un écho, face A au-dessus, face B en dessous. Plus l'écho est loin du disque, plus le titre est rapide. Le balayage tourne pendant l'écoute ; toucher un écho lance le titre. Couleur du vinyle propre à chaque sortie.</span></div>
-    <div class="press"><div class="relName" id="relName"></div><b id="pressLab">TOUCHER POUR ÉCOUTER</b><div class="np" id="np">B1 · Sans Sucre · The Living Wreck</div><div class="air" id="air">00:00 / 06:12</div></div>
+    <div class="press"><div class="relName" id="relName"></div><b id="pressLab">TOUCHER POUR ÉCOUTER</b><div class="np" id="np">A1 · Sans Sucre · Tetrodoxin</div><div class="air" id="air">00:00 / 06:12</div></div>
     <div class="faces"><button class="pill on" data-face="a">Face A</button><button class="pill" data-face="b">Face B</button><a class="pill buy" href="https://distantwaters.bandcamp.com" target="_blank" rel="noopener">Bandcamp ↗</a></div>
     <div class="legend"><span><i class="lg1"></i>Chaque point est un titre de l'EP</span><span><i class="lg2"></i>Plus il est loin du disque, plus il est rapide</span></div>
    </div>
@@ -1619,7 +1623,7 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
    <h2 class="words">Seacast</h2>
    <p class="chapo reveal">Une tribune d'expression pour les artistes qui nous tiennent à cœur et qu'on a envie de faire grandir. Chaque épisode est une plongée signée par un·e invité·e.</p>
    <div class="seaMeta reveal"><span class="pill">12 épisodes</span><span class="pill">Mars 2021 · Août 2024</span></div>
-   <div class="seaActs reveal"><button class="btn btn-plancton" type="button" id="seaPlay">▶ Écouter le dernier épisode</button><a class="btn btn-ghost" href="#contact" data-demo>Proposer un podcast →</a></div>
+   <div class="seaActs reveal"><a class="btn btn-ghost" href="#contact" data-demo>Proposer un podcast →</a></div>
   </div>
   <div class="seaLog reveal">
    <div class="slHead"><span>Journal de bord</span><span>Épisode · artiste · équipage</span></div>
@@ -1851,14 +1855,14 @@ $('#scrim').onclick=closeSheet; addEventListener('keydown',e=>{ if(e.key==='Esca
 
 
 /* Seacast : épisodes joués dans le lecteur du site, depuis la playlist SoundCloud */
-const SEA=[['07','Bigraf','La Récré'],['06','Thysme','Soulbirde'],['05','Brume','Discrete Society'],['04','Jpeg','Distant Waters'],['03','Piedcheveu','']];
+/* épisodes : numéro, artiste, collectif, date de sortie (jj.mm.aaaa, à compléter) */
+const SEA=[['07','Bigraf','La Récré',''],['06','Thysme','Soulbirde',''],['05','Brume','Discrete Society',''],['04','Jpeg','Distant Waters',''],['03','Piedcheveu','','']];
 const SEA_URL='distantwaters/sets/seacast-serie';
-$('#seaList').innerHTML=SEA.map(([n,a,c],i)=>`<li><button type="button" class="ep" data-i="${i}" aria-pressed="false"><span class="no">${n}</span><span class="who"><b>${a}</b>${c?`<small>${c}</small>`:''}</span><span class="pb" aria-hidden="true"></span></button></li>`).join('');
-function seaUI(k){ $$('.ep').forEach((x,j)=>{ x.classList.toggle('on',j===k); x.setAttribute('aria-pressed',j===k); }); ($('#seaPlay .lbl')||$('#seaPlay')).textContent='❚❚ Pause'; }
-function seaOff(){ $$('.ep').forEach(x=>{ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); }); ($('#seaPlay .lbl')||$('#seaPlay')).textContent='▶ Écouter le dernier épisode'; }
+$('#seaList').innerHTML=SEA.map(([n,a,c,d],i)=>`<li><button type="button" class="ep" data-i="${i}" aria-pressed="false"><span class="no">${n}</span><span class="who"><b>${a}</b>${c||d?`<small>${[c,d].filter(Boolean).join(' · ')}</small>`:''}</span><span class="pb" aria-hidden="true"></span></button></li>`).join('');
+function seaUI(k){ $$('.ep').forEach((x,j)=>{ x.classList.toggle('on',j===k); x.setAttribute('aria-pressed',j===k); }); }
+function seaOff(){ $$('.ep').forEach(x=>{ x.classList.remove('on'); x.setAttribute('aria-pressed','false'); }); }
 function seaToggle(i){ if(scp.owner==='sea:'+i&&scp.on){ scPause(); seaOff(); return; } if(playing) pause(true); mixOff(); au.pause(); scp.au=false; scPlay([SEA_URL,0,0,i],'sea:'+i,()=>window.open('https://soundcloud.com/'+SEA_URL,'_blank')); seaUI(i); }
 $$('.ep').forEach(b=>b.onclick=()=>seaToggle(+b.dataset.i));
-$('#seaPlay').onclick=()=>seaToggle(scp.owner&&scp.owner.startsWith('sea:')?+scp.owner.slice(4):0);
 
 /* Inspirations de l'équipage : un morceau par résident·e (à compléter) */
 const INSPI={vic:null,sanssucre:null,jpeg:null,buzz:null,yola:null};
@@ -1912,7 +1916,7 @@ const releases=[
  {vc:'20,70,110',vg:'158,211,230',bpm:[122,126,130,120],c:'DW02',t:'Synchronized Hunting',s:'VARIOUS ARTISTS · AOÛT 2022 · VINYLE',img:['dw02a','dw02b'],tr:[['A1','Solidwood','Evolution Of Dreams'],['A2','Sans Sucre','The Sea Banquet'],['B1','Groenogen & Soyouz',"Warmin' Liquid"],['B2','Human Logo','Scuba Disco']],rpm:45},
  {vc:'52,30,120',vg:'160,128,240',bpm:[128,124,132,118],c:'DW03',t:'Keepers Of The Ruins',s:'EMI ÖMAR & SANS SUCRE · MARS 2023 · VINYLE',img:['dw03b','dw03a'],tr:[['A1','Emi Ömar','????'],['A2','Emi Ömar','Aquaboulevard'],['B1','Sans Sucre','The Living Wreck'],['B2','Sans Sucre','The Riddle']],rpm:33},
  {vc:'40,110,90',vg:'217,242,92',bpm:[116,120,126,134],c:'DW04',t:'The Bell On Ice',s:'AKYKI · JUIN 2024 · NUMÉRIQUE',tr:[['1','Akyki','One Hundred Years'],['2','Akyki','Salted Suite'],['3','Akyki','The Bell On Ice'],['4','Akyki','River Denizens']],rpm:33}];
-let R=2, face='a', TR=2;
+let R=0, face='a', TR=0;
 const pos=[[28,32],[74,24],[66,64],[32,74]];
 function renderRel(){ $('#rel').innerHTML=releases.map((r,i)=>`<button class="${i===R?'on':''}" data-i="${i}"><span class="c">${r.c}</span><span class="t">${r.t}</span><span class="s">${r.s}</span></button>`).join(''); $$('#rel button').forEach(b=>b.onclick=()=>{ const dk=$('#deck'); const r=dk.getBoundingClientRect(); if(r.top>innerHeight*.55||r.bottom<80) dk.scrollIntoView({behavior:'smooth',block:'center'});
     if(+b.dataset.i===R){ if(!playing) play(); return; } R=+b.dataset.i; TR=0; face='a'; dk.classList.remove('swap'); void dk.offsetWidth; dk.classList.add('swap'); if(playing) restartIfPlaying(); else play(); setTimeout(()=>{ renderAll(false); },320); }); }
@@ -2214,11 +2218,25 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
     const g={host,w,url,st,h,f:null,wd:null,on:false}; G.push(g); return g; }
   function arm(g){ if(g.f) return; const f=document.createElement('iframe'); f.title='Lecture'; f.allow='autoplay; encrypted-media'; f.setAttribute('scrolling','no'); f.setAttribute('frameborder','no'); f.setAttribute('tabindex','-1');
     f.src=scSrc(g.url,g.st); g.w.appendChild(f); g.f=f; fit(g); bindG(g); }
-  function bindG(g){ scApi().then(()=>{ const wd=SC.Widget(g.f), E=SC.Widget.Events; g.wd=wd;
-      wd.bind(E.PLAY,()=>{ G.forEach(o=>{ if(o!==g&&o.on&&o.wd){ o.wd.pause(); } }); g.on=true; cur=g; if(amb){ wasAmb=true; stopAmb(); sndUI&&sndUI(); } g.h.play&&g.h.play(wd); });
-      const off=()=>{ g.on=false; if(cur===g) cur=null; g.h.stop&&g.h.stop(); }; wd.bind(E.PAUSE,off); wd.bind(E.FINISH,off);
-      if(g.h.prog) wd.bind(E.PLAY_PROGRESS,e=>g.h.prog(e.currentPosition/1000)); }).catch(()=>{}); }
-  function retune(g,url){ if(g.url===url) return; g.url=url; if(g.on&&g.wd) g.wd.pause(); g.on=false; if(g.f){ g.f.src=scSrc(url,g.st); } }
+  /* ?voir : petit journal pour comprendre ce que renvoie SoundCloud */
+  const dbg=/[?&]voir\b/.test(location.search)?Object.assign(document.createElement('div'),{className:'ghostLog'}):null; if(dbg) document.body.appendChild(dbg);
+  const log=m=>{ if(dbg){ dbg.textContent=(m+'\n'+dbg.textContent).slice(0,400); } };
+  /* allumer / éteindre un lecteur : appelé par SoundCloud quand il prévient, ou par nous quand on voit le doigt toucher */
+  function gOn(g,src){ if(g.on){ if(src==='sc'&&g.h.play) g.h.play(g.wd); return; } G.forEach(o=>{ if(o!==g&&o.on){ o.wd&&o.wd.pause(); gOff(o,'autre'); } }); g.on=true; cur=g; g.t0=Date.now(); g.base=g.pos||0;
+    if(amb){ wasAmb=true; stopAmb(); sndUI(); } g.h.play&&g.h.play(g.wd); log('▶ '+src); }
+  function gOff(g,src){ if(!g.on) return; g.on=false; if(cur===g) cur=null; g.pos=g.base+(Date.now()-g.t0)/1000; g.h.stop&&g.h.stop(); log('❚❚ '+src); }
+  function bindG(g){ scApi().then(()=>{ const wd=SC.Widget(g.f), E=SC.Widget.Events; g.wd=wd; log('api ok');
+      wd.bind(E.READY,()=>log('prêt'));
+      wd.bind(E.PLAY,()=>{ g.ev=true; gOn(g,'sc'); });
+      wd.bind(E.PAUSE,()=>{ g.ev=true; gOff(g,'sc'); }); wd.bind(E.FINISH,()=>{ g.ev=true; g.pos=0; gOff(g,'fin'); });
+      wd.bind(E.PLAY_PROGRESS,e=>{ g.ev=true; g.lastProg=Date.now(); const t=e.currentPosition/1000; g.pos=t; g.base=t; g.t0=Date.now(); if(!g.on) gOn(g,'prog'); g.h.prog&&g.h.prog(t); }); }).catch(()=>log('api échec')); }
+  /* filet de sécurité : toucher un lecteur caché fait passer le focus dans son cadre, on le voit et on bascule l'affichage */
+  addEventListener('blur',()=>setTimeout(()=>{ const a=document.activeElement, g=G.find(o=>o.f&&o.f===a); if(!g) return; if(Date.now()-(g.tap||0)<700) return; g.tap=Date.now();
+      if(g.on) gOff(g,'doigt'); else gOn(g,'doigt');
+      setTimeout(()=>{ try{ a.blur(); }catch(_){} try{ window.focus(); }catch(_){} },250); },0));
+  /* si SoundCloud ne donne pas l'avancée, on fait défiler le temps nous-mêmes */
+  setInterval(()=>{ if(cur&&cur.h.prog&&(!cur.lastProg||Date.now()-cur.lastProg>2500)) cur.h.prog(cur.base+(Date.now()-cur.t0)/1000); },1000);
+  function retune(g,url){ if(g.url===url) return; g.url=url; if(g.on&&g.wd) g.wd.pause(); gOff(g,'titre'); g.pos=0; if(g.f){ g.f.src=scSrc(url,g.st); } }
   /* on ne charge chaque lecteur invisible qu'à l'approche, pour garder la page légère */
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const g=G.find(o=>o.host===e.target); g&&arm(g); io.unobserve(e.target); } }),{rootMargin:'700px 0px'});
   addEventListener('resize',()=>G.forEach(g=>g.f&&fit(g)));
@@ -2227,9 +2245,9 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
   const pb=$('#playBtn'); let mstart=0;
   const playIco='<path d="M7 4v16l13-8z" fill="currentColor"/>', pauseIco='<path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/>';
   const deckG=ghost(pb,'',0,{
-    play:wd=>{ if(mstart){ const s=mstart; mstart=0; wd.seekTo(s*1000); } disc.classList.add('play'); deck.classList.add('play'); $('#pIcon').innerHTML=pauseIco; },
+    play:wd=>{ if(mstart&&wd){ const s=mstart; mstart=0; wd.seekTo(s*1000); } disc.classList.add('play'); deck.classList.add('play'); $('#pIcon').innerHTML=pauseIco; },
     stop:()=>{ disc.classList.remove('play'); deck.classList.remove('play'); $('#pIcon').innerHTML=playIco; },
-    prog:t=>{ const s=TRK[R]&&TRK[R][TR]; const st=s?s[1]||0:0; const e=Math.max(0,t-st); $('#air').textContent=fmt(e)+' / '+fmt(DUR); } });
+    prog:t=>{ const s=TRK[R]&&TRK[R][TR]; const st=s?s[1]||0:0; const e=t>=st?t-st:t; $('#air').textContent=fmt(e)+' / '+fmt(DUR); } });
   const mobLoad=()=>{ const s=TRK[R]&&TRK[R][TR]; if(!s) return; const t=releases[R].tr[TR];
     $('#np').textContent=t[0]+' · '+t[1]+' · '+(t[2]||'titre à venir'); mstart=s[1]||0;
     if(s[0]!==deckG.url){ deckG.h.stop(); retune(deckG,s[0]); } else if(deckG.on&&deckG.wd&&mstart){ deckG.wd.seekTo(mstart*1000); mstart=0; }
@@ -2248,7 +2266,6 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
 
   /* Seacast : notre journal de bord, chaque épisode se lance d'un toucher */
   $$('#seaList .ep').forEach((ep,i)=>{ const g=ghost(ep,SEA_URL,i,{ play:()=>seaUI(i), stop:()=>{ if(!G.some(o=>o.on&&o.sea)) seaOff(); } }); g.sea=true; io.observe(ep); });
-  const sp=$('#seaPlay'); if(sp){ sp.style.position='relative'; sp.innerHTML='<span class="lbl">'+sp.textContent+'</span>'; const g=ghost(sp,SEA_URL,0,{ play:()=>seaUI(0), stop:()=>{ if(!G.some(o=>o.on&&o.sea)) seaOff(); } }); g.sea=true; io.observe(sp); }
 }
 </script>
 </body>
