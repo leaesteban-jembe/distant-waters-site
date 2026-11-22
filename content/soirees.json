@@ -300,6 +300,19 @@
       "autre_lieu": ""
     },
     {
+      "titre": "Odyssea 4",
+      "date": "2024-04-25",
+      "date_affichee": "",
+      "lieu": "Macadam",
+      "lineup": [],
+      "descente": "23 h 30",
+      "remontee": "6 h",
+      "billetterie": "",
+      "affiche": "img/ig2410.webp",
+      "credit": "Illustration Jeanne Macaigne",
+      "autre_lieu": ""
+    },
+    {
       "titre": "Release DW04",
       "date": "2024-05-01",
       "date_affichee": "Mai 24",
@@ -329,7 +342,7 @@
       "titre": "Boreal × DW",
       "date": "2024-08-23",
       "date_affichee": "",
-      "lieu": "Boreal",
+      "lieu": "Ohm Town",
       "lineup": [],
       "descente": "23 h 30",
       "remontee": "6 h",
@@ -349,19 +362,6 @@
       "billetterie": "",
       "affiche": "img/ig2409.webp",
       "credit": "Team label",
-      "autre_lieu": ""
-    },
-    {
-      "titre": "Odyssea 4",
-      "date": "2024-10-25",
-      "date_affichee": "Automne 24",
-      "lieu": "Macadam",
-      "lineup": [],
-      "descente": "23 h 30",
-      "remontee": "6 h",
-      "billetterie": "",
-      "affiche": "img/ig2410.webp",
-      "credit": "Illustration Jeanne Macaigne",
       "autre_lieu": ""
     },
     {

@@ -275,6 +275,12 @@ body.notes .note-pin{display:block}
 .diver .hub::after{content:'▶';position:absolute;inset:0;margin:auto;width:28px;height:28px;border-radius:50%;background:var(--plancton);color:var(--nuit);display:grid;place-items:center;font-size:11px;box-shadow:0 0 14px var(--plancton)}
 .diver b{font:700 11px var(--mono);letter-spacing:.12em;color:var(--plancton)}
 .diver small{display:block;color:var(--lagon);margin-top:4px}
+.clipBox{position:fixed;inset:0;z-index:9000;background:rgba(5,8,32,.88);display:grid;place-items:center;padding:20px;opacity:0;transition:opacity .3s}
+.clipBox.on{opacity:1}
+.clipIn{position:relative;width:min(960px,100%)}
+.clipIn iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:14px;background:#000;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.clipIn p{margin-top:12px;color:var(--lagon);font-size:14px;text-align:center}.clipIn p b{color:var(--ecume)}
+.clipX{position:absolute;right:0;top:-48px;width:40px;height:40px;border-radius:50%;background:var(--ecume);color:var(--nuit);border:0;font-size:16px;cursor:pointer}
 .deck{display:flex;flex-direction:column;align-items:center}
 .deckWrap{position:relative;width:min(440px,84vw);margin:0 auto}
 .platter{position:absolute;inset:-34px;border-radius:50%;background:radial-gradient(circle,rgba(var(--vg),.45) 0 48%,rgba(var(--vg),0) 72%);filter:blur(8px);opacity:.55;transition:opacity .8s,background .8s}
@@ -1286,6 +1292,7 @@ section.palier{overflow:visible!important;overflow-x:clip!important;overflow-y:v
 .mixRow small{font:700 9.5px var(--mono);letter-spacing:.12em;color:var(--plancton)}
 .mixRow button.on small{display:none}
 @media (prefers-reduced-motion:reduce){.mixRow button.on .ring,.mixRow button.on .w1,.mixRow button.on .w2,.mixRow button.on .w3,.mixRow button.on .mw,.mixRow button.on .eq i{animation:none}}
+.mixLong{display:inline-block;margin:18px 0 0 12px;font:500 14px var(--sans);color:var(--lagon);text-decoration:underline;text-underline-offset:3px}
 .mixSoon{display:inline-block;margin:18px 0 0;font:500 14px var(--sans);color:var(--lagon);border:1px dashed rgba(158,211,230,.5);padding:10px 16px;border-radius:999px}
 .mixBtn{margin:18px 0 0;background:var(--plancton)!important;color:var(--nuit)!important;border:0;cursor:pointer;padding:12px 18px;border-radius:999px;font-weight:600}
 .bookSheet{position:fixed;z-index:80;right:24px;bottom:24px;width:min(420px,calc(100% - 24px));background:var(--beige);color:var(--nuit);border-radius:22px;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.45);transform:translateY(120%);opacity:0;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s;pointer-events:none}
@@ -1660,7 +1667,7 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
     <h2 class="words">Le son</h2>
     <p class="chapo reveal" style="font-size:19px">Un label, quatre sorties et autant de singularités.</p>
     <div class="rel reveal" id="rel"></div>
-    <div class="diver reveal" id="diver" data-note><div class="hub"><img loading="lazy" decoding="async" src="img/dw02b.webp" alt=""></div><div><b>CLIP · THE DIVER</b><div style="font-weight:500">Sans Sucre</div><small>Réalisé par @planet.bich</small></div><span class="note-pin"><b>HUBLOT</b>Le clip se lance dans le hublot, plein écran au clic.</span></div>
+    <div class="diver reveal" id="diver" data-note><div class="hub"><img loading="lazy" decoding="async" src="img/dw02b.webp" alt=""></div><div><b>CLIP · THE DIVER</b><div style="font-weight:500">Sans Sucre</div><small>Réalisé par @planet.bich · voir le clip</small></div><span class="note-pin"><b>HUBLOT</b>Le clip se lance dans le hublot, plein écran au clic.</span></div>
    </div>
    <div class="deck reveal">
     <div class="deckWrap" id="deck" data-note><div class="sonar2" id="sonar2" aria-hidden="false"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="axisH"></i><div class="sweep2"></div><span class="lblA">FACE A</span><span class="lblB">FACE B</span></div><div class="platter"></div>
@@ -1909,7 +1916,7 @@ let SI=-1;
 function openSheet(i,dir){ const c=crew[i]; SI=i; $$('.crew .p').forEach((p,k)=>p.classList.toggle('sel',k===i)); const N=crew.length, pv=crew[(i+N-1)%N], nx=crew[(i+1)%N];
   $('#sheet').innerHTML=`<div class="top"><span>RÉSIDENT·E ${i+1} / ${N}</span><button class="round" id="sx" aria-label="Fermer">✕</button></div>
   <div class="thumbs">${crew.map((m,k)=>`<button data-k="${k}" class="${k===i?'on':''}" aria-label="${m.n}"><img loading="lazy" decoding="async" src="img/${m.k}.webp" alt=""></button>`).join('')}</div>
-  <div class="sbody ${dir?'in-'+dir:''}"><div class="big"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></div><h3>${c.n}</h3><p>${c.bio}</p>${c.dates?'<ul class="dates">'+c.dates.map(d=>`<li><span>${d[0]}</span>${d[1]}</li>`).join('')+'</ul>':'<ul class="dates"><li><span>DATES</span>Dernières dates à compléter</li></ul>'}${MIX[c.k]?`<button class="btn mixBtn" data-mix="${i}">▶ Écouter son mix</button>`:`<span class="mixSoon">〰 Mix encore au large, bientôt à la surface</span>`}<div class="links"><a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://instagram.com/distantwatersrecords" target="_blank" rel="noopener">Instagram ↗</a></div><a class="btn btn-plancton" href="#contact" id="bk">Booker ${c.n} →</a></div>
+  <div class="sbody ${dir?'in-'+dir:''}"><div class="big"><img loading="lazy" decoding="async" src="img/${c.k}.webp" alt=""></div><h3>${c.n}</h3><p>${c.bio}</p>${c.dates?'<ul class="dates">'+c.dates.map(d=>`<li><span>${d[0]}</span>${d[1]}</li>`).join('')+'</ul>':'<ul class="dates"><li><span>DATES</span>Dernières dates à compléter</li></ul>'}${MIX[c.k]?`<button class="btn mixBtn" data-mix="${i}">▶ Écouter son mix</button>${MIX_LONG[c.k]?`<a class="mixLong" href="https://soundcloud.com/${MIX_LONG[c.k]}" target="_blank" rel="noopener">Version longue · 3 h ↗</a>`:''}`:`<span class="mixSoon">〰 Mix encore au large, bientôt à la surface</span>`}<div class="links"><a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud ↗</a><a href="https://instagram.com/distantwatersrecords" target="_blank" rel="noopener">Instagram ↗</a></div><a class="btn btn-plancton" href="#contact" id="bk">Booker ${c.n} →</a></div>
   <nav class="snav"><button id="pv"><small>← PRÉCÉDENT</small>${pv.n}</button><button id="nx"><small>SUIVANT →</small>${nx.n}</button></nav>`;
   $('#sheet').classList.add('open'); $('#scrim').classList.add('open'); $('#sx').onclick=closeSheet; $('#bk').onclick=closeSheet;
   $('#pv').onclick=()=>openSheet((i+N-1)%N,'l'); $('#nx').onclick=()=>openSheet((i+1)%N,'r'); $$('.thumbs button').forEach(b=>b.onclick=()=>{ const k=+b.dataset.k; if(k!==i) openSheet(k,k>i?'r':'l'); }); }
@@ -1921,7 +1928,7 @@ $('#scrim').onclick=closeSheet; addEventListener('keydown',e=>{ if(e.key==='Esca
 
 /* Seacast : épisodes joués dans le lecteur du site, depuis la playlist SoundCloud */
 /* épisodes : numéro, artiste, collectif, date de sortie (jj.mm.aaaa, à compléter) */
-const SEA=[['07','Bigraf','La Récré',''],['06','Thysme','Soulbirde',''],['05','Brume','Discrete Society',''],['04','Jpeg','Distant Waters',''],['03','Piedcheveu','','']];
+const SEA=[['07','Bigraf','La Récré','2024'],['06','Thysme','Soulbirde','2024'],['05','Brume','Discrete Society','2023'],['04','Jpeg','Distant Waters','2023'],['03','Piedcheveu','','2022'],['02','Tonini','','2021'],['01','Vic','Distant Waters','2021']];
 const SEA_URL='distantwaters/sets/seacast-serie';
 $('#seaList').innerHTML=SEA.map(([n,a,c,d],i)=>`<li><button type="button" class="ep" data-i="${i}" aria-pressed="false"><span class="no">${n}</span><span class="who"><b>${a}</b>${c||d?`<small>${[c,d].filter(Boolean).join(' · ')}</small>`:''}</span><span class="pb" aria-hidden="true"></span></button></li>`).join('');
 function seaUI(k){ $$('.ep').forEach((x,j)=>{ x.classList.toggle('on',j===k); x.setAttribute('aria-pressed',j===k); }); }
@@ -2014,7 +2021,8 @@ const TRK=[
  [[DW02X,0,90],['sanssucre-music/the-sea-banquet'],['recordeep-mag/premiere-groenogen-soyouz-warmin-liquid-dw02'],[DW02X,270,90]],
  [['emiomar/sfhjrjjjoqpx'],['emiomar/aquaboulevard'],['sanssucre-music/the-living-wreck'],['sanssucre-music/the-riddle']],
  [['recordeep-mag/premiere-akyki-one-hundred-years-dw04'],['recordeep-mag/premiere-akyki-salted-suite-dw04'],['distantwaters/b1-the-bell-on-ice-snippet'],['distantwaters/b2-river-denizens-snippet']]];
-const MIX={vic:['ouargue/ouargue-2-vic-celt-mix-shire'],sanssucre:['sans-sucre-ajoute/late-80s-love'],yola:['yola-lf'],jpeg:['recordeep-mag/sundaysession006-jpeg-distant-waters']};
+const MIX_LONG={yola:'radiody10/radio-nd-s01e01-invite-yola-06'};
+const MIX={vic:['ouargue/ouargue-2-vic-celt-mix-shire'],sanssucre:['sans-sucre-ajoute/late-80s-love'],yola:['yola-lf/welcomeprintemps'],jpeg:['recordeep-mag/sundaysession006-jpeg-distant-waters']};
 const MIX_DEF=['distantwaters/emi-omar-sans-sucre-keepers-of-the-ruins-ep-dw03'];
 const scp={api:null,w:null,key:'',owner:null,on:false,pos:0,dur:0,start:0,len:0,seeked:true,t:null};
 const IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
@@ -2099,7 +2107,12 @@ function pause(keepSc){ if(!playing) return; playing=false; disc.classList.remov
 const toggle=()=>playing?pause():play();
 disc.addEventListener('click',toggle); $('#playBtn').addEventListener('click',toggle);
 $('#player').addEventListener('click',toggle); $('#player').style.cursor='pointer';
-$('#diver').onclick=()=>{ $('#diver small').textContent='Le clip se lancera ici (lien YouTube à brancher).'; };
+/* clip The Diver : s'ouvre en grand sur la page, sans quitter le site */
+const CLIP_ID='u49DtNQgnLs';
+$('#diver').onclick=()=>{ if(typeof amb!=='undefined'&&amb){ wasAmb=false; stopAmb(); sndUI(); } if(playing) pause(true); window.dwStopAll&&window.dwStopAll();
+  const m=document.createElement('div'); m.className='clipBox'; m.innerHTML=`<div class="clipIn"><button class="clipX" aria-label="Fermer le clip">✕</button><iframe src="https://www.youtube-nocookie.com/embed/${CLIP_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Sans Sucre · The Diver (clip)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe><p>Sans Sucre · <b>The Diver</b> · réalisé par @planet.bich</p></div>`;
+  const close=()=>{ m.classList.remove('on'); setTimeout(()=>m.remove(),300); document.removeEventListener('keydown',esc); }; const esc=e=>{ if(e.key==='Escape') close(); };
+  m.onclick=e=>{ if(e.target===m||e.target.closest('.clipX')) close(); }; document.addEventListener('keydown',esc); document.body.appendChild(m); requestAnimationFrame(()=>m.classList.add('on')); };
 /* ambiance sous-marine : grondement, bulles, chants lointains, sonar dans les abysses */
 let amb=null;
 function impulse(sec,decay){ const len=AC.sampleRate*sec, b=AC.createBuffer(2,len,AC.sampleRate); for(let c=0;c<2;c++){ const d=b.getChannelData(c); for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay); } return b; }
@@ -2312,6 +2325,7 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
       setTimeout(()=>{ try{ a.blur(); }catch(_){} try{ window.focus(); }catch(_){} },250); },0));
   /* si SoundCloud ne donne pas l'avancée, on fait défiler le temps nous-mêmes */
   setInterval(()=>{ if(cur&&cur.h.prog&&(!cur.lastProg||Date.now()-cur.lastProg>2500)) cur.h.prog(cur.base+(Date.now()-cur.t0)/1000); },1000);
+  window.dwStopAll=()=>G.forEach(o=>{ if(o.on){ try{ o.wd&&o.wd.pause(); }catch(_){} gOff(o,'clip'); } });
   function retune(g,url){ if(g.url===url) return; g.url=url; if(g.on&&g.wd) g.wd.pause(); gOff(g,'titre'); g.pos=0; if(g.f){ g.f.src=scSrc(url,g.st); } }
   /* on ne charge chaque lecteur invisible qu'à l'approche, pour garder la page légère */
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const g=G.find(o=>o.host===e.target); g&&arm(g); io.unobserve(e.target); } }),{rootMargin:'700px 0px'});
