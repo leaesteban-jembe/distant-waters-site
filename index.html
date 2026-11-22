@@ -1432,7 +1432,7 @@ footer .socials a{text-decoration:none;border-bottom:1px solid rgba(242,238,227,
 
 /* son sur téléphone */
 .mobPlay{display:none}
-.touchAudio .ghost{position:absolute;inset:0;overflow:hidden;border-radius:inherit;z-index:6;-webkit-tap-highlight-color:transparent}
+.touchAudio .ghost{display:block;position:absolute;inset:0;overflow:hidden;border-radius:inherit;z-index:6;-webkit-tap-highlight-color:transparent}
 .touchAudio .ghost iframe{position:absolute;left:0;top:0;width:300px;height:120px;border:0;transform-origin:0 0;opacity:.012}
 .touchAudio #playBtn{overflow:hidden}
 .touchAudio #playBtn.rowOn .ghost{pointer-events:none;visibility:hidden}
@@ -2217,7 +2217,7 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
   const G=[]; let cur=null;
   const fit=g=>{ const r=g.host.getBoundingClientRect(); if(!r.width) return; const half=Math.hypot(r.width,r.height)/2, k=Math.max(1.6,(half+10)/SCR);
     g.f.style.transform=`translate(${r.width/2-SCX*k}px,${r.height/2-SCY*k}px) scale(${k})`; };
-  function ghost(host,url,st,h){ const w=document.createElement('span'); w.className='ghost'; host.appendChild(w);
+  function ghost(host,url,st,h){ const w=document.createElement('dw-ghost'); w.className='ghost'; host.appendChild(w);
     const g={host,w,url,st,h,f:null,wd:null,on:false}; G.push(g); return g; }
   function arm(g){ if(g.f) return; const f=document.createElement('iframe'); f.title='Lecture'; f.allow='autoplay; encrypted-media'; f.setAttribute('scrolling','no'); f.setAttribute('frameborder','no'); f.setAttribute('tabindex','-1');
     f.src=scSrc(g.url,g.st); g.w.appendChild(f); g.f=f; fit(g); bindG(g); }
