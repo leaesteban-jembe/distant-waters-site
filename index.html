@@ -1399,7 +1399,7 @@ html.inapp #fp .hpCaus{display:none}
 .insPl{perspective:1000px;display:flex;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
 .insIn{position:relative;flex:1;display:flex;transition:transform .75s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
 @media (hover:hover){.insPl:hover .insIn{transform:rotateY(180deg)}}
-.insPl.flip .insIn,.insPl:focus-visible .insIn{transform:rotateY(180deg)}
+.insPl.flip .insIn,.insPl.playing .insIn,.insPl:focus-visible .insIn{transform:rotateY(180deg)}
 .insF,.insB{backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;display:flex;flex-direction:column}
 .insF{position:relative;flex:1;color:var(--nuit);border:1px solid #d6c9a6;box-shadow:0 20px 40px rgba(0,0,0,.35);padding:26px 24px 34px;background:#efe6cf radial-gradient(circle at 18% 22%,rgba(150,110,40,.07),transparent 30%);background-image:radial-gradient(circle at 18% 22%,rgba(150,110,40,.07),transparent 30%),radial-gradient(circle at 82% 78%,rgba(150,110,40,.09),transparent 34%),radial-gradient(circle at 70% 15%,rgba(150,110,40,.05),transparent 20%)}
 .insF::before{content:'';position:absolute;inset:8px;border:2px solid rgba(18,26,74,.7);pointer-events:none}
@@ -1423,7 +1423,7 @@ html.inapp #fp .hpCaus{display:none}
 .insB .insX{position:absolute;top:14px;right:16px;font:700 8px var(--mono);letter-spacing:.14em;color:var(--sable);opacity:.7}
 .insB .insQ{font:italic 14px/1.5 Georgia,serif;margin:14px 0 18px;color:rgba(242,238,227,.88)}
 .insB .insT.todo{opacity:.6;font-style:italic}
-.insGo{align-self:flex-start;font:700 10px var(--mono);letter-spacing:.14em;background:var(--plancton);color:var(--nuit);padding:8px 13px;border-radius:999px;text-decoration:none}
+.insGo{position:relative;overflow:hidden;border:0;cursor:pointer;align-self:flex-start;font:700 10px var(--mono);letter-spacing:.14em;background:var(--plancton);color:var(--nuit);padding:8px 13px;border-radius:999px;text-decoration:none}
 @media(max-width:900px){.insPlates{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.insF{padding:22px 18px 30px}.insLat{font-size:14.5px}.insAu{font-size:10px}.insPl:last-child{grid-column:span 2;width:calc(50% - 7px);justify-self:center}.insB .insT{font-size:18px}.insB .insQ{font-size:13px;margin:10px 0 14px}}
 @media(max-width:360px){.insLat{white-space:normal;font-size:14px}.insF{padding:20px 15px 28px}}
 footer a{color:inherit}
@@ -1902,11 +1902,11 @@ $$('.ep').forEach(b=>b.onclick=()=>seaToggle(+b.dataset.i));
 /* Inspirations de l'équipage : un morceau par résident·e (à compléter) */
 /* Inspirations : une planche d'encyclopédie par résident·e. Remplir INSPI dès qu'on a le morceau : {t:'titre', a:'artiste · année', q:'la phrase', u:'lien'} */
 const INSPI={vic:null,sanssucre:null,jpeg:null,buzz:null,yola:null};
-const INSPI_EX={t:'The Riddle',a:'Sans Sucre · 2023',q:'« Le morceau qui m\u2019a donné envie de plonger, la première fois que je l\u2019ai joué en soirée. »',u:'https://soundcloud.com/sanssucre-music/the-riddle'};
+const INSPI_EX={t:'The Riddle',a:'Sans Sucre · 2023',q:'« Le morceau qui m\u2019a donné envie de plonger, la première fois que je l\u2019ai joué en soirée. »',sc:'sanssucre-music/the-riddle'};
 const PLANCHE={vic:['Victopus vinylus','poulpe',2020],sanssucre:['Sansucrites insipidus','ammonite',2020],jpeg:['Jpelagia noctiluca','meduse',2022],buzz:['Buzzcinus maenas','crabe',2022],yola:['Yolasterias japonica','etoile',2026]};
 $('#inspi').innerHTML=crew.filter(c=>PLANCHE[c.k]).map((c,i)=>{ const P=PLANCHE[c.k]; let s=INSPI[c.k];
   const ex=!s; if(ex) s=INSPI_EX;
-  const back=`${ex?'<span class="insX">EXEMPLE</span>':''}<span class="insT">${s.t}</span><span class="insA">${s.a}</span>${s.q?`<span class="insQ">${s.q}</span>`:''}${s.u?`<a class="insGo" href="${s.u}" target="_blank" rel="noopener" onclick="event.stopPropagation()">ÉCOUTER ↗</a>`:''}`;
+  const back=`${ex?'<span class="insX">EXEMPLE</span>':''}<span class="insT">${s.t}</span><span class="insA">${s.a}</span>${s.q?`<span class="insQ">${s.q}</span>`:''}${s.sc?`<button class="insGo" type="button" data-sc="${s.sc}" aria-label="Écouter ${s.t}"><span class="lbl">▶ ÉCOUTER</span></button>`:''}`;
   return `<div class="insPl" tabindex="0" role="button" aria-label="Retourner la planche de ${c.n}"><div class="insIn"><div class="insF"><div class="insHd"><span>Pl. ${['I','II','III','IV','V'][i]}</span><i>Fig. ${i+1}</i></div><div class="insImg"><span class="insRond"><img class="ph" loading="lazy" decoding="async" src="img/${c.k}.webp" alt="${c.n}"><img class="an" loading="lazy" decoding="async" src="img/inspi/${P[1]}.webp" alt="" aria-hidden="true"><img class="an c" loading="lazy" decoding="async" src="img/inspi/${P[1]}.webp" alt="" aria-hidden="true"></span></div><div class="insLat">${P[0]}</div><div class="insAu">${c.n} · ${P[2]}</div></div><div class="insB"><span class="insK">CE QUI L'A FAIT PLONGER</span>${back}</div></div></div>`; }).join('');
 const insHover=matchMedia('(hover:hover)').matches;
 $$('.insPl').forEach(p=>{ p.onclick=()=>{ if(insHover) return; const on=!p.classList.contains('flip'); $$('.insPl').forEach(x=>x.classList.remove('flip')); p.classList.toggle('flip',on); }; p.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); p.classList.toggle('flip'); } }; });
@@ -2342,6 +2342,10 @@ if(TOUCH_AUDIO){ document.documentElement.classList.add('touchAudio'); if(/[?&]v
   document.addEventListener('click',e=>{ const m=e.target.closest('.mixBtn[data-mix]'); if(!m) return; e.stopPropagation(); e.preventDefault();
     const btn=$$('#mixRow button')[+m.dataset.mix]; typeof closeSheet==='function'&&closeSheet(); setTimeout(()=>{ btn.scrollIntoView({behavior:'smooth',block:'center'}); btn.classList.remove('nudge'); void btn.offsetWidth; btn.classList.add('nudge'); },350); },true);
 
+  /* Inspirations : le bouton Écouter au dos de chaque planche lance le morceau sur place */
+  $$('.insGo[data-sc]').forEach(btn=>{ const pl=btn.closest('.insPl'), lb=btn.querySelector('.lbl');
+    const g=ghost(btn,btn.dataset.sc,0,{ play:()=>{ lb.textContent='❚❚ PAUSE'; pl.classList.add('playing'); }, stop:()=>{ lb.textContent='▶ ÉCOUTER'; pl.classList.remove('playing'); } });
+    io.observe(btn); });
   /* Seacast : notre journal de bord, chaque épisode se lance d'un toucher */
   $$('#seaList .ep').forEach((ep,i)=>{ const g=ghost(ep,SEA_URL,i,{ play:()=>seaUI(i), stop:()=>{ if(!G.some(o=>o.on&&o.sea)) seaOff(); } }); g.sea=true; io.observe(ep); });
 }
